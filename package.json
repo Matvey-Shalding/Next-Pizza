@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "prisma:push" : "prisma db push",
+    "prisma:studio": "prisma studio"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
