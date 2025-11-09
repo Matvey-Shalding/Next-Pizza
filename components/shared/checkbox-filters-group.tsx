@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
-import { Input } from '../ui';
+import { Input, Skeleton } from '../ui';
 import { FilterCheckbox, FilterCheckboxProps } from './filter-checkbox';
 
 type Item = FilterCheckboxProps;
@@ -17,6 +17,7 @@ export function CheckboxFiltersGroup({
 	searchInputPlaceholder = 'Search...',
 	className,
 	onChange,
+	loading,
 	defaultValue,
 }: {
 	className?: string;
@@ -27,7 +28,19 @@ export function CheckboxFiltersGroup({
 	searchInputPlaceholder?: string;
 	onChange?: (values: string[]) => void;
 	defaultValue?: string[];
+	loading: boolean;
 }) {
+	if (loading) {
+		return (
+			<div className='flex flex-col gap-y-3'>
+				<span className='font-bold'>{title}</span>
+				{...new Array(limit).fill(0).map((_, index) => <Skeleton className='mb-2.5 h-6 rounded-lg' />)}
+				<Skeleton className='w-28 h-6'/>
+			</div>
+
+		);
+	}
+
 	const [showAll, setShowAll] = useState<boolean>(false);
 
 	const [searchValue, setSearchValue] = useState('');

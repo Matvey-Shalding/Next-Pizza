@@ -1,5 +1,6 @@
 'use client';
 
+import { useFilterIngredients } from '@/hooks/useFilterIngredients';
 import { cn } from '@/lib/utils';
 import { Input } from '../ui';
 import { CheckboxFiltersGroup } from './checkbox-filters-group';
@@ -8,6 +9,10 @@ import { RangeSlider } from './range-slider';
 import { Title } from './title';
 
 export function Filters({ className }: { className?: string }) {
+	const { ingredients,loading } = useFilterIngredients();
+
+	console.log(ingredients);
+
 	return (
 		<div className={cn(className, 'basis-62.5')}>
 			<div className='flex flex-col gap-y-5'>
@@ -22,36 +27,17 @@ export function Filters({ className }: { className?: string }) {
 					<span className='font-bold'>Price range</span>
 					<div className='flex gap-3'>
 						<Input type='number' placeholder='0' min={0} max={1000} defaultValue={0} />
-						<Input type='number' min={100} max={1000} value={500} placeholder='500' />
+						<Input type='nu,mber' min={100} max={1000} value={500} placeholder='500' />
 					</div>
 					<RangeSlider min={0} max={1000} step={10} value={[0, 1000]} />
 				</div>
 				<CheckboxFiltersGroup
+					loading={loading}
 					title='Ingredients'
 					className=''
 					limit={6}
-					items={[
-						{ text: 'Cheese sauce', value: '1' },
-						{ text: 'Mozzarella', value: '2' },
-						{ text: 'Garlic', value: '3' },
-						{ text: 'Pickles', value: '4' },
-						{ text: 'Red onion', value: '5' },
-						{ text: 'Tomatoes', value: '6' },
-						{ text: 'Cheese sauce', value: '1' },
-						{ text: 'Mozzarella', value: '2' },
-						{ text: 'Garlic', value: '3' },
-						{ text: 'Pickles', value: '4' },
-						{ text: 'Red onion', value: '5' },
-						{ text: 'Tomatoes', value: '6' },
-					]}
-					defaultItems={[
-						{ text: 'Cheese sauce', value: '1' },
-						{ text: 'Mozzarella', value: '2' },
-						{ text: 'Garlic', value: '3' },
-						{ text: 'Pickles', value: '4' },
-						{ text: 'Red onion', value: '5' },
-						{ text: 'Tomatoes', value: '6' },
-					]}
+					items={ingredients}
+					defaultItems={ingredients.slice(0, 6)}
 				/>
 			</div>
 		</div>
