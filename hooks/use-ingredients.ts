@@ -6,20 +6,14 @@ interface Ingredient {
 	value: string;
 }
 
-interface ReturnProps {
-	ingredients: Ingredient[];
-	loading:boolean
-}
-
-export const useFilterIngredients = (): ReturnProps => {
+export const useIngredients = () => {
+	const [loading, setLoading] = useState(true);
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-
-	const [loading,setLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchIngredients = async () => {
 			try {
-				setLoading(true)
+				setLoading(true);
 				const ingredients = await Api.ingredients.getAll();
 
 				const formattedIngredients = ingredients.map(ingredient => ({
@@ -29,14 +23,14 @@ export const useFilterIngredients = (): ReturnProps => {
 
 				setIngredients(formattedIngredients);
 			} catch (e) {
-				console.error(e)
+				console.error(e);
 			} finally {
-				setLoading(false)
+				setLoading(false);
 			}
 		};
 
 		fetchIngredients();
 	}, []);
 
-	return { ingredients,loading };
+	return { ingredients, loading };
 };
