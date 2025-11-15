@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 // The component accepts text size and generates the corresponding html title tag
 
@@ -12,23 +12,23 @@ interface Props {
 }
 
 export const Title: React.FC<Props> = ({ text, size = 'sm', className }) => {
-	const mapTagBySize = {
+	const mapTagBySize = useMemo(() => ({
 		xs: 'h5',
 		sm: 'h4',
 		md: 'h3',
 		lg: 'h2',
 		xl: 'h1',
 		'2xl': 'h1',
-	} as const;
+	} as const),[])
 
-	const mapClassNameBySize = {
+	const mapClassNameBySize = useMemo(() => ({
 		xs: 'text-base',
 		sm: 'text-[22px]',
 		md: 'text-[26px]',
 		lg: 'text-[32px]',
 		xl: 'text-[40px]',
 		'2xl': 'text-[48px]',
-	} as const;
+	} as const),[])
 
 	return React.createElement(
 		mapTagBySize[size],
