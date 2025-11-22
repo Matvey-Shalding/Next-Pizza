@@ -1,11 +1,5 @@
-import { Header } from '@/components/shared/header';
 import { nunito } from '@/config/font';
-import type { Metadata } from 'next';
 import './globals.css';
-
-export const metadata: Metadata = {
-	title: 'Next pizza | Home page',
-};
 
 export default function RootLayout({
 	children,
@@ -15,10 +9,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={nunito.className}>
-				<main className='min-h-screen'>
-					<Header />
-					{children}
-				</main>
+				<main className='min-h-screen'>{children}</main>
 			</body>
 		</html>
 	);
