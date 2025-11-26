@@ -2,8 +2,8 @@
 
 import { ProductWithIngredients } from '@/types';
 import React, { useMemo } from 'react';
-import { ChoosePizzaForm } from './choose-pizza-form';
 import { ChooseProductForm } from './choose-product-form';
+import { ChoosePizzaForm } from './choosePizzaForm/choose-pizza-form';
 interface Props {
 	className?: string;
 	product: ProductWithIngredients;

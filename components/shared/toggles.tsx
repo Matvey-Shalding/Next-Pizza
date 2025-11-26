@@ -1,50 +1,36 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
+import { useSlidingMarker } from '@/hooks/use-sliding-marker';
 
-interface Toggle {
+export interface Toggle {
 	name: string;
-	value: string;
+	value: string; // DOM requires string
 	disabled?: boolean;
 }
 
 interface Props {
-	onClick: (value: Toggle['value']) => void;
-	selectedValue: Toggle['value'];
+	onClick: (value: string) => void;
+	selectedValue: string;
 	items: Toggle[];
 	className?: string;
 }
 
 export const Toggles: React.FC<Props> = ({ className, items, onClick, selectedValue }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
-	const [sliderStyle, setSliderStyle] = useState<React.CSSProperties>({ left: 0, width: 0 });
 
-	useEffect(() => {
-		if (!containerRef.current) return;
-
-		const selectedItem = containerRef.current.querySelector(`[data-value="${selectedValue}"]`);
-		if (!selectedItem) return;
-
-		const containerRect = containerRef.current.getBoundingClientRect();
-		const itemRect = selectedItem.getBoundingClientRect();
-
-		setSliderStyle({
-			left: itemRect.left - containerRect.left,
-			width: itemRect.width,
-			transition: 'left 0.3s ease, width 0.3s ease',
-		});
-	}, [selectedValue]);
+	const sliderStyle = useSlidingMarker({
+		containerRef,
+		selectedValue,
+	});
 
 	return (
 		<div
 			ref={containerRef}
 			className={cn(className, 'relative flex h-9 rounded-4xl bg-[#ECECEC] overflow-hidden')}
 		>
-			{/* Sliding background */}
 			<div className='absolute top-0 bottom-0 bg-white shadow rounded-3xl z-0' style={sliderStyle} />
-
-			{/* Toggle items */}
 			{items.map(item => (
 				<div
 					data-value={item.value}
