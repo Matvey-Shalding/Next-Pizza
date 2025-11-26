@@ -3,7 +3,7 @@
 import { PizzaSize, pizzaSizes, PizzaType, pizzaTypes } from '@/constants/pizza';
 import { cn } from '@/lib/utils';
 import { Ingredient, ProductItem } from '@prisma/client';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useSet } from 'react-use';
 import { Button } from '../ui';
 import { DialogTitle } from '../ui/dialog';
@@ -18,12 +18,29 @@ interface Props {
 	items: ProductItem[];
 	ingredients: Ingredient[];
 }
-export const ChoosePizzaForm: React.FC<Props> = ({ className, imageUrl, name, ingredients }) => {
+export const ChoosePizzaForm: React.FC<Props> = ({ className, imageUrl, name, ingredients, items }) => {
 	const [size, setSize] = useState<PizzaSize>(20);
 
 	const [type, setType] = useState<PizzaType>(1);
 
 	const [selectedIngredients, { toggle: addIngredient }] = useSet(new Set<number>([]));
+
+	console.log(items);
+
+	const currentPrice = useMemo(() => {
+		return (
+			Number(items.find(item => item.size === size && item.pizzaType === type)?.price) +
+			ingredients.filter(item => selectedIngredients.has(item.id)).reduce((acc, item) => acc + item.price, 0)
+		);
+	}, [items, selectedIngredients, size, type]);
+
+	const availablePizzaSizes = items
+		.filter(item => item.pizzaType === type)
+		.map(item => item.size) as PizzaSize[];
+
+	const availablePizzaTypes = items
+		.filter(item => item.size === size)
+		.map(item => item.pizzaType) as PizzaType[];
 
 	return (
 		<div className={cn(className, 'flex gap-x-1')}>
@@ -42,11 +59,18 @@ export const ChoosePizzaForm: React.FC<Props> = ({ className, imageUrl, name, in
 						onClick={value => setSize(Number(value) as PizzaSize)}
 						selectedValue={String(size)}
 						items={pizzaSizes}
+						// items={pizzaSizes.map(item => ({
+						// 	...item,
+						// 	disabled: !availablePizzaSizes.includes(Number(item.value) as PizzaSize),
+						// }))}
 					/>
 					<Toggles
 						onClick={value => setType(Number(value) as PizzaType)}
 						selectedValue={String(type)}
-						items={pizzaTypes}
+						items={pizzaTypes.map(item => ({
+							...item,
+							disabled: !availablePizzaTypes.includes(Number(item.value) as PizzaType),
+						}))}
 					/>
 				</div>
 				<div className='flex flex-col gap-y-2'>
@@ -66,7 +90,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({ className, imageUrl, name, in
 						</div>
 					</div>
 				</div>
-				<Button>Add to cart</Button>
+				<Button>Add to cart for {currentPrice}$</Button>
 			</div>
 		</div>
 	);
