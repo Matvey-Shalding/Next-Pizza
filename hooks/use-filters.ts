@@ -1,13 +1,7 @@
+import { PriceRange } from '@/types';
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useSet } from 'react-use';
-import { useIngredients } from './use-ingredients';
-
-
-interface PriceRange {
-	from: number;
-	to: number;
-}
 
 interface Ingredient {
 	text: string;
@@ -17,10 +11,17 @@ interface Ingredient {
 export const useFilters = () => {
 	const params = useSearchParams();
 
+	const priceFrom = useMemo(() => {
+		return params.get('priceFrom');
+	}, [params]);
+
+	const priceTo = useMemo(() => {
+		return params.get('priceTo');
+	}, [params]);
 
 	const [prices, setPrices] = useState<PriceRange>({
-		from: Number(params.get('priceFrom')) ?? 0,
-		to: Number(params.get('priceTo')) ?? 1000,
+		from: priceFrom !== null ? Number(priceFrom) : undefined,
+		to: priceTo !== null ? Number(priceTo) : undefined,
 	});
 
 	const [sizes, { toggle: setSizes }] = useSet<string>(
