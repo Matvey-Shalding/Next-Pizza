@@ -1,12 +1,14 @@
 export { Categories } from './categories';
 export { CheckboxFiltersGroup } from './checkbox-filters-group';
-export { ChoosePizzaForm } from './choose-pizza-form';
 export { ChooseProductForm } from './choose-product-form';
+export * from './choosePizzaForm';
 export { Container } from './container';
 export { FilterCheckbox } from './filter-checkbox';
 export { Filters } from './filters';
 export { Header } from './header';
+export { IngredientItem } from './ingredient-item';
 export * from './modals/index';
+export { PizzaImage } from './pizza-image';
 export { ProductCard } from './product-card';
 export { ProductForm } from './product-form';
 export { ProductsGroupList } from './products-group-list';

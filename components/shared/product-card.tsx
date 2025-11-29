@@ -1,10 +1,9 @@
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
+import { Plus } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import { Title } from './title';
 import { Button } from '../ui';
-import { Plus } from 'lucide-react';
+import { Title } from '.';
 interface Props {
 	className?: string;
 	id: number;
@@ -17,8 +16,7 @@ export const ProductCard: React.FC<Props> = ({ className, id, name, imageUrl, pr
 		<div className={cn(className, 'flex flex-col gap-y-4')}>
 			<Link href={`/product/${id}`}>
 				<div className='flex justify-center p-6 bg-secondary rounded-lg h-70'>
-					{/* <Image width={285} height={260} src={imageUrl} alt='Logo' /> */}
-					<img src={imageUrl} width={285} alt="Logo" />
+					<img src={imageUrl} width={285} alt='Logo' />
 				</div>
 			</Link>
 			<div className='flex flex-col gap-y-3'>
@@ -27,14 +25,14 @@ export const ProductCard: React.FC<Props> = ({ className, id, name, imageUrl, pr
 					<p className='text-sm text-gray-400'>
 						Chicken, mozzarella, cheddar and parmesan cheeses, cheese sauce, tomatoes, Alfredo sauce, garlic
 					</p>
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-[20px]">{price} $</span>
-          <Button variant='secondary' className='text-base font-bold'>
-            <Plus className='size-5 mr-1' />
-            <span>Add</span>
-          </Button>
-        </div>
+				</div>
+				<div className='flex items-center justify-between'>
+					<span className='text-[20px]'>{price} $</span>
+					<Button variant='secondary' className='text-base font-bold'>
+						<Plus className='size-5 mr-1' />
+						<span>Add</span>
+					</Button>
+				</div>
 			</div>
 		</div>
 	);

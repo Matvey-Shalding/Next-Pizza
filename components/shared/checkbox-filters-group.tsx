@@ -43,20 +43,17 @@ export function CheckboxFiltersGroup({
 	const currentItems = useMemo(() => {
 		let baseList = items;
 
-		// Apply search
 		if (showAll && showSearch && searchValue) {
 			const term = searchValue.toLowerCase();
 			baseList = items.filter(item => item.text.toLowerCase().includes(term));
 		}
 
-		// If collapsed, ensure selected items are visible
 		if (!showAll) {
 			const selected = items.filter(item => selectedIds.has(item.value));
 			const unselected = baseList.filter(item => !selectedIds.has(item.value));
 			baseList = [...selected, ...unselected].slice(0, limit);
 		}
 
-		// Sort: checked first
 		return [...baseList].sort((a, b) => {
 			const aChecked = selectedIds.has(a.value);
 			const bChecked = selectedIds.has(b.value);

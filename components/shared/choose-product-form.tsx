@@ -1,15 +1,15 @@
 import { cn } from '@/lib/utils';
-import React from 'react';
-import { Title } from './title';
-import { Button } from '../ui';
 import { ProductItem } from '@prisma/client';
+import React from 'react';
+import { Title } from '.';
+import { Button } from '../ui';
 interface Props {
 	className?: string;
 	name: string;
 	imageUrl: string;
-	items: ProductItem[]
+	items: ProductItem[];
 }
-export const ChooseProductForm: React.FC<Props> = ({ className, imageUrl, name,items }) => {
+export const ChooseProductForm: React.FC<Props> = ({ className, imageUrl, name, items }) => {
 	return (
 		<div className={cn(className, 'flex gap-x-1')}>
 			<div className='bg-white h-full basis-1/2 grid place-content-center'>

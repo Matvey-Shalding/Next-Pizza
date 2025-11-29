@@ -9,15 +9,16 @@ export const mapPizzaType = {
 	2: 'Thin',
 } as const;
 
-export const pizzaSizes = Object.entries(mapPizzaSize).map(([value, name]) => ({
+// Convert string keys from Object.entries back to numbers
+export const pizzaSizes = (Object.entries(mapPizzaSize) as [string, string][]).map(([valueStr, name]) => ({
 	name,
-	value,
+	value: Number(valueStr) as keyof typeof mapPizzaSize,
 }));
 
-export const pizzaTypes = Object.entries(mapPizzaType).map(([value, name]) => ({
+export const pizzaTypes = (Object.entries(mapPizzaType) as [string, string][]).map(([valueStr, name]) => ({
 	name,
-	value,
+	value: Number(valueStr) as keyof typeof mapPizzaType,
 }));
 
-export type PizzaSize = keyof typeof mapPizzaSize;
-export type PizzaType = keyof typeof mapPizzaType;
+export type PizzaSize = keyof typeof mapPizzaSize; // 20 | 30 | 40
+export type PizzaType = keyof typeof mapPizzaType; // 1 | 2

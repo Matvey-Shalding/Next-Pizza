@@ -5,7 +5,7 @@ import { ProductWithIngredients } from '@/types';
 import { X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { ProductForm } from '../product-form';
+import { ProductForm } from '..';
 
 interface Props {
 	className?: string;

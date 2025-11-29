@@ -1,5 +1,5 @@
 import { Ingredient } from '@prisma/client';
-import { IngredientItem } from '../ingredient-item';
+import { IngredientItem } from '..';
 
 interface Props {
 	ingredients: Ingredient[];

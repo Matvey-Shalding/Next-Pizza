@@ -1,0 +1,1 @@
+we install qs we bind all params then we add them using router after that after reload we still get them from search params

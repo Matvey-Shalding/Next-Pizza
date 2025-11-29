@@ -1,13 +1,12 @@
 'use client';
 
-import { categories } from '@/constants/categories';
 import { cn } from '@/lib/utils';
 import { useCategoryStore } from '@/store/category';
+import { Category } from '@prisma/client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-export function Categories({ classname }: { classname?: string }) {
+export function Categories({ classname, categories }: { classname?: string; categories: Category[] }) {
 	const activeId = useCategoryStore(state => state.activeId);
-	const setActiveId = useCategoryStore(state => state.setActiveId); // optional if you have this
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [markerStyle, setMarkerStyle] = useState<React.CSSProperties>({ left: 0, width: 0 });
 
@@ -53,7 +52,7 @@ export function Categories({ classname }: { classname?: string }) {
 			/>
 
 			{categories.map(({ name, id }) => (
-				<a key={id} data-id={id} href={`/#${name}`} className='relative z-10'>
+				<a key={id} data-id={id} href={`#${name}`} className='relative z-10'>
 					<button
 						className={cn(
 							'flex items-center font-bold h-11 rounded-2xl px-5 transition-colors duration-300',

@@ -3,16 +3,12 @@
 import { Button } from '@/components/ui';
 import { DialogTitle } from '@/components/ui/dialog';
 import { PizzaSize, PizzaType, mapPizzaType } from '@/constants/pizza';
-import { usePizzaPrice } from '@/hooks/use-pizza-price';
-import { useValidatedPizzaSelection } from '@/hooks/use-validate-pizza-selection';
+import { usePizzaPrice, useValidatedPizzaSelection } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { Ingredient, ProductItem } from '@prisma/client';
 import React, { useState } from 'react';
 import { useSet } from 'react-use';
-import { PizzaImage } from '../pizza-image';
-import { Title } from '../title';
-import { PizzaFormIngredients } from './pizza-form-ingredients';
-import { PizzaFormSelectors } from './pizza-form-selectors';
+import { PizzaFormIngredients, PizzaFormSelectors, PizzaImage, Title } from '..';
 
 interface Props {
 	className?: string;

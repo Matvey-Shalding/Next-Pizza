@@ -1,12 +1,11 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Input } from '../ui';
-import { CheckboxFiltersGroup } from './checkbox-filters-group';
-import { RangeSlider } from './range-slider';
 
 import { doughs, sizes } from '@/constants/filters';
 import { useFilters, useIngredients, useQueryIngredients } from '@/hooks';
+import { CheckboxFiltersGroup, RangeSlider } from '.';
+import { Input } from '../ui';
 
 export function Filters({ className }: { className?: string }) {
 	const { ingredients, loading } = useIngredients();

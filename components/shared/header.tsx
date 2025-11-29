@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import { ArrowRight, ShoppingCart, User } from 'lucide-react';
 import Image from 'next/image';
+import { Container, SearchInput } from '.';
 import { Button } from '../ui';
-import { Container } from './container';
-import { SearchInput } from './search-input';
+
 
 export function Header({ className }: { className?: string }) {
 	return (

@@ -47,7 +47,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
 			{
 				<div
 					className={`fixed inset-0 ${
-						isFocused ? 'opacity-100' : 'opacity-0'
+						isFocused ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
 					} bg-black/50 z-30 transition-opacity duration-200`}
 				/>
 			}

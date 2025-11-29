@@ -43,6 +43,16 @@
 	}
 }
 
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type='number'] {
+	-moz-appearance: textfield;
+}
+
 @theme {
 	--color-border: hsl(var(--border));
 	--color-input: hsl(var(--input));
@@ -77,6 +87,8 @@
 
 	--animate-acnycordion-down: accordion-down 0.2s ease-out;
 	--animate-accordion-up: accordion-up 0.2s ease-out;
+
+	--shadow-popup: 0px 2px 4px 0px #0000000A;
 
 	@keyframes accordion-down {
 		from {

@@ -5,8 +5,7 @@ import { useCategoryStore } from '@/store/category';
 import React, { useEffect, useRef } from 'react';
 import { useIntersection } from 'react-use';
 import { v4 } from 'uuid';
-import { ProductCard } from './product-card';
-import { Title } from './title';
+import { ProductCard, Title } from '.';
 interface Props {
 	className?: string;
 	title: string;
