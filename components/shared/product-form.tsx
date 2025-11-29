@@ -23,6 +23,6 @@ export const ProductForm: React.FC<Props> = ({ className, product }) => {
 			/>
 		);
 	} else {
-		return <ChooseProductForm name={product.name} imageUrl={product.imageUrl} />;
+		return <ChooseProductForm items={product.items}  name={product.name} imageUrl={product.imageUrl} />;
 	}
 };

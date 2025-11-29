@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@/components/ui';
+import { DialogTitle } from '@/components/ui/dialog';
 import { PizzaSize, PizzaType, mapPizzaType } from '@/constants/pizza';
 import { usePizzaPrice } from '@/hooks/use-pizza-price';
 import { useValidatedPizzaSelection } from '@/hooks/use-validate-pizza-selection';
@@ -9,10 +11,8 @@ import React, { useState } from 'react';
 import { useSet } from 'react-use';
 import { PizzaImage } from '../pizza-image';
 import { Title } from '../title';
-import { DialogTitle } from '@/components/ui/dialog';
-import { PizzaFormSelectors } from './pizza-form-selectors';
 import { PizzaFormIngredients } from './pizza-form-ingredients';
-import { Button } from '@/components/ui';
+import { PizzaFormSelectors } from './pizza-form-selectors';
 
 interface Props {
 	className?: string;

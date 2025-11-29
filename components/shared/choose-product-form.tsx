@@ -1,9 +1,24 @@
+import { cn } from '@/lib/utils';
 import React from 'react';
+import { Title } from './title';
+import { Button } from '../ui';
+import { ProductItem } from '@prisma/client';
 interface Props {
 	className?: string;
 	name: string;
 	imageUrl: string;
+	items: ProductItem[]
 }
-export const ChooseProductForm: React.FC<Props> = ({ className }) => {
-	return <div className={className}>Product</div>;
+export const ChooseProductForm: React.FC<Props> = ({ className, imageUrl, name,items }) => {
+	return (
+		<div className={cn(className, 'flex gap-x-1')}>
+			<div className='bg-white h-full basis-1/2 grid place-content-center'>
+				<img src={imageUrl} />
+			</div>
+			<div className='basis-1/2 h-full flex flex-col justify-between  bg-[#F4F1EE] p-10'>
+				<Title size='sm' className='font-bold' text={name} />
+				<Button>Add to cart for ${items[0].price}$</Button>
+			</div>
+		</div>
+	);
 };
