@@ -1,9 +1,8 @@
 import { cn } from '@/lib/utils';
-import { ArrowRight, ShoppingCart, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import Image from 'next/image';
-import { Container, SearchInput } from '.';
+import { CartButton, Container, SearchInput } from '.';
 import { Button } from '../ui';
-
 
 export function Header({ className }: { className?: string }) {
 	return (
@@ -16,31 +15,14 @@ export function Header({ className }: { className?: string }) {
 						<p className='text-sm text-gray-400 leading-3'>It can’t get any more delicious.</p>
 					</div>
 				</div>
-				<SearchInput className='basis-full flex items-center justify-center'/>
+				<SearchInput className='basis-full flex items-center justify-center' />
 				<div className='flex items-center gap-x-3'>
 					<Button variant='outline' className='flex items-center gap-x-1'>
 						<User size={16} />
 						Log in
 					</Button>
-					<div className=''>
-						<Button className='group relative flex items-center gap-x-3'>
-							<span className='font-bold'>520$</span>
-							<span className='h-full w-[1px] bg-white/30'></span>
-							<div className='relative'>
-								<div className='flex items-center gap-1 transition duration-300 group-hover:opacity-0'>
-									<ShoppingCart className='size-4 stroke-2' />
-									<span className='font-bold'>3</span>
-								</div>
-								<ArrowRight
-									className={cn(
-										'opacity-0 w-5 h-5 left-0 group-hover:left-2 top-1/2',
-										' -translate-y-1/2 absolute transition-all duration-300 group-hover:opacity-100'
-									)}
-								/>
-							</div>
-						</Button>
-					</div>
 				</div>
+				<CartButton />
 			</Container>
 		</header>
 	);

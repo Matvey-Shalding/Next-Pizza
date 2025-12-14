@@ -1,3 +1,5 @@
+export { CartButton } from './cart-button';
+export { CartDrawer } from './cart-drawer';
 export { Categories } from './categories';
 export { CheckboxFiltersGroup } from './checkbox-filters-group';
 export { ChooseProductForm } from './choose-product-form';
@@ -18,3 +20,4 @@ export { SortPopup } from './sort-popup';
 export { Title } from './title';
 export { Toggles } from './toggles';
 export { TopBar } from './top-bar';
+export {CartDrawerButton} from './cart-drawer-button'
