@@ -1,9 +1,9 @@
 // A file used to generate mock data
 
-import { Prisma } from '@prisma/client';
 import { hashSync } from 'bcrypt';
 import { categories, ingredients, products } from './constants';
-import { prisma } from './prisma-client';
+import { Prisma } from './generated/prisma/client';
+import prisma from '@/lib/prisma';
 
 const randomDecimalNumber = (min: number, max: number) => {
 	return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;

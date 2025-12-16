@@ -1,18 +1,26 @@
-// components/cart/cart-drawer-item.tsx
 'use client';
 
-import { CartDrawerButton } from './cart-drawer-button';
 import React from 'react';
+import { CartDrawerButton } from './cart-drawer-button';
 
 export interface CartDrawerItemProps {
 	name: string;
 	description: string;
 	imageUrl: string;
 	price: number;
+	quantity: number;
+	onClickCountButton: (type: 'plus' | 'minus') => void;
 }
 
-export const CartDrawerItem: React.FC<CartDrawerItemProps> = ({ name, description, imageUrl, price }) => {
-	const [quantity, setQuantity] = React.useState(1);
+export const CartDrawerItem: React.FC<CartDrawerItemProps> = ({
+	name,
+	description,
+	imageUrl,
+	price,
+	quantity,
+	onClickCountButton,
+}) => {
+	console.log(price, quantity);
 
 	return (
 		<div className='bg-white p-5 flex gap-x-6'>
@@ -26,14 +34,20 @@ export const CartDrawerItem: React.FC<CartDrawerItemProps> = ({ name, descriptio
 				<div className='flex items-center justify-between'>
 					<div className='flex items-center gap-x-2'>
 						<CartDrawerButton
+							quantity={quantity}
+							onClick={() => onClickCountButton('minus')}
 							type='minus'
 							disabled={quantity <= 1}
-							setQuantity={() => setQuantity(q => Math.max(1, q - 1))}
 						/>
 						<span className='text-black font-bold'>{quantity}</span>
-						<CartDrawerButton type='plus' disabled={false} setQuantity={() => setQuantity(q => q + 1)} />
+						<CartDrawerButton
+							quantity={quantity}
+							type='plus'
+							disabled={false}
+							onClick={() => onClickCountButton('plus')}
+						/>
 					</div>
-					<span className='text-black font-bold'>{(price * quantity).toFixed(0)}$</span>
+					<span className='text-black font-bold'>{(price).toFixed(0)}$</span>
 				</div>
 			</div>
 		</div>

@@ -17,11 +17,17 @@ interface Props {
 }
 
 export const CartDrawer: React.FC<Props> = ({ children, open, setOpen }) => {
-	const { items, totalAmount, fetchCartItems } = useCartStore();
+	const { items, totalAmount, fetchCartItems, updateItemQuantity } = useCartStore();
 
+	
 	useEffect(() => {
 		fetchCartItems();
 	}, []);
+
+	const onClickCountButton = (id: number, type: 'plus' | 'minus', quantity: number) => {
+		const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
+		updateItemQuantity(id, newQuantity);
+	};
 
 	return (
 		<>
@@ -60,6 +66,8 @@ export const CartDrawer: React.FC<Props> = ({ children, open, setOpen }) => {
 							<div className='basis-full flex flex-col gap-y-2.5 overflow-y-auto'>
 								{items.map(item => (
 									<CartDrawerItem
+										onClickCountButton={type => onClickCountButton(item.id, type, item.quantity)}
+										quantity={item.quantity}
 										key={item.id}
 										name={item.name}
 										description={

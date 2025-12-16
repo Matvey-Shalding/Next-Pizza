@@ -1,31 +1,20 @@
 import { cn } from '@/lib/utils';
 import { Minus, Plus } from 'lucide-react';
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Button } from '../ui';
 
 interface Props {
 	className?: string;
-	setQuantity: React.Dispatch<React.SetStateAction<number>>;
+	quantity: number;
 	disabled?: boolean;
 	type: 'plus' | 'minus';
+	onClick: (type: 'plus' | 'minus') => void;
 }
-export const CartDrawerButton: React.FC<Props> = ({ className, type, disabled, setQuantity }) => {
-	const onClick = useCallback(() => {
-		if (disabled) {
-			return;
-		}
-
-		if (type === 'plus') {
-			setQuantity(prev => prev + 1);
-		} else {
-			setQuantity(prev => prev - 1);
-		}
-	}, [setQuantity, type,disabled]);
-
+export const CartDrawerButton: React.FC<Props> = ({ className, type, disabled, onClick }) => {
 	return (
 		<Button
 			disabled={disabled}
-			onClick={onClick}
+			onClick={() => onClick(type)}
 			variant='outline'
 			type='button'
 			className={cn(
