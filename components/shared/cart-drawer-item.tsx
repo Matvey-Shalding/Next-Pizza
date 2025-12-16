@@ -1,5 +1,6 @@
 'use client';
 
+import { Trash2Icon } from 'lucide-react';
 import React from 'react';
 import { CartDrawerButton } from './cart-drawer-button';
 
@@ -10,6 +11,7 @@ export interface CartDrawerItemProps {
 	price: number;
 	quantity: number;
 	onClickCountButton: (type: 'plus' | 'minus') => void;
+	onRemoveItem: () => void;
 }
 
 export const CartDrawerItem: React.FC<CartDrawerItemProps> = ({
@@ -18,6 +20,7 @@ export const CartDrawerItem: React.FC<CartDrawerItemProps> = ({
 	imageUrl,
 	price,
 	quantity,
+	onRemoveItem,
 	onClickCountButton,
 }) => {
 	console.log(price, quantity);
@@ -47,7 +50,10 @@ export const CartDrawerItem: React.FC<CartDrawerItemProps> = ({
 							onClick={() => onClickCountButton('plus')}
 						/>
 					</div>
-					<span className='text-black font-bold'>{(price).toFixed(0)}$</span>
+					<div className='flex gap-x-1.5'>
+						<span className='text-black font-bold'>{price.toFixed(0)}$</span>
+						<Trash2Icon onClick={onRemoveItem} className='size-5 stroke-gray-400' />
+					</div>
 				</div>
 			</div>
 		</div>

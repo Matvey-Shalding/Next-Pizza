@@ -1,57 +1,39 @@
-import { getCartItemPrice } from './get-cart-item-price';
-import prisma from './prisma';
+// lib/update-cart-total-amount.ts
+import { getCartItemPrice } from '@/lib/get-cart-item-price';
+import prisma from '@/lib/prisma';
 
-export const updateCartTotalAmount = async (token: string) => {
-	const cart = await prisma.cart.findFirst({
-		where: {
-			token,
-		},
-		include: {
-			items: {
-				orderBy: {
-					createdAt: 'desc',
-				},
-				include: {
-					productItem: {
-						include: {
-							product: true,
-						},
+export async function updateCartTotalAmount(cartId: number) {
+	return prisma.$transaction(async tx => {
+		const cart = await tx.cart.findFirst({
+			where: { id: cartId },
+			include: {
+				items: {
+					include: {
+						productItem: { include: { product: true } },
+						ingredients: true,
 					},
-					ingredients: true,
 				},
 			},
-		},
-	});
+		});
 
-	console.log(cart);
+		if (!cart) {
+			throw new Error('CART_NOT_FOUND');
+		}
 
-	if (!cart) {
-		return;
-	}
+		const totalAmount = cart.items.reduce((acc, item) => acc + getCartItemPrice(item), 0);
 
-	const totalAmount = cart.items.reduce((acc, item) => acc + getCartItemPrice(item), 0);
-
-	return await prisma.cart.update({
-		where: {
-			id: cart.id,
-		},
-		data: {
-			totalAmount,
-		},
-		include: {
-			items: {
-				orderBy: {
-					createdAt: 'desc',
-				},
-				include: {
-					productItem: {
-						include: {
-							product: true,
-						},
+		return tx.cart.update({
+			where: { id: cart.id },
+			data: { totalAmount },
+			include: {
+				items: {
+					orderBy: { createdAt: 'desc' },
+					include: {
+						productItem: { include: { product: true } },
+						ingredients: true,
 					},
-					ingredients: true,
 				},
 			},
-		},
+		});
 	});
-};
+}

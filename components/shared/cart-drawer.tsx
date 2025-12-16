@@ -17,9 +17,8 @@ interface Props {
 }
 
 export const CartDrawer: React.FC<Props> = ({ children, open, setOpen }) => {
-	const { items, totalAmount, fetchCartItems, updateItemQuantity } = useCartStore();
+	const { items, totalAmount, fetchCartItems, updateItemQuantity, removeCartItem } = useCartStore();
 
-	
 	useEffect(() => {
 		fetchCartItems();
 	}, []);
@@ -66,6 +65,7 @@ export const CartDrawer: React.FC<Props> = ({ children, open, setOpen }) => {
 							<div className='basis-full flex flex-col gap-y-2.5 overflow-y-auto'>
 								{items.map(item => (
 									<CartDrawerItem
+										onRemoveItem={() => removeCartItem(item.id)}
 										onClickCountButton={type => onClickCountButton(item.id, type, item.quantity)}
 										quantity={item.quantity}
 										key={item.id}

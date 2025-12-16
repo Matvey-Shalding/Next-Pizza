@@ -1,9 +1,9 @@
 // A file used to generate mock data
 
+import prisma from '@/lib/prisma';
 import { hashSync } from 'bcrypt';
 import { categories, ingredients, products } from './constants';
 import { Prisma } from './generated/prisma/client';
-import prisma from '@/lib/prisma';
 
 const randomDecimalNumber = (min: number, max: number) => {
 	return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
@@ -141,6 +141,39 @@ async function up() {
 				token: '123',
 			},
 		],
+	});
+
+	await prisma.cartItem.create({
+		data: {
+			quantity: 2,
+			cartId: 1,
+			productItemId: 1,
+			ingredients: {
+				connect: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
+			},
+		},
+	});
+
+	await prisma.cartItem.create({
+		data: {
+			quantity: 2,
+			cartId: 1,
+			productItemId: 2,
+			ingredients: {
+				connect: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
+			},
+		},
+	});
+
+	await prisma.cartItem.create({
+		data: {
+			quantity: 2,
+			cartId: 1,
+			productItemId: 3,
+			ingredients: {
+				connect: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
+			},
+		},
 	});
 
 	await prisma.cartItem.create({
