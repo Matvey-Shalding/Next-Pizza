@@ -7795,7 +7795,7 @@ export namespace Prisma {
 
   export type CartGroupByOutputType = {
     id: number
-    userId: number
+    userId: number | null
     token: string
     totalAmount: number
     createdAt: Date
@@ -7883,7 +7883,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      userId: number
+      userId: number | null
       token: string
       totalAmount: number
       createdAt: Date
@@ -12859,7 +12859,7 @@ export namespace Prisma {
     OR?: CartWhereInput[]
     NOT?: CartWhereInput | CartWhereInput[]
     id?: IntFilter<"Cart"> | number
-    userId?: IntFilter<"Cart"> | number
+    userId?: IntNullableFilter<"Cart"> | number | null
     token?: StringFilter<"Cart"> | string
     totalAmount?: IntFilter<"Cart"> | number
     createdAt?: DateTimeFilter<"Cart"> | Date | string
@@ -12870,7 +12870,7 @@ export namespace Prisma {
 
   export type CartOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userId?: SortOrderInput | SortOrder
     token?: SortOrder
     totalAmount?: SortOrder
     createdAt?: SortOrder
@@ -12895,7 +12895,7 @@ export namespace Prisma {
 
   export type CartOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userId?: SortOrderInput | SortOrder
     token?: SortOrder
     totalAmount?: SortOrder
     createdAt?: SortOrder
@@ -12912,7 +12912,7 @@ export namespace Prisma {
     OR?: CartScalarWhereWithAggregatesInput[]
     NOT?: CartScalarWhereWithAggregatesInput | CartScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Cart"> | number
-    userId?: IntWithAggregatesFilter<"Cart"> | number
+    userId?: IntNullableWithAggregatesFilter<"Cart"> | number | null
     token?: StringWithAggregatesFilter<"Cart"> | string
     totalAmount?: IntWithAggregatesFilter<"Cart"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Cart"> | Date | string
@@ -13493,7 +13493,7 @@ export namespace Prisma {
 
   export type CartUncheckedCreateInput = {
     id?: number
-    userId: number
+    userId?: number | null
     token: string
     totalAmount?: number
     createdAt?: Date | string
@@ -13512,7 +13512,7 @@ export namespace Prisma {
 
   export type CartUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    userId?: IntFieldUpdateOperationsInput | number
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
     token?: StringFieldUpdateOperationsInput | string
     totalAmount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13522,7 +13522,7 @@ export namespace Prisma {
 
   export type CartCreateManyInput = {
     id?: number
-    userId: number
+    userId?: number | null
     token: string
     totalAmount?: number
     createdAt?: Date | string
@@ -13538,7 +13538,7 @@ export namespace Prisma {
 
   export type CartUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    userId?: IntFieldUpdateOperationsInput | number
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
     token?: StringFieldUpdateOperationsInput | string
     totalAmount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15938,7 +15938,7 @@ export namespace Prisma {
 
   export type CartUncheckedCreateWithoutItemsInput = {
     id?: number
-    userId: number
+    userId?: number | null
     token: string
     totalAmount?: number
     createdAt?: Date | string
@@ -16021,7 +16021,7 @@ export namespace Prisma {
 
   export type CartUncheckedUpdateWithoutItemsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    userId?: IntFieldUpdateOperationsInput | number
+    userId?: NullableIntFieldUpdateOperationsInput | number | null
     token?: StringFieldUpdateOperationsInput | string
     totalAmount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
