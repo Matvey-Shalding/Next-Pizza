@@ -5,8 +5,8 @@ import { DialogTitle } from '@/components/ui/dialog';
 import { PizzaSize, PizzaType, mapPizzaType } from '@/constants/pizza';
 import { usePizzaPrice, useValidatedPizzaSelection } from '@/hooks';
 import { cn } from '@/lib/utils';
-import { Ingredient, ProductItem } from '@prisma/client';
-import React, { useState } from 'react';
+import { Ingredient, ProductItem } from '@/prisma/generated/prisma';
+import React, { useMemo, useState } from 'react';
 import { useSet } from 'react-use';
 import { PizzaFormIngredients, PizzaFormSelectors, PizzaImage, Title } from '..';
 
@@ -16,12 +16,24 @@ interface Props {
 	imageUrl: string;
 	items: ProductItem[];
 	ingredients: Ingredient[];
+	onSubmit: (productId: number, ingredients: number[]) => void;
 }
 
-export const ChoosePizzaForm: React.FC<Props> = ({ className, name, imageUrl, items, ingredients }) => {
+export const ChoosePizzaForm: React.FC<Props> = ({
+	className,
+	name,
+	imageUrl,
+	items,
+	ingredients,
+	onSubmit,
+}) => {
 	const [size, setSize] = useState<PizzaSize>(20);
 	const [type, setType] = useState<PizzaType>(1);
 	const [selectedIngredients, { toggle: toggleIngredient }] = useSet(new Set<number>([]));
+
+	const currentId = useMemo(() => {
+		return items.find(item => item.size === size && item.pizzaType === type)?.id;
+	}, [items, size, type]);
 
 	useValidatedPizzaSelection({
 		size,
@@ -62,7 +74,9 @@ export const ChoosePizzaForm: React.FC<Props> = ({ className, name, imageUrl, it
 					onToggle={toggleIngredient}
 				/>
 
-				<Button>Add to cart for ${currentPrice.toFixed(2)}</Button>
+				<Button onClick={() => onSubmit(currentId!, Array.from(selectedIngredients))}>
+					Add to cart for ${currentPrice.toFixed(2)}
+				</Button>
 			</div>
 		</div>
 	);
