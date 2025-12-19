@@ -6,11 +6,12 @@ import React, { useEffect, useRef } from 'react';
 import { useIntersection } from 'react-use';
 import { v4 } from 'uuid';
 import { ProductCard, Title } from '.';
+import { ProductWithIngredients } from '@/types';
 interface Props {
 	className?: string;
 	title: string;
-	products: any[];
 	categoryId: number;
+	products: ProductWithIngredients[];
 	listClassName?: string;
 }
 export const ProductsGroupList: React.FC<Props> = ({
@@ -34,6 +35,8 @@ export const ProductsGroupList: React.FC<Props> = ({
 		}
 	}, [intersection?.isIntersecting, categoryId]);
 
+	if(products.length === 0) return null
+
 	return (
 		<div id={title} ref={intersectionRef} className={cn(className, 'flex flex-col gap-y-5')}>
 			<Title text={title} size='lg' className='font-extrabold' />
@@ -45,6 +48,7 @@ export const ProductsGroupList: React.FC<Props> = ({
 						name={product.name}
 						imageUrl={product.imageUrl}
 						price={product.items[0].price}
+						ingredients={product.ingredients}
 					/>
 				))}
 			</div>

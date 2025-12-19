@@ -1,17 +1,19 @@
 import { cn } from '@/lib/utils';
+import { Ingredient } from '@/prisma/generated/prisma';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import { Button } from '../ui';
 import { Title } from '.';
+import { Button } from '../ui';
 interface Props {
 	className?: string;
 	id: number;
 	price: number;
 	imageUrl: string;
 	name: string;
+	ingredients: Ingredient[];
 }
-export const ProductCard: React.FC<Props> = ({ className, id, name, imageUrl, price }) => {
+export const ProductCard: React.FC<Props> = ({ className, id, name, imageUrl, ingredients, price }) => {
 	return (
 		<div className={cn(className, 'flex flex-col gap-y-4')}>
 			<Link href={`/product/${id}`}>
@@ -23,7 +25,9 @@ export const ProductCard: React.FC<Props> = ({ className, id, name, imageUrl, pr
 				<div className='flex flex-col gap-y-2'>
 					<Title text={name} size='sm' className='font-bold' />
 					<p className='text-sm text-gray-400'>
-						Chicken, mozzarella, cheddar and parmesan cheeses, cheese sauce, tomatoes, Alfredo sauce, garlic
+						{ingredients
+							.map((ingredient, i) => (i !== 0 ? ingredient.name.toLowerCase() : ingredient.name))
+							.join(', ')}
 					</p>
 				</div>
 				<div className='flex items-center justify-between'>
