@@ -1,40 +1,42 @@
 'use client';
 
-import { ProductWithIngredients } from '@/types';
-import React, { useMemo } from 'react';
-import { ChoosePizzaForm, ChooseProductForm } from '.';
 import { useCartStore } from '@/store/cart';
-import { stat } from 'fs';
-import { ingredients } from '@/prisma/constants';
+import { ProductWithIngredients } from '@/types';
+import { useRouter } from 'next/navigation';
+import React, { useMemo } from 'react';
+import toast from 'react-hot-toast';
+import { ChoosePizzaForm, ChooseProductForm } from '.';
 interface Props {
 	className?: string;
 	product: ProductWithIngredients;
 }
 export const ProductForm: React.FC<Props> = ({ className, product }) => {
+	const { addCartItem, loading } = useCartStore();
 
-	const { addCartItem } = useCartStore();
-
-	const onAddProduct = (productId: number) => {
-		addCartItem({
-			productItemId: productId,
-		})
-	}
-
-	const onAddPizza = (productId: number, ingredients: number[]) => {
-		addCartItem({
-			productItemId: productId,
-			ingredients: ingredients
-		})
-	}
-	
 	const isPizza = useMemo(() => {
 		return Boolean(product.items[0].pizzaType);
 	}, []);
 
+	const router = useRouter();
+
+	const onSubmit = async (productId?: number, ingredients?: number[]) => {
+		try {
+			await addCartItem({ productItemId: productId ?? product.items[0].id, ingredients: ingredients });
+
+			toast.success(`${product.name} added to cart`);
+
+			router.back();
+		} catch (error) {
+			console.log(error);
+			toast.error('Something went wrong');
+		}
+	};
+
 	if (isPizza) {
 		return (
 			<ChoosePizzaForm
-				onSubmit={onAddPizza}
+				loading={loading}
+				onSubmit={onSubmit}
 				name={product.name}
 				imageUrl={product.imageUrl}
 				items={product.items}
@@ -42,6 +44,14 @@ export const ProductForm: React.FC<Props> = ({ className, product }) => {
 			/>
 		);
 	} else {
-		return <ChooseProductForm onSubmit={onAddProduct}  items={product.items} name={product.name} imageUrl={product.imageUrl} />;
+		return (
+			<ChooseProductForm
+				loading={loading}
+				onSubmit={onSubmit}
+				items={product.items}
+				name={product.name}
+				imageUrl={product.imageUrl}
+			/>
+		);
 	}
 };

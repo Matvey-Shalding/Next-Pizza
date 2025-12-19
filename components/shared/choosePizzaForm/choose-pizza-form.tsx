@@ -17,6 +17,7 @@ interface Props {
 	items: ProductItem[];
 	ingredients: Ingredient[];
 	onSubmit: (productId: number, ingredients: number[]) => void;
+	loading?: boolean;
 }
 
 export const ChoosePizzaForm: React.FC<Props> = ({
@@ -26,6 +27,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 	items,
 	ingredients,
 	onSubmit,
+	loading
 }) => {
 	const [size, setSize] = useState<PizzaSize>(20);
 	const [type, setType] = useState<PizzaType>(1);
@@ -74,7 +76,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 					onToggle={toggleIngredient}
 				/>
 
-				<Button onClick={() => onSubmit(currentId!, Array.from(selectedIngredients))}>
+				<Button loading={loading} onClick={() => onSubmit(currentId!, Array.from(selectedIngredients))}>
 					Add to cart for ${currentPrice.toFixed(2)}
 				</Button>
 			</div>

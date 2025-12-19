@@ -23,15 +23,14 @@ export const CartDrawerItem: React.FC<CartDrawerItemProps> = ({
 	onRemoveItem,
 	onClickCountButton,
 }) => {
-	console.log(price, quantity);
 
 	return (
 		<div className='bg-white p-5 flex gap-x-6'>
 			<img className='size-15 rounded object-cover' src={imageUrl} alt={name} />
 			<div className='flex flex-col gap-y-3 basis-full'>
-				<div className='flex flex-col gap-y-0.5'>
+				<div className='flex flex-col'>
 					<span className='font-bold text-black'>{name}</span>
-					<span className='text-xs text-[#A1A1A1]'>{description}</span>
+					{description && <span className='text-xs mt-0.5 text-[#A1A1A1]'>{description}</span>}
 				</div>
 				<div className='w-full h-px bg-[#EDEDED]'></div>
 				<div className='flex items-center justify-between'>
