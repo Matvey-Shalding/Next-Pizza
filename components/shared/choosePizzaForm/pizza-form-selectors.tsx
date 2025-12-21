@@ -1,7 +1,7 @@
 import { PizzaSize, PizzaType, pizzaSizes, pizzaTypes } from '@/constants/pizza';
-import { ProductItem } from '@prisma/client';
 import { useMemo } from 'react';
 import { Toggles } from '..';
+import { ProductItem } from '@/prisma/generated/prisma';
 
 interface Props {
 	size: PizzaSize;
@@ -37,7 +37,7 @@ export const PizzaFormSelectors = ({ size, type, items, onSizeChange, onTypeChan
 	);
 
 	return (
-		<div className='flex flex-col gap-y-2'>
+		<div className='flex flex-col gap-y-2 max-w-105 -mx-4 p-4 bg-gray-50 rounded-md min-w-full'>
 			<Toggles
 				selectedValue={String(size)}
 				onClick={v => onSizeChange(Number(v) as PizzaSize)}

@@ -1,5 +1,6 @@
-import { Ingredient } from '@prisma/client';
+import { Ingredient } from '@/prisma/generated/prisma';
 import { IngredientItem } from '..';
+import { cn } from '@/lib/utils';
 
 interface Props {
 	ingredients: Ingredient[];
@@ -11,8 +12,10 @@ export const PizzaFormIngredients = ({ ingredients, selectedIds, onToggle }: Pro
 	return (
 		<div className='flex flex-col gap-y-2'>
 			<span className='font-semibold text-xl text-black'>Add to taste</span>
-			<div className='bg-gray-50 rounded-md -mx-4 py-4 grid place-content-center'>
-				<div className='grid grid-cols-3 gap-3'>
+			<div className={cn('bg-gray-50 rounded-md -mx-4 py-4 px-4 grid place-content-center', {
+				'-mx-4': false
+			})}>
+				<div className='flex flex-wrap gap-3'>
 					{ingredients.map(ingredient => (
 						<IngredientItem
 							key={ingredient.id}

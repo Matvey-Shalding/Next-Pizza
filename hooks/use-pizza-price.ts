@@ -1,6 +1,6 @@
-import { Ingredient, ProductItem } from '@prisma/client';
 import { useMemo } from 'react';
 import { PizzaSize, PizzaType } from '@/constants/pizza';
+import { Ingredient, ProductItem } from '@/prisma/generated/prisma';
 
 export const usePizzaPrice = (
 	items: ProductItem[],

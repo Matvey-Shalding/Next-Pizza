@@ -21,7 +21,7 @@ export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
 				showCloseButton={false}
 				className='min-w-250 max-h-145 h-145 overflow-hidden p-0! rounded-4xl shadow-popup bg-white'
 			>
-				<ProductForm product={product} />
+				<ProductForm product={product} inline={false} />
 
 				{/* Custom close button */}
 				<DialogClose asChild>

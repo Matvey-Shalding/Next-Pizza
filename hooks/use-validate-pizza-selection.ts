@@ -1,5 +1,5 @@
 import { PizzaSize, PizzaType } from '@/constants/pizza';
-import { ProductItem } from '@prisma/client';
+import { ProductItem } from '@/prisma/generated/prisma';
 import { useEffect } from 'react';
 
 /**

@@ -1,6 +1,5 @@
 import { Header } from '@/components/shared/header';
 import { nunito } from '@/config/font';
-import {Toaster} from "react-hot-toast"
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -21,7 +20,6 @@ export default function RootLayout({
 					<Header />
 					{modal}
 					{children}
-					<Toaster/>
 				</main>
 			</body>
 		</html>

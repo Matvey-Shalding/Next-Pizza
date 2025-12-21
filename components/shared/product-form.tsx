@@ -1,5 +1,6 @@
 'use client';
 
+import { ProductFormContext } from '@/context/ProductForm';
 import { useCartStore } from '@/store/cart';
 import { ProductWithIngredients } from '@/types';
 import { useRouter } from 'next/navigation';
@@ -9,8 +10,9 @@ import { ChoosePizzaForm, ChooseProductForm } from '.';
 interface Props {
 	className?: string;
 	product: ProductWithIngredients;
+	inline?: boolean;
 }
-export const ProductForm: React.FC<Props> = ({ className, product }) => {
+export const ProductForm: React.FC<Props> = ({ className, product, inline }) => {
 	const { addCartItem, loading } = useCartStore();
 
 	const isPizza = useMemo(() => {
@@ -34,24 +36,28 @@ export const ProductForm: React.FC<Props> = ({ className, product }) => {
 
 	if (isPizza) {
 		return (
-			<ChoosePizzaForm
-				loading={loading}
-				onSubmit={onSubmit}
-				name={product.name}
-				imageUrl={product.imageUrl}
-				items={product.items}
-				ingredients={product.ingredients}
-			/>
+			<ProductFormContext value={!!inline}>
+				<ChoosePizzaForm
+					loading={loading}
+					onSubmit={onSubmit}
+					name={product.name}
+					imageUrl={product.imageUrl}
+					items={product.items}
+					ingredients={product.ingredients}
+				/>
+			</ProductFormContext>
 		);
 	} else {
 		return (
-			<ChooseProductForm
-				loading={loading}
-				onSubmit={onSubmit}
-				items={product.items}
-				name={product.name}
-				imageUrl={product.imageUrl}
-			/>
+			<ProductFormContext value={!!inline}>
+				<ChooseProductForm
+					loading={loading}
+					onSubmit={onSubmit}
+					items={product.items}
+					name={product.name}
+					imageUrl={product.imageUrl}
+				/>
+			</ProductFormContext>
 		);
 	}
 };

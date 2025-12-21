@@ -1,6 +1,6 @@
-'use client'
-
-export default function Page({ }) {
-	
+interface Props {
+	className?: string;
+}
+export default function Page() {
 	return null;
 }

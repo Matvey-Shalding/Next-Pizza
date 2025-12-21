@@ -28,9 +28,9 @@ export const Toggles: React.FC<Props> = ({ className, items, onClick, selectedVa
 	return (
 		<div
 			ref={containerRef}
-			className={cn(className, 'relative flex h-9 rounded-4xl bg-[#ECECEC] overflow-hidden')}
+			className={cn(className, 'relative flex max-w-105 h-9 rounded-4xl bg-[#ECECEC] overflow-hidden')}
 		>
-			<div className='absolute top-0 bottom-0 bg-white shadow rounded-3xl z-0' style={sliderStyle} />
+			<div className='absolute top-1/2 h-9 -translate-y-1/2 left-1 bottom-0 bg-white shadow rounded-3xl z-0' style={sliderStyle} />
 			{items.map(item => (
 				<div
 					data-value={item.value}

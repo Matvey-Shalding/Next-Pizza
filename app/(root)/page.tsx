@@ -2,8 +2,10 @@ import { Container, Filters, ProductsGroupList, Title, TopBar } from '@/componen
 import { getCategories, SearchParams } from '@/lib/get-categories';
 import { Suspense } from 'react';
 
-export default async function Home({ searchParams }: { searchParams: SearchParams }) {
-	const categories = await getCategories(searchParams);
+export default async function Home({ searchParams }: { searchParams: Promise<SearchParams> }) {
+	const params = await searchParams;
+
+	const categories = await getCategories(params);
 
 	return (
 		<>
