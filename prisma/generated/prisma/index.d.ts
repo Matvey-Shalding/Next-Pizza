@@ -8793,6 +8793,7 @@ export namespace Prisma {
     productItemId: number | null
     cartId: number | null
     quantity: number | null
+    ingredientsCount: number | null
   }
 
   export type CartItemSumAggregateOutputType = {
@@ -8800,6 +8801,7 @@ export namespace Prisma {
     productItemId: number | null
     cartId: number | null
     quantity: number | null
+    ingredientsCount: number | null
   }
 
   export type CartItemMinAggregateOutputType = {
@@ -8807,6 +8809,8 @@ export namespace Prisma {
     productItemId: number | null
     cartId: number | null
     quantity: number | null
+    ingredientsKey: string | null
+    ingredientsCount: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -8816,6 +8820,8 @@ export namespace Prisma {
     productItemId: number | null
     cartId: number | null
     quantity: number | null
+    ingredientsKey: string | null
+    ingredientsCount: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -8825,6 +8831,8 @@ export namespace Prisma {
     productItemId: number
     cartId: number
     quantity: number
+    ingredientsKey: number
+    ingredientsCount: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -8836,6 +8844,7 @@ export namespace Prisma {
     productItemId?: true
     cartId?: true
     quantity?: true
+    ingredientsCount?: true
   }
 
   export type CartItemSumAggregateInputType = {
@@ -8843,6 +8852,7 @@ export namespace Prisma {
     productItemId?: true
     cartId?: true
     quantity?: true
+    ingredientsCount?: true
   }
 
   export type CartItemMinAggregateInputType = {
@@ -8850,6 +8860,8 @@ export namespace Prisma {
     productItemId?: true
     cartId?: true
     quantity?: true
+    ingredientsKey?: true
+    ingredientsCount?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -8859,6 +8871,8 @@ export namespace Prisma {
     productItemId?: true
     cartId?: true
     quantity?: true
+    ingredientsKey?: true
+    ingredientsCount?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -8868,6 +8882,8 @@ export namespace Prisma {
     productItemId?: true
     cartId?: true
     quantity?: true
+    ingredientsKey?: true
+    ingredientsCount?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -8964,6 +8980,8 @@ export namespace Prisma {
     productItemId: number
     cartId: number
     quantity: number
+    ingredientsKey: string
+    ingredientsCount: number
     createdAt: Date
     updatedAt: Date
     _count: CartItemCountAggregateOutputType | null
@@ -8992,6 +9010,8 @@ export namespace Prisma {
     productItemId?: boolean
     cartId?: boolean
     quantity?: boolean
+    ingredientsKey?: boolean
+    ingredientsCount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     productItem?: boolean | ProductItemDefaultArgs<ExtArgs>
@@ -9005,6 +9025,8 @@ export namespace Prisma {
     productItemId?: boolean
     cartId?: boolean
     quantity?: boolean
+    ingredientsKey?: boolean
+    ingredientsCount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     productItem?: boolean | ProductItemDefaultArgs<ExtArgs>
@@ -9016,6 +9038,8 @@ export namespace Prisma {
     productItemId?: boolean
     cartId?: boolean
     quantity?: boolean
+    ingredientsKey?: boolean
+    ingredientsCount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     productItem?: boolean | ProductItemDefaultArgs<ExtArgs>
@@ -9027,11 +9051,13 @@ export namespace Prisma {
     productItemId?: boolean
     cartId?: boolean
     quantity?: boolean
+    ingredientsKey?: boolean
+    ingredientsCount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CartItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productItemId" | "cartId" | "quantity" | "createdAt" | "updatedAt", ExtArgs["result"]["cartItem"]>
+  export type CartItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productItemId" | "cartId" | "quantity" | "ingredientsKey" | "ingredientsCount" | "createdAt" | "updatedAt", ExtArgs["result"]["cartItem"]>
   export type CartItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     productItem?: boolean | ProductItemDefaultArgs<ExtArgs>
     cart?: boolean | CartDefaultArgs<ExtArgs>
@@ -9059,6 +9085,8 @@ export namespace Prisma {
       productItemId: number
       cartId: number
       quantity: number
+      ingredientsKey: string
+      ingredientsCount: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["cartItem"]>
@@ -9491,6 +9519,8 @@ export namespace Prisma {
     readonly productItemId: FieldRef<"CartItem", 'Int'>
     readonly cartId: FieldRef<"CartItem", 'Int'>
     readonly quantity: FieldRef<"CartItem", 'Int'>
+    readonly ingredientsKey: FieldRef<"CartItem", 'String'>
+    readonly ingredientsCount: FieldRef<"CartItem", 'Int'>
     readonly createdAt: FieldRef<"CartItem", 'DateTime'>
     readonly updatedAt: FieldRef<"CartItem", 'DateTime'>
   }
@@ -12338,6 +12368,8 @@ export namespace Prisma {
     productItemId: 'productItemId',
     cartId: 'cartId',
     quantity: 'quantity',
+    ingredientsKey: 'ingredientsKey',
+    ingredientsCount: 'ingredientsCount',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -12927,6 +12959,8 @@ export namespace Prisma {
     productItemId?: IntFilter<"CartItem"> | number
     cartId?: IntFilter<"CartItem"> | number
     quantity?: IntFilter<"CartItem"> | number
+    ingredientsKey?: StringFilter<"CartItem"> | string
+    ingredientsCount?: IntFilter<"CartItem"> | number
     createdAt?: DateTimeFilter<"CartItem"> | Date | string
     updatedAt?: DateTimeFilter<"CartItem"> | Date | string
     productItem?: XOR<ProductItemScalarRelationFilter, ProductItemWhereInput>
@@ -12939,6 +12973,8 @@ export namespace Prisma {
     productItemId?: SortOrder
     cartId?: SortOrder
     quantity?: SortOrder
+    ingredientsKey?: SortOrder
+    ingredientsCount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     productItem?: ProductItemOrderByWithRelationInput
@@ -12954,6 +12990,8 @@ export namespace Prisma {
     productItemId?: IntFilter<"CartItem"> | number
     cartId?: IntFilter<"CartItem"> | number
     quantity?: IntFilter<"CartItem"> | number
+    ingredientsKey?: StringFilter<"CartItem"> | string
+    ingredientsCount?: IntFilter<"CartItem"> | number
     createdAt?: DateTimeFilter<"CartItem"> | Date | string
     updatedAt?: DateTimeFilter<"CartItem"> | Date | string
     productItem?: XOR<ProductItemScalarRelationFilter, ProductItemWhereInput>
@@ -12966,6 +13004,8 @@ export namespace Prisma {
     productItemId?: SortOrder
     cartId?: SortOrder
     quantity?: SortOrder
+    ingredientsKey?: SortOrder
+    ingredientsCount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CartItemCountOrderByAggregateInput
@@ -12983,6 +13023,8 @@ export namespace Prisma {
     productItemId?: IntWithAggregatesFilter<"CartItem"> | number
     cartId?: IntWithAggregatesFilter<"CartItem"> | number
     quantity?: IntWithAggregatesFilter<"CartItem"> | number
+    ingredientsKey?: StringWithAggregatesFilter<"CartItem"> | string
+    ingredientsCount?: IntWithAggregatesFilter<"CartItem"> | number
     createdAt?: DateTimeWithAggregatesFilter<"CartItem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"CartItem"> | Date | string
   }
@@ -13547,6 +13589,8 @@ export namespace Prisma {
 
   export type CartItemCreateInput = {
     quantity?: number
+    ingredientsKey: string
+    ingredientsCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     productItem: ProductItemCreateNestedOneWithoutCartItemsInput
@@ -13559,6 +13603,8 @@ export namespace Prisma {
     productItemId: number
     cartId: number
     quantity?: number
+    ingredientsKey: string
+    ingredientsCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredients?: IngredientUncheckedCreateNestedManyWithoutCartItemsInput
@@ -13566,6 +13612,8 @@ export namespace Prisma {
 
   export type CartItemUpdateInput = {
     quantity?: IntFieldUpdateOperationsInput | number
+    ingredientsKey?: StringFieldUpdateOperationsInput | string
+    ingredientsCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productItem?: ProductItemUpdateOneRequiredWithoutCartItemsNestedInput
@@ -13578,6 +13626,8 @@ export namespace Prisma {
     productItemId?: IntFieldUpdateOperationsInput | number
     cartId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+    ingredientsKey?: StringFieldUpdateOperationsInput | string
+    ingredientsCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: IngredientUncheckedUpdateManyWithoutCartItemsNestedInput
@@ -13588,12 +13638,16 @@ export namespace Prisma {
     productItemId: number
     cartId: number
     quantity?: number
+    ingredientsKey: string
+    ingredientsCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type CartItemUpdateManyMutationInput = {
     quantity?: IntFieldUpdateOperationsInput | number
+    ingredientsKey?: StringFieldUpdateOperationsInput | string
+    ingredientsCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13603,6 +13657,8 @@ export namespace Prisma {
     productItemId?: IntFieldUpdateOperationsInput | number
     cartId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+    ingredientsKey?: StringFieldUpdateOperationsInput | string
+    ingredientsCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14253,6 +14309,8 @@ export namespace Prisma {
     productItemId?: SortOrder
     cartId?: SortOrder
     quantity?: SortOrder
+    ingredientsKey?: SortOrder
+    ingredientsCount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14262,6 +14320,7 @@ export namespace Prisma {
     productItemId?: SortOrder
     cartId?: SortOrder
     quantity?: SortOrder
+    ingredientsCount?: SortOrder
   }
 
   export type CartItemMaxOrderByAggregateInput = {
@@ -14269,6 +14328,8 @@ export namespace Prisma {
     productItemId?: SortOrder
     cartId?: SortOrder
     quantity?: SortOrder
+    ingredientsKey?: SortOrder
+    ingredientsCount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14278,6 +14339,8 @@ export namespace Prisma {
     productItemId?: SortOrder
     cartId?: SortOrder
     quantity?: SortOrder
+    ingredientsKey?: SortOrder
+    ingredientsCount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14287,6 +14350,7 @@ export namespace Prisma {
     productItemId?: SortOrder
     cartId?: SortOrder
     quantity?: SortOrder
+    ingredientsCount?: SortOrder
   }
 
   export type EnumOrderStatusFilter<$PrismaModel = never> = {
@@ -15630,6 +15694,8 @@ export namespace Prisma {
 
   export type CartItemCreateWithoutProductItemInput = {
     quantity?: number
+    ingredientsKey: string
+    ingredientsCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     cart: CartCreateNestedOneWithoutItemsInput
@@ -15640,6 +15706,8 @@ export namespace Prisma {
     id?: number
     cartId: number
     quantity?: number
+    ingredientsKey: string
+    ingredientsCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredients?: IngredientUncheckedCreateNestedManyWithoutCartItemsInput
@@ -15709,6 +15777,8 @@ export namespace Prisma {
     productItemId?: IntFilter<"CartItem"> | number
     cartId?: IntFilter<"CartItem"> | number
     quantity?: IntFilter<"CartItem"> | number
+    ingredientsKey?: StringFilter<"CartItem"> | string
+    ingredientsCount?: IntFilter<"CartItem"> | number
     createdAt?: DateTimeFilter<"CartItem"> | Date | string
     updatedAt?: DateTimeFilter<"CartItem"> | Date | string
   }
@@ -15739,6 +15809,8 @@ export namespace Prisma {
 
   export type CartItemCreateWithoutIngredientsInput = {
     quantity?: number
+    ingredientsKey: string
+    ingredientsCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     productItem: ProductItemCreateNestedOneWithoutCartItemsInput
@@ -15750,6 +15822,8 @@ export namespace Prisma {
     productItemId: number
     cartId: number
     quantity?: number
+    ingredientsKey: string
+    ingredientsCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15827,6 +15901,8 @@ export namespace Prisma {
 
   export type CartItemCreateWithoutCartInput = {
     quantity?: number
+    ingredientsKey: string
+    ingredientsCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     productItem: ProductItemCreateNestedOneWithoutCartItemsInput
@@ -15837,6 +15913,8 @@ export namespace Prisma {
     id?: number
     productItemId: number
     quantity?: number
+    ingredientsKey: string
+    ingredientsCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredients?: IngredientUncheckedCreateNestedManyWithoutCartItemsInput
@@ -16351,12 +16429,16 @@ export namespace Prisma {
     id?: number
     cartId: number
     quantity?: number
+    ingredientsKey: string
+    ingredientsCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type CartItemUpdateWithoutProductItemInput = {
     quantity?: IntFieldUpdateOperationsInput | number
+    ingredientsKey?: StringFieldUpdateOperationsInput | string
+    ingredientsCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cart?: CartUpdateOneRequiredWithoutItemsNestedInput
@@ -16367,6 +16449,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     cartId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+    ingredientsKey?: StringFieldUpdateOperationsInput | string
+    ingredientsCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: IngredientUncheckedUpdateManyWithoutCartItemsNestedInput
@@ -16376,6 +16460,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     cartId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+    ingredientsKey?: StringFieldUpdateOperationsInput | string
+    ingredientsCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16410,6 +16496,8 @@ export namespace Prisma {
 
   export type CartItemUpdateWithoutIngredientsInput = {
     quantity?: IntFieldUpdateOperationsInput | number
+    ingredientsKey?: StringFieldUpdateOperationsInput | string
+    ingredientsCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productItem?: ProductItemUpdateOneRequiredWithoutCartItemsNestedInput
@@ -16421,6 +16509,8 @@ export namespace Prisma {
     productItemId?: IntFieldUpdateOperationsInput | number
     cartId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+    ingredientsKey?: StringFieldUpdateOperationsInput | string
+    ingredientsCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16430,6 +16520,8 @@ export namespace Prisma {
     productItemId?: IntFieldUpdateOperationsInput | number
     cartId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+    ingredientsKey?: StringFieldUpdateOperationsInput | string
+    ingredientsCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16438,12 +16530,16 @@ export namespace Prisma {
     id?: number
     productItemId: number
     quantity?: number
+    ingredientsKey: string
+    ingredientsCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type CartItemUpdateWithoutCartInput = {
     quantity?: IntFieldUpdateOperationsInput | number
+    ingredientsKey?: StringFieldUpdateOperationsInput | string
+    ingredientsCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productItem?: ProductItemUpdateOneRequiredWithoutCartItemsNestedInput
@@ -16454,6 +16550,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     productItemId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+    ingredientsKey?: StringFieldUpdateOperationsInput | string
+    ingredientsCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredients?: IngredientUncheckedUpdateManyWithoutCartItemsNestedInput
@@ -16463,6 +16561,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     productItemId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+    ingredientsKey?: StringFieldUpdateOperationsInput | string
+    ingredientsCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

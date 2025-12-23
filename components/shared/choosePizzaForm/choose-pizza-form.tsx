@@ -1,14 +1,14 @@
 'use client';
 
-import { Button } from '@/components/ui';
-import { PizzaSize, PizzaType, mapPizzaType } from '@/constants/pizza';
-import { usePizzaPrice, useValidatedPizzaSelection } from '@/hooks';
-import { cn } from '@/lib/utils';
-import { Ingredient, ProductItem } from '@/prisma/generated/prisma';
-import React, { useContext, useMemo, useState } from 'react';
-import { useSet } from 'react-use';
-import { PizzaFormIngredients, PizzaFormSelectors, PizzaImage, Title } from '..';
-import { ProductFormContext } from '@/context/ProductForm';
+import { Button } from '@/components/ui'
+import { PizzaSize, PizzaType, mapPizzaType } from '@/constants/pizza'
+import { ProductFormContext } from '@/context/ProductForm'
+import { usePizzaPrice, useValidatedPizzaSelection } from '@/hooks'
+import { cn } from '@/lib/utils'
+import { Ingredient, ProductItem } from '@/prisma/generated/prisma'
+import React, { useContext, useMemo, useState } from 'react'
+import { useSet } from 'react-use'
+import { PizzaFormIngredients, PizzaFormSelectors, PizzaImage, Title } from '..'
 
 interface Props {
 	className?: string;

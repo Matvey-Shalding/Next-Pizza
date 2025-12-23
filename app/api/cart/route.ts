@@ -1,11 +1,14 @@
-import prisma from '@/lib/prisma';
-import { NextRequest, NextResponse } from 'next/server';
-import { initCart } from '@/lib/init-cart';
-import { updateCartTotalAmount } from '@/lib/update-cart-total-amount';
-import { CreateCartItemValues } from '@/services/dto/cart.dto';
+import { createIngredientsKey } from '@/lib/create-ingredients-key'
+import { initCart } from '@/lib/init-cart'
+import prisma from '@/lib/prisma'
+import { updateCartTotalAmount } from '@/lib/update-cart-total-amount'
+import { CreateCartItemValues } from '@/services/dto/cart.dto'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest) {
 	// temporary the first user
+
+	// TODO: fetch real token
 
 	const token = '123';
 
@@ -40,6 +43,8 @@ export async function GET(req: NextRequest) {
 	return NextResponse.json(userCart);
 }
 
+// add cart item
+
 export async function POST(req: NextRequest) {
 	try {
 		let token = req.cookies.get('cartToken')?.value;
@@ -52,23 +57,20 @@ export async function POST(req: NextRequest) {
 
 		const { ingredients, productItemId } = (await req.json()) as CreateCartItemValues;
 
+		const ingredientsKey = createIngredientsKey(ingredients);
+
 		// if such cart item already exists
 
 		const cartItem = await prisma.cartItem.findFirst({
 			where: {
 				cartId: cart.id,
 				productItemId,
-				ingredients: {
-					every: {
-						id: {
-							in: ingredients,
-						},
-					},
-				},
+				ingredientsKey: ingredientsKey
 			},
 		});
 
-		console.log(cartItem);
+		console.log(cartItem)
+
 
 		//update quantity
 
@@ -90,6 +92,8 @@ export async function POST(req: NextRequest) {
 					ingredients: {
 						connect: ingredients?.map(id => ({ id })),
 					},
+					ingredientsKey,
+					ingredientsCount: ingredients?.length ?? 0,
 				},
 			});
 		}
@@ -101,8 +105,9 @@ export async function POST(req: NextRequest) {
 		response.cookies.set('cartToken', token);
 
 		return response;
+
 	} catch (e) {
 		console.error('[CART_POST] server error', e);
-		return NextResponse.json({ message: 'Something went wrong' + e }, { status: 500 });
+		return NextResponse.json({ message: 'Something went wrong'}, { status: 500 });
 	}
 }

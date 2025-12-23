@@ -4,6 +4,8 @@ import { updateCartTotalAmount } from '@/lib/update-cart-total-amount';
 import { CreateCartItemValues } from '@/services/dto/cart.dto';
 import { NextRequest, NextResponse } from 'next/server';
 
+// update cartItem
+
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
 	try {
 		const { id } = await params;
