@@ -21,3 +21,5 @@ export { Title } from './title';
 export { Toggles } from './toggles';
 export { TopBar } from './top-bar';
 export {CartDrawerButton} from './cart-drawer-button'
+export {CheckoutBlock} from './checkout-block'
+export {CheckoutSidebar} from './checkout-sidebar'
