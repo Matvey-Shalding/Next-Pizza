@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils';
 import { useCartStore } from '@/store/cart';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '../ui';
 import { CartDrawer } from './cart-drawer';
 interface Props {
@@ -11,6 +11,16 @@ interface Props {
 }
 export const CartButton: React.FC<Props> = ({ className }) => {
 	const [open, setOpen] = React.useState(false);
+
+	useEffect(() => {
+		if (open) {
+			document.body.style.overflow = 'hidden';
+			document.body.style.pointerEvents = 'none';
+		} else {
+			document.body.style.overflow = 'unset';
+			document.body.style.pointerEvents = 'unset';
+		}
+	},[open])
 
 	const { totalAmount, items, loading } = useCartStore();
 

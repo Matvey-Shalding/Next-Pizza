@@ -1,8 +1,9 @@
 'use client';
 
-import { Trash2Icon } from 'lucide-react';
-import React from 'react';
-import { CartDrawerButton } from './cart-drawer-button';
+import { cn } from '@/lib/utils'
+import { Trash2Icon } from 'lucide-react'
+import React from 'react'
+import { CartDrawerButton } from './cart-drawer-button'
 
 export interface CartDrawerItemProps {
 	name: string;
@@ -12,6 +13,7 @@ export interface CartDrawerItemProps {
 	quantity: number;
 	onClickCountButton: (type: 'plus' | 'minus') => void;
 	onRemoveItem: () => void;
+	disabled?: boolean;
 }
 
 export const CartDrawerItem: React.FC<CartDrawerItemProps> = ({
@@ -22,10 +24,11 @@ export const CartDrawerItem: React.FC<CartDrawerItemProps> = ({
 	quantity,
 	onRemoveItem,
 	onClickCountButton,
+	disabled
 }) => {
 
 	return (
-		<div className='bg-white p-5 flex gap-x-6'>
+		<div className={cn('bg-white p-5 flex gap-x-6', { 'opacity-50 pointer-events-none': disabled })}>
 			<img className='size-15 rounded object-cover' src={imageUrl} alt={name} />
 			<div className='flex flex-col gap-y-3 basis-full'>
 				<div className='flex flex-col'>
