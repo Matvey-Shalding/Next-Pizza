@@ -68,7 +68,7 @@ export const CheckoutSidebar: React.FC<Props> = ({
 				</div>
 			</div>
 			<Button
-				disabled={loading}
+				loading={loading}
 				type="submit"
 				className="mx-11 min-h-15 font-bold text-lg"
 			>

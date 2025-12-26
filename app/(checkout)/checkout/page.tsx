@@ -1,5 +1,6 @@
 'use client'
 
+import { createOrder } from '@/app/actions'
 import { Container, Title } from '@/components/shared'
 import {
 	AdditionalInformation,
@@ -13,7 +14,9 @@ import {
 	CheckoutFormSchemaType
 } from '@/schema/checkout-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 
 //TODO: Add loading state, react Imask
 
@@ -22,8 +25,21 @@ export default function Checkout() {
 		resolver: zodResolver(checkoutFormSchema)
 	})
 
-	const onSubmit = methods.handleSubmit(data => {
-		console.log(data)
+	const [submitting, setSubmitting] = useState(false)
+
+	const onSubmit = methods.handleSubmit(async data => {
+		try {
+			setSubmitting(true)
+			const url = await createOrder(data)
+			toast.success('Order created successfully')
+			if (url) {
+				location.href = url
+			}
+		} catch (error) {
+			toast.error('Something went wrong')
+		} finally {
+			setSubmitting(false)
+		}
 	})
 
 	const { items, onClickCountButton, removeCartItem, totalAmount, loading } =
@@ -53,7 +69,7 @@ export default function Checkout() {
 						<AdditionalInformation />
 					</div>
 					<CheckoutSidebar
-						loading={loading}
+						loading={loading || submitting}
 						totalAmount={totalAmount}
 					/>
 				</form>
