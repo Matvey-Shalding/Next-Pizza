@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 import React from 'react'
-import { Title } from './title'
+import { Title } from '..'
 interface Props {
 	className?: string
 	endAdornment?: React.ReactNode

@@ -1,8 +1,8 @@
 import { cn } from '@/lib/utils'
 import { X } from 'lucide-react'
 import React from 'react'
-import { CartDrawerButton } from './cart-drawer-button'
-import { CartDrawerItemProps } from './cart-drawer-item'
+import { CartDrawerItemProps } from '../cart-drawer-item'
+import { CartDrawerButton } from '..'
 
 export const CheckoutItem: React.FC<CartDrawerItemProps> = ({
 	imageUrl,

@@ -1,25 +1,23 @@
-export { CartButton } from './cart-button';
-export { CartDrawer } from './cart-drawer';
-export { Categories } from './categories';
-export { CheckboxFiltersGroup } from './checkbox-filters-group';
-export { ChooseProductForm } from './choose-product-form';
-export * from './choosePizzaForm';
-export { Container } from './container';
-export { FilterCheckbox } from './filter-checkbox';
-export { Filters } from './filters';
-export { Header } from './header';
-export { IngredientItem } from './ingredient-item';
-export * from './modals/index';
-export { PizzaImage } from './pizza-image';
-export { ProductCard } from './product-card';
-export { ProductForm } from './product-form';
-export { ProductsGroupList } from './products-group-list';
-export { RangeSlider } from './range-slider';
-export { SearchInput } from './search-input';
-export { SortPopup } from './sort-popup';
-export { Title } from './title';
-export { Toggles } from './toggles';
-export { TopBar } from './top-bar';
-export {CartDrawerButton} from './cart-drawer-button'
-export {CheckoutBlock} from './checkout-block'
-export {CheckoutSidebar} from './checkout-sidebar'
+export { CartButton } from './cart-button'
+export { CartDrawer } from './cart-drawer'
+export { CartDrawerButton } from './cart-drawer-button'
+export { Categories } from './categories'
+export { CheckboxFiltersGroup } from './checkbox-filters-group'
+export { ChooseProductForm } from './choose-product-form'
+export * from './choosePizzaForm'
+export { Container } from './container'
+export { FilterCheckbox } from './filter-checkbox'
+export { Filters } from './filters'
+export { Header } from './header'
+export { IngredientItem } from './ingredient-item'
+export * from './modals/index'
+export { PizzaImage } from './pizza-image'
+export { ProductCard } from './product-card'
+export { ProductForm } from './product-form'
+export { ProductsGroupList } from './products-group-list'
+export { RangeSlider } from './range-slider'
+export { SearchInput } from './search-input'
+export { SortPopup } from './sort-popup'
+export { Title } from './title'
+export { Toggles } from './toggles'
+export { TopBar } from './top-bar'
