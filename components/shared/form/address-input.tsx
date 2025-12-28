@@ -1,5 +1,5 @@
 import { Input } from '@/components/ui'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AddressSuggestions } from 'react-dadata'
 import 'react-dadata/dist/react-dadata.css'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -10,6 +10,10 @@ export const AddressInput: React.FC<Props> = ({ className }) => {
 	const { setValue, watch } = useFormContext()
 
 	const value = watch('address')
+
+	useEffect(() => {
+		console.log(value)
+	}, [value])
 
 	const inputBaseClasses =
 		'file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground ' +

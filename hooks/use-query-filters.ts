@@ -1,40 +1,54 @@
-import { PriceRange } from '@/types';
-import { useRouter } from 'next/navigation';
-import qs from 'qs';
-import { useDebounce } from 'react-use';
+import { PriceRange } from '@/types'
+import { useRouter } from 'next/navigation'
+import qs from 'qs'
+import React from 'react'
+import { useDebounce } from 'react-use'
 
 interface Props {
-	sizes: Set<string>;
+	sizes: Set<string>
 
-	pizzaTypes: Set<string>;
+	pizzaTypes: Set<string>
 
-	selectedIngredients: Set<string>;
+	selectedIngredients: Set<string>
 
-	prices: PriceRange;
+	prices: PriceRange
 }
 
-export const useQueryIngredients = ({ prices, pizzaTypes, sizes, selectedIngredients }: Props) => {
-	const router = useRouter();
+export const useQueryIngredients = ({
+	prices,
+	pizzaTypes,
+	sizes,
+	selectedIngredients
+}: Props) => {
+	const router = useRouter()
+
+	// This code fixes the bug when on mount query string is cleared
+
+	const isMounted = React.useRef(false)
 
 	useDebounce(
 		() => {
-			const filters = {
-				pizzaTypes: Array.from(pizzaTypes),
-				sizes: Array.from(sizes),
-				priceFrom: prices.from,
-				priceTo: prices.to,
-				ingredients: Array.from(selectedIngredients),
-			};
+			if (isMounted.current) {
+				const filters = {
+					pizzaTypes: Array.from(pizzaTypes),
+					sizes: Array.from(sizes),
+					priceFrom: prices.from,
+					priceTo: prices.to,
+					ingredients: Array.from(selectedIngredients)
+				}
 
-			const query = qs.stringify(filters, {
-				arrayFormat: 'comma',
-			});
+				const query = qs.stringify(filters, {
+					arrayFormat: 'comma'
+				})
 
-			router.push(`?${query}`, {
-				scroll: false,
-			});
+				router.push(`?${query}`, {
+					scroll: false
+				})
+			}
+
+			isMounted.current = true
 		},
 		500,
 		[selectedIngredients, sizes, pizzaTypes, prices]
-	);
-};
+	)
+}

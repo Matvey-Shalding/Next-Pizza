@@ -1,11 +1,17 @@
 'use server'
 
+import PayOrderTemplate from '@/components/shared/email-templates/pay-order'
 import prisma from '@/lib/prisma'
+import { sendEmail } from '@/lib/send-email'
 import { OrderStatus } from '@/prisma/generated/prisma'
 import { CheckoutFormSchemaType } from '@/schema/checkout-schema'
+import { render } from '@react-email/components'
 import { cookies } from 'next/headers'
+import { Resend } from 'resend'
 
 export const createOrder = async (data: CheckoutFormSchemaType) => {
+	console.log('Creating order...')
+
 	try {
 		const cookie = await cookies()
 
@@ -40,7 +46,7 @@ export const createOrder = async (data: CheckoutFormSchemaType) => {
 
 		// Create order
 
-		await prisma.order.create({
+		const order = await prisma.order.create({
 			data: {
 				userId: userCart.userId || undefined,
 				token: cartToken,
@@ -55,7 +61,9 @@ export const createOrder = async (data: CheckoutFormSchemaType) => {
 			}
 		})
 
-		// Clear the cart
+
+		let paymentUrl = ''
+
 
 		await prisma.cart.update({
 			where: {
@@ -74,11 +82,19 @@ export const createOrder = async (data: CheckoutFormSchemaType) => {
 			}
 		})
 
-		//TODO: send payment url
+		const resend = new Resend(process.env.RESEND_API_KEY)
 
-		// const url = 'https://github.com/vitalybaev/react-dadata'
+		const emailHtml = await render(
+			PayOrderTemplate({
+				orderId: order.id,
+				totalAmount: order.totalAmount,
+				paymentUrl: ''
+			})
+		)
 
-		return ''
+		await sendEmail(data.email, 'Payment for the order', emailHtml)
+
+		return paymentUrl
 	} catch (e) {
 		console.log('Error while creating order', e)
 	}

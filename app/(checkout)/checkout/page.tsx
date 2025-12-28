@@ -14,6 +14,7 @@ import {
 	CheckoutFormSchemaType
 } from '@/schema/checkout-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -27,14 +28,14 @@ export default function Checkout() {
 
 	const [submitting, setSubmitting] = useState(false)
 
+	const router = useRouter()
+
 	const onSubmit = methods.handleSubmit(async data => {
 		try {
 			setSubmitting(true)
-			const url = await createOrder(data)
-			toast.success('Order created successfully')
-			if (url) {
-				location.href = url
-			}
+			const res = (await createOrder(data)) as any
+
+			router.push('/?paid=success')
 		} catch (error) {
 			toast.error('Something went wrong')
 		} finally {
