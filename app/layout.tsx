@@ -1,19 +1,20 @@
-import { nunito } from '@/config/font';
-import { Toaster } from 'react-hot-toast';
+import { nunito } from '@/config/font'
 
-import './globals.css';
+import { Providers } from '@/components/shared/providers'
+import './globals.css'
 
 export default function RootLayout({
-	children,
+	children
 }: Readonly<{
-	children: React.ReactNode;
+	children: React.ReactNode
 }>) {
 	return (
-		<html lang='en'>
+		<html lang="en">
 			<body className={nunito.className}>
-				<main className='min-h-screen'>{children}</main>
-				<Toaster />
+				<Providers>
+					<main className="min-h-screen">{children}</main>
+				</Providers>
 			</body>
 		</html>
-	);
+	)
 }
