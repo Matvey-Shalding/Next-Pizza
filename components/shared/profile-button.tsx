@@ -1,8 +1,9 @@
 import { CircleUser, User } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '../ui/button'
+import { AuthModal } from './modals/auth/auth-modal'
 
 interface Props {
 	onClickSignIn?: () => void
@@ -17,15 +18,21 @@ export const ProfileButton: React.FC<Props> = ({
 
 	console.log(session)
 
+	const [open, setOpen] = useState(false)
+
 	return (
 		<div className={className}>
 			{!session ? (
 				<Button
-					onClick={onClickSignIn}
+					onClick={() => setOpen(true)}
 					variant="outline"
 					className="flex items-center gap-1"
 				>
 					<User size={16} />
+					<AuthModal
+						open={open}
+						onClose={() => setOpen(false)}
+					/>
 					Sign in
 				</Button>
 			) : (
