@@ -1,11 +1,14 @@
 'use server'
 
 import PayOrderTemplate from '@/components/shared/email-templates/pay-order'
+import { getUserSession } from '@/lib/get-user-session'
 import prisma from '@/lib/prisma'
 import { sendEmail } from '@/lib/send-email'
 import { OrderStatus } from '@/prisma/generated/prisma'
 import { CheckoutFormSchemaType } from '@/schema/checkout-schema'
+import { ProfileSchemaType } from '@/schema/profile-schema'
 import { render } from '@react-email/components'
+import { hashSync } from 'bcrypt'
 import { cookies } from 'next/headers'
 import { Resend } from 'resend'
 
@@ -61,9 +64,7 @@ export const createOrder = async (data: CheckoutFormSchemaType) => {
 			}
 		})
 
-
 		let paymentUrl = ''
-
 
 		await prisma.cart.update({
 			where: {
@@ -97,5 +98,40 @@ export const createOrder = async (data: CheckoutFormSchemaType) => {
 		return paymentUrl
 	} catch (e) {
 		console.log('Error while creating order', e)
+	}
+}
+
+export const updateProfile = async (data: ProfileSchemaType) => {
+	try {
+		// Check if user exists
+
+		const currentUser = await getUserSession()
+
+		if (!currentUser) {
+			throw new Error('User not found')
+		}
+
+		const user = await prisma.user.findUnique({
+			where: {
+				id: +currentUser.user.id
+			}
+		})
+
+		if (!user) {
+			throw new Error('User not found')
+		}
+
+		await prisma.user.update({
+			where: {
+				id: user.id
+			},
+			data: {
+				fullName: data.fullName,
+				email: data.email,
+				password: data.password ? hashSync(data.password, 10) : user.password
+			}
+		})
+	} catch (error) {
+		console.log('[PROFILE_UPDATE_ERROR]', error)
 	}
 }
