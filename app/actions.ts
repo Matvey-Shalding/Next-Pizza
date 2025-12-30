@@ -7,6 +7,7 @@ import { sendEmail } from '@/lib/send-email'
 import { OrderStatus } from '@/prisma/generated/prisma'
 import { CheckoutFormSchemaType } from '@/schema/checkout-schema'
 import { ProfileSchemaType } from '@/schema/profile-schema'
+import { SignUpSchemaType } from '@/schema/sign-up-schema'
 import { render } from '@react-email/components'
 import { hashSync } from 'bcrypt'
 import { cookies } from 'next/headers'
@@ -133,5 +134,29 @@ export const updateProfile = async (data: ProfileSchemaType) => {
 		})
 	} catch (error) {
 		console.log('[PROFILE_UPDATE_ERROR]', error)
+	}
+}
+
+export const createUser = async (form: SignUpSchemaType) => {
+	try {
+		const findUser = await prisma.user.findUnique({
+			where: {
+				email: form.email
+			}
+		})
+
+		if (findUser) {
+			throw new Error('User already exists')
+		}
+
+		await prisma.user.create({
+			data: {
+				fullName: form.fullName,
+				email: form.email,
+				password: hashSync(form.password, 10),
+			}
+		})
+	} catch (error) {
+		console.log('[SIGN_UP_ERROR]', error)
 	}
 }

@@ -23,13 +23,11 @@ model User {
 
   providerId String?
 
-  verified DateTime
 
   createdAt DateTime @default(now())
 
   updatedAt DateTime @updatedAt
 
-  verificationCode VerificationCode?
 
   cart Cart?
 
@@ -180,16 +178,4 @@ enum OrderStatus {
 enum UserRole {
   USER
   ADMIN
-}
-
-model VerificationCode {
-  id Int @id @default(autoincrement())
-
-  user User @relation(fields: [userId], references: [id])
-
-  userId Int @unique
-
-  code String
-
-  createdAt DateTime @default(now())
 }

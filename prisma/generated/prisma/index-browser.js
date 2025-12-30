@@ -128,7 +128,6 @@ exports.Prisma.UserScalarFieldEnum = {
   role: 'role',
   provider: 'provider',
   providerId: 'providerId',
-  verified: 'verified',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -203,13 +202,6 @@ exports.Prisma.OrderScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.VerificationCodeScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  code: 'code',
-  createdAt: 'createdAt'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -253,8 +245,7 @@ exports.Prisma.ModelName = {
   Ingredient: 'Ingredient',
   Cart: 'Cart',
   CartItem: 'CartItem',
-  Order: 'Order',
-  VerificationCode: 'VerificationCode'
+  Order: 'Order'
 };
 
 /**

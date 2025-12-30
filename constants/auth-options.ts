@@ -35,10 +35,7 @@ export const authOptions: NextAuthOptions = {
 					return null
 				}
 
-				// Optional: reject unverified users
-				if (!user.verified) {
-					return null
-				}
+
 
 				// Compare passwords
 
@@ -117,7 +114,6 @@ export const authOptions: NextAuthOptions = {
 							email: user.email,
 							provider: account?.provider,
 							providerId: account?.providerAccountId,
-							verified: new Date(),
 							fullName: user.name ?? 'User',
 							password: crypto.randomUUID()
 						}
