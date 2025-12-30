@@ -3,9 +3,14 @@ import { compare } from 'bcrypt'
 import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GithubProvider from 'next-auth/providers/github'
+import GoogleProvider from 'next-auth/providers/google'
 
 export const authOptions: NextAuthOptions = {
 	providers: [
+		GoogleProvider({
+			clientId: process.env.GOOGLE_CLIENT_ID ?? '',
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? ''
+		}),
 		GithubProvider({
 			clientId: process.env.GITHUB_ID ?? '',
 			clientSecret: process.env.GITHUB_SECRET ?? ''
@@ -35,8 +40,6 @@ export const authOptions: NextAuthOptions = {
 					return null
 				}
 
-
-
 				// Compare passwords
 
 				const isPasswordValid = await compare(
@@ -58,12 +61,12 @@ export const authOptions: NextAuthOptions = {
 	],
 	callbacks: {
 		// Optional: enrich session with user ID
-		async session({ session, token }) {
-			if (session.user) {
-				session.user.id = token.sub as string
-			}
-			return session
-		},
+		// async session({ session, token }) {
+		// 	if (session.user) {
+		// 		session.user.id = token.sub as string
+		// 	}
+		// 	return session
+		// },
 		async signIn({ user, account }) {
 			try {
 				//Sign in logic only applies to providers
@@ -110,7 +113,6 @@ export const authOptions: NextAuthOptions = {
 
 					await prisma.user.create({
 						data: {
-							id: Number(user.id),
 							email: user.email,
 							provider: account?.provider,
 							providerId: account?.providerAccountId,
