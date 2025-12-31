@@ -4,5 +4,6 @@ export const API_ROUTES = {
 	INGREDIENTS: '/ingredients',
 	CATEGORIES: '/categories',
 	CART: '/cart',
-	CHECKOUT: '/checkout'
+	CHECKOUT: '/checkout',
+	STORIES: '/stories',
 } as const

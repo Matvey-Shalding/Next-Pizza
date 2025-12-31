@@ -26,7 +26,7 @@ const generateProductItem = ({
 	} as Prisma.ProductItemUncheckedCreateInput
 }
 
-//Generate data
+// Generate data
 async function up() {
 	await prisma.user.createMany({
 		data: [
@@ -128,7 +128,6 @@ async function up() {
 	})
 
 	// Create cart and cart items
-
 	await prisma.cart.createMany({
 		data: [
 			{
@@ -191,10 +190,54 @@ async function up() {
 			ingredientsKey: '1,2,3,4'
 		}
 	})
+
+	// === STORIES SECTION (UPDATED) ===
+	const previewImages = [
+		'https://cdn.inappstory.ru/story/xep/xzh/zmc/cr4gcw0aselwvf628pbmj3j/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=3101815496',
+		'https://cdn.inappstory.ru/story/km2/9gf/jrn/sb7ls1yj9fe5bwvuwgym73e/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=3074015640',
+		'https://cdn.inappstory.ru/story/quw/acz/zf5/zu37vankpngyccqvgzbohj1/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=1336215020',
+		'https://cdn.inappstory.ru/story/7oc/5nf/ipn/oznceu2ywv82tdlnpwriyrq/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=38903958',
+		'https://cdn.inappstory.ru/story/q0t/flg/0ph/xt67uw7kgqe9bag7spwkkyw/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=2941222737',
+		'https://cdn.inappstory.ru/story/lza/rsp/2gc/xrar8zdspl4saq4uajmso38/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=4207486284'
+	]
+
+	const baseStoryItems = [
+		'https://cdn.inappstory.ru/file/dd/yj/sx/oqx9feuljibke3mknab7ilb35t.webp?k=IgAAAAAAAAAE',
+		'https://cdn.inappstory.ru/file/jv/sb/fh/io7c5zarojdm7eus0trn7czdet.webp?k=IgAAAAAAAAAE',
+		'https://cdn.inappstory.ru/file/ts/p9/vq/zktyxdxnjqbzufonxd8ffk44cb.webp?k=IgAAAAAAAAAE',
+		'https://cdn.inappstory.ru/file/ur/uq/le/9ufzwtpdjeekidqq04alfnxvu2.webp?k=IgAAAAAAAAAE',
+		'https://cdn.inappstory.ru/file/sy/vl/c7/uyqzmdojadcbw7o0a35ojxlcul.webp?k=IgAAAAAAAAAE'
+	]
+
+	// Make 6 items per story by duplicating the first
+	const storyItems6 = [...baseStoryItems, baseStoryItems[0]]
+
+	// Create 12 stories
+	const storiesData = Array.from({ length: 12 }, (_, i) => ({
+		previewImageUrl: previewImages[i % previewImages.length]
+	}))
+
+	await prisma.story.createMany({
+		data: storiesData
+	})
+
+	// Create 6 story items per story (12 stories × 6 = 72 items)
+	const storyItemsData = []
+	for (let storyId = 1; storyId <= 12; storyId++) {
+		for (const sourceUrl of storyItems6) {
+			storyItemsData.push({ storyId, sourceUrl })
+		}
+	}
+
+	await prisma.storyItem.createMany({
+		data: storyItemsData
+	})
 }
 
-//Clear data
+// Clear data
 async function down() {
+	await prisma.$executeRaw`TRUNCATE TABLE "StoryItem" RESTART IDENTITY CASCADE`
+	await prisma.$executeRaw`TRUNCATE TABLE "Story" RESTART IDENTITY CASCADE`
 	await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE`
 	await prisma.$executeRaw`TRUNCATE TABLE "Category" RESTART IDENTITY CASCADE`
 	await prisma.$executeRaw`TRUNCATE TABLE "Cart" RESTART IDENTITY CASCADE`
@@ -207,7 +250,6 @@ async function down() {
 async function main() {
 	try {
 		await down()
-
 		await up()
 	} catch (e) {
 		console.log(e)

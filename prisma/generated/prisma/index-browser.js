@@ -202,6 +202,19 @@ exports.Prisma.OrderScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.StoryScalarFieldEnum = {
+  id: 'id',
+  previewImageUrl: 'previewImageUrl',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.StoryItemScalarFieldEnum = {
+  id: 'id',
+  storyId: 'storyId',
+  sourceUrl: 'sourceUrl',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -245,7 +258,9 @@ exports.Prisma.ModelName = {
   Ingredient: 'Ingredient',
   Cart: 'Cart',
   CartItem: 'CartItem',
-  Order: 'Order'
+  Order: 'Order',
+  Story: 'Story',
+  StoryItem: 'StoryItem'
 };
 
 /**

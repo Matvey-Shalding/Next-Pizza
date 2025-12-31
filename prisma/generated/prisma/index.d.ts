@@ -53,6 +53,16 @@ export type CartItem = $Result.DefaultSelection<Prisma.$CartItemPayload>
  * 
  */
 export type Order = $Result.DefaultSelection<Prisma.$OrderPayload>
+/**
+ * Model Story
+ * 
+ */
+export type Story = $Result.DefaultSelection<Prisma.$StoryPayload>
+/**
+ * Model StoryItem
+ * 
+ */
+export type StoryItem = $Result.DefaultSelection<Prisma.$StoryItemPayload>
 
 /**
  * Enums
@@ -280,6 +290,26 @@ export class PrismaClient<
     * ```
     */
   get order(): Prisma.OrderDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.story`: Exposes CRUD operations for the **Story** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Stories
+    * const stories = await prisma.story.findMany()
+    * ```
+    */
+  get story(): Prisma.StoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.storyItem`: Exposes CRUD operations for the **StoryItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StoryItems
+    * const storyItems = await prisma.storyItem.findMany()
+    * ```
+    */
+  get storyItem(): Prisma.StoryItemDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -721,7 +751,9 @@ export namespace Prisma {
     Ingredient: 'Ingredient',
     Cart: 'Cart',
     CartItem: 'CartItem',
-    Order: 'Order'
+    Order: 'Order',
+    Story: 'Story',
+    StoryItem: 'StoryItem'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -737,7 +769,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "category" | "product" | "productItem" | "ingredient" | "cart" | "cartItem" | "order"
+      modelProps: "user" | "category" | "product" | "productItem" | "ingredient" | "cart" | "cartItem" | "order" | "story" | "storyItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1333,6 +1365,154 @@ export namespace Prisma {
           }
         }
       }
+      Story: {
+        payload: Prisma.$StoryPayload<ExtArgs>
+        fields: Prisma.StoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>
+          }
+          findFirst: {
+            args: Prisma.StoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>
+          }
+          findMany: {
+            args: Prisma.StoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>[]
+          }
+          create: {
+            args: Prisma.StoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>
+          }
+          createMany: {
+            args: Prisma.StoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>[]
+          }
+          delete: {
+            args: Prisma.StoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>
+          }
+          update: {
+            args: Prisma.StoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.StoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.StoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>
+          }
+          aggregate: {
+            args: Prisma.StoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStory>
+          }
+          groupBy: {
+            args: Prisma.StoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StoryCountArgs<ExtArgs>
+            result: $Utils.Optional<StoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      StoryItem: {
+        payload: Prisma.$StoryItemPayload<ExtArgs>
+        fields: Prisma.StoryItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StoryItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StoryItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryItemPayload>
+          }
+          findFirst: {
+            args: Prisma.StoryItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StoryItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryItemPayload>
+          }
+          findMany: {
+            args: Prisma.StoryItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryItemPayload>[]
+          }
+          create: {
+            args: Prisma.StoryItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryItemPayload>
+          }
+          createMany: {
+            args: Prisma.StoryItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StoryItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryItemPayload>[]
+          }
+          delete: {
+            args: Prisma.StoryItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryItemPayload>
+          }
+          update: {
+            args: Prisma.StoryItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.StoryItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StoryItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StoryItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.StoryItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryItemPayload>
+          }
+          aggregate: {
+            args: Prisma.StoryItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStoryItem>
+          }
+          groupBy: {
+            args: Prisma.StoryItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StoryItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StoryItemCountArgs<ExtArgs>
+            result: $Utils.Optional<StoryItemCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1449,6 +1629,8 @@ export namespace Prisma {
     cart?: CartOmit
     cartItem?: CartItemOmit
     order?: OrderOmit
+    story?: StoryOmit
+    storyItem?: StoryItemOmit
   }
 
   /* Types for Logging */
@@ -1756,6 +1938,37 @@ export namespace Prisma {
    */
   export type CartItemCountOutputTypeCountIngredientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IngredientWhereInput
+  }
+
+
+  /**
+   * Count Type StoryCountOutputType
+   */
+
+  export type StoryCountOutputType = {
+    items: number
+  }
+
+  export type StoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | StoryCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * StoryCountOutputType without action
+   */
+  export type StoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryCountOutputType
+     */
+    select?: StoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * StoryCountOutputType without action
+   */
+  export type StoryCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StoryItemWhereInput
   }
 
 
@@ -11067,6 +11280,2167 @@ export namespace Prisma {
 
 
   /**
+   * Model Story
+   */
+
+  export type AggregateStory = {
+    _count: StoryCountAggregateOutputType | null
+    _avg: StoryAvgAggregateOutputType | null
+    _sum: StorySumAggregateOutputType | null
+    _min: StoryMinAggregateOutputType | null
+    _max: StoryMaxAggregateOutputType | null
+  }
+
+  export type StoryAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type StorySumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type StoryMinAggregateOutputType = {
+    id: number | null
+    previewImageUrl: string | null
+    createdAt: Date | null
+  }
+
+  export type StoryMaxAggregateOutputType = {
+    id: number | null
+    previewImageUrl: string | null
+    createdAt: Date | null
+  }
+
+  export type StoryCountAggregateOutputType = {
+    id: number
+    previewImageUrl: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type StoryAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type StorySumAggregateInputType = {
+    id?: true
+  }
+
+  export type StoryMinAggregateInputType = {
+    id?: true
+    previewImageUrl?: true
+    createdAt?: true
+  }
+
+  export type StoryMaxAggregateInputType = {
+    id?: true
+    previewImageUrl?: true
+    createdAt?: true
+  }
+
+  export type StoryCountAggregateInputType = {
+    id?: true
+    previewImageUrl?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type StoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Story to aggregate.
+     */
+    where?: StoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Stories to fetch.
+     */
+    orderBy?: StoryOrderByWithRelationInput | StoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Stories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Stories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Stories
+    **/
+    _count?: true | StoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StoryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StorySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StoryMaxAggregateInputType
+  }
+
+  export type GetStoryAggregateType<T extends StoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateStory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStory[P]>
+      : GetScalarType<T[P], AggregateStory[P]>
+  }
+
+
+
+
+  export type StoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StoryWhereInput
+    orderBy?: StoryOrderByWithAggregationInput | StoryOrderByWithAggregationInput[]
+    by: StoryScalarFieldEnum[] | StoryScalarFieldEnum
+    having?: StoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StoryCountAggregateInputType | true
+    _avg?: StoryAvgAggregateInputType
+    _sum?: StorySumAggregateInputType
+    _min?: StoryMinAggregateInputType
+    _max?: StoryMaxAggregateInputType
+  }
+
+  export type StoryGroupByOutputType = {
+    id: number
+    previewImageUrl: string
+    createdAt: Date
+    _count: StoryCountAggregateOutputType | null
+    _avg: StoryAvgAggregateOutputType | null
+    _sum: StorySumAggregateOutputType | null
+    _min: StoryMinAggregateOutputType | null
+    _max: StoryMaxAggregateOutputType | null
+  }
+
+  type GetStoryGroupByPayload<T extends StoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StoryGroupByOutputType[P]>
+            : GetScalarType<T[P], StoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    previewImageUrl?: boolean
+    createdAt?: boolean
+    items?: boolean | Story$itemsArgs<ExtArgs>
+    _count?: boolean | StoryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["story"]>
+
+  export type StorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    previewImageUrl?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["story"]>
+
+  export type StorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    previewImageUrl?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["story"]>
+
+  export type StorySelectScalar = {
+    id?: boolean
+    previewImageUrl?: boolean
+    createdAt?: boolean
+  }
+
+  export type StoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "previewImageUrl" | "createdAt", ExtArgs["result"]["story"]>
+  export type StoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | Story$itemsArgs<ExtArgs>
+    _count?: boolean | StoryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type StoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type StoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $StoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Story"
+    objects: {
+      items: Prisma.$StoryItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      previewImageUrl: string
+      createdAt: Date
+    }, ExtArgs["result"]["story"]>
+    composites: {}
+  }
+
+  type StoryGetPayload<S extends boolean | null | undefined | StoryDefaultArgs> = $Result.GetResult<Prisma.$StoryPayload, S>
+
+  type StoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StoryCountAggregateInputType | true
+    }
+
+  export interface StoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Story'], meta: { name: 'Story' } }
+    /**
+     * Find zero or one Story that matches the filter.
+     * @param {StoryFindUniqueArgs} args - Arguments to find a Story
+     * @example
+     * // Get one Story
+     * const story = await prisma.story.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StoryFindUniqueArgs>(args: SelectSubset<T, StoryFindUniqueArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Story that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StoryFindUniqueOrThrowArgs} args - Arguments to find a Story
+     * @example
+     * // Get one Story
+     * const story = await prisma.story.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StoryFindUniqueOrThrowArgs>(args: SelectSubset<T, StoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Story that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryFindFirstArgs} args - Arguments to find a Story
+     * @example
+     * // Get one Story
+     * const story = await prisma.story.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StoryFindFirstArgs>(args?: SelectSubset<T, StoryFindFirstArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Story that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryFindFirstOrThrowArgs} args - Arguments to find a Story
+     * @example
+     * // Get one Story
+     * const story = await prisma.story.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StoryFindFirstOrThrowArgs>(args?: SelectSubset<T, StoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Stories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Stories
+     * const stories = await prisma.story.findMany()
+     * 
+     * // Get first 10 Stories
+     * const stories = await prisma.story.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const storyWithIdOnly = await prisma.story.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StoryFindManyArgs>(args?: SelectSubset<T, StoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Story.
+     * @param {StoryCreateArgs} args - Arguments to create a Story.
+     * @example
+     * // Create one Story
+     * const Story = await prisma.story.create({
+     *   data: {
+     *     // ... data to create a Story
+     *   }
+     * })
+     * 
+     */
+    create<T extends StoryCreateArgs>(args: SelectSubset<T, StoryCreateArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Stories.
+     * @param {StoryCreateManyArgs} args - Arguments to create many Stories.
+     * @example
+     * // Create many Stories
+     * const story = await prisma.story.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StoryCreateManyArgs>(args?: SelectSubset<T, StoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Stories and returns the data saved in the database.
+     * @param {StoryCreateManyAndReturnArgs} args - Arguments to create many Stories.
+     * @example
+     * // Create many Stories
+     * const story = await prisma.story.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Stories and only return the `id`
+     * const storyWithIdOnly = await prisma.story.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StoryCreateManyAndReturnArgs>(args?: SelectSubset<T, StoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Story.
+     * @param {StoryDeleteArgs} args - Arguments to delete one Story.
+     * @example
+     * // Delete one Story
+     * const Story = await prisma.story.delete({
+     *   where: {
+     *     // ... filter to delete one Story
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StoryDeleteArgs>(args: SelectSubset<T, StoryDeleteArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Story.
+     * @param {StoryUpdateArgs} args - Arguments to update one Story.
+     * @example
+     * // Update one Story
+     * const story = await prisma.story.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StoryUpdateArgs>(args: SelectSubset<T, StoryUpdateArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Stories.
+     * @param {StoryDeleteManyArgs} args - Arguments to filter Stories to delete.
+     * @example
+     * // Delete a few Stories
+     * const { count } = await prisma.story.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StoryDeleteManyArgs>(args?: SelectSubset<T, StoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Stories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Stories
+     * const story = await prisma.story.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StoryUpdateManyArgs>(args: SelectSubset<T, StoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Stories and returns the data updated in the database.
+     * @param {StoryUpdateManyAndReturnArgs} args - Arguments to update many Stories.
+     * @example
+     * // Update many Stories
+     * const story = await prisma.story.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Stories and only return the `id`
+     * const storyWithIdOnly = await prisma.story.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StoryUpdateManyAndReturnArgs>(args: SelectSubset<T, StoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Story.
+     * @param {StoryUpsertArgs} args - Arguments to update or create a Story.
+     * @example
+     * // Update or create a Story
+     * const story = await prisma.story.upsert({
+     *   create: {
+     *     // ... data to create a Story
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Story we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StoryUpsertArgs>(args: SelectSubset<T, StoryUpsertArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Stories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryCountArgs} args - Arguments to filter Stories to count.
+     * @example
+     * // Count the number of Stories
+     * const count = await prisma.story.count({
+     *   where: {
+     *     // ... the filter for the Stories we want to count
+     *   }
+     * })
+    **/
+    count<T extends StoryCountArgs>(
+      args?: Subset<T, StoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Story.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StoryAggregateArgs>(args: Subset<T, StoryAggregateArgs>): Prisma.PrismaPromise<GetStoryAggregateType<T>>
+
+    /**
+     * Group by Story.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StoryGroupByArgs['orderBy'] }
+        : { orderBy?: StoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Story model
+   */
+  readonly fields: StoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Story.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    items<T extends Story$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Story$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Story model
+   */
+  interface StoryFieldRefs {
+    readonly id: FieldRef<"Story", 'Int'>
+    readonly previewImageUrl: FieldRef<"Story", 'String'>
+    readonly createdAt: FieldRef<"Story", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Story findUnique
+   */
+  export type StoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Story
+     */
+    select?: StorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Story
+     */
+    omit?: StoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Story to fetch.
+     */
+    where: StoryWhereUniqueInput
+  }
+
+  /**
+   * Story findUniqueOrThrow
+   */
+  export type StoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Story
+     */
+    select?: StorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Story
+     */
+    omit?: StoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Story to fetch.
+     */
+    where: StoryWhereUniqueInput
+  }
+
+  /**
+   * Story findFirst
+   */
+  export type StoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Story
+     */
+    select?: StorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Story
+     */
+    omit?: StoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Story to fetch.
+     */
+    where?: StoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Stories to fetch.
+     */
+    orderBy?: StoryOrderByWithRelationInput | StoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Stories.
+     */
+    cursor?: StoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Stories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Stories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Stories.
+     */
+    distinct?: StoryScalarFieldEnum | StoryScalarFieldEnum[]
+  }
+
+  /**
+   * Story findFirstOrThrow
+   */
+  export type StoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Story
+     */
+    select?: StorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Story
+     */
+    omit?: StoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Story to fetch.
+     */
+    where?: StoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Stories to fetch.
+     */
+    orderBy?: StoryOrderByWithRelationInput | StoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Stories.
+     */
+    cursor?: StoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Stories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Stories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Stories.
+     */
+    distinct?: StoryScalarFieldEnum | StoryScalarFieldEnum[]
+  }
+
+  /**
+   * Story findMany
+   */
+  export type StoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Story
+     */
+    select?: StorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Story
+     */
+    omit?: StoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Stories to fetch.
+     */
+    where?: StoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Stories to fetch.
+     */
+    orderBy?: StoryOrderByWithRelationInput | StoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Stories.
+     */
+    cursor?: StoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Stories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Stories.
+     */
+    skip?: number
+    distinct?: StoryScalarFieldEnum | StoryScalarFieldEnum[]
+  }
+
+  /**
+   * Story create
+   */
+  export type StoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Story
+     */
+    select?: StorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Story
+     */
+    omit?: StoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Story.
+     */
+    data: XOR<StoryCreateInput, StoryUncheckedCreateInput>
+  }
+
+  /**
+   * Story createMany
+   */
+  export type StoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Stories.
+     */
+    data: StoryCreateManyInput | StoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Story createManyAndReturn
+   */
+  export type StoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Story
+     */
+    select?: StorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Story
+     */
+    omit?: StoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many Stories.
+     */
+    data: StoryCreateManyInput | StoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Story update
+   */
+  export type StoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Story
+     */
+    select?: StorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Story
+     */
+    omit?: StoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Story.
+     */
+    data: XOR<StoryUpdateInput, StoryUncheckedUpdateInput>
+    /**
+     * Choose, which Story to update.
+     */
+    where: StoryWhereUniqueInput
+  }
+
+  /**
+   * Story updateMany
+   */
+  export type StoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Stories.
+     */
+    data: XOR<StoryUpdateManyMutationInput, StoryUncheckedUpdateManyInput>
+    /**
+     * Filter which Stories to update
+     */
+    where?: StoryWhereInput
+    /**
+     * Limit how many Stories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Story updateManyAndReturn
+   */
+  export type StoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Story
+     */
+    select?: StorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Story
+     */
+    omit?: StoryOmit<ExtArgs> | null
+    /**
+     * The data used to update Stories.
+     */
+    data: XOR<StoryUpdateManyMutationInput, StoryUncheckedUpdateManyInput>
+    /**
+     * Filter which Stories to update
+     */
+    where?: StoryWhereInput
+    /**
+     * Limit how many Stories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Story upsert
+   */
+  export type StoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Story
+     */
+    select?: StorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Story
+     */
+    omit?: StoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Story to update in case it exists.
+     */
+    where: StoryWhereUniqueInput
+    /**
+     * In case the Story found by the `where` argument doesn't exist, create a new Story with this data.
+     */
+    create: XOR<StoryCreateInput, StoryUncheckedCreateInput>
+    /**
+     * In case the Story was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StoryUpdateInput, StoryUncheckedUpdateInput>
+  }
+
+  /**
+   * Story delete
+   */
+  export type StoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Story
+     */
+    select?: StorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Story
+     */
+    omit?: StoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryInclude<ExtArgs> | null
+    /**
+     * Filter which Story to delete.
+     */
+    where: StoryWhereUniqueInput
+  }
+
+  /**
+   * Story deleteMany
+   */
+  export type StoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Stories to delete
+     */
+    where?: StoryWhereInput
+    /**
+     * Limit how many Stories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Story.items
+   */
+  export type Story$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryItem
+     */
+    select?: StoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoryItem
+     */
+    omit?: StoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryItemInclude<ExtArgs> | null
+    where?: StoryItemWhereInput
+    orderBy?: StoryItemOrderByWithRelationInput | StoryItemOrderByWithRelationInput[]
+    cursor?: StoryItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StoryItemScalarFieldEnum | StoryItemScalarFieldEnum[]
+  }
+
+  /**
+   * Story without action
+   */
+  export type StoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Story
+     */
+    select?: StorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Story
+     */
+    omit?: StoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model StoryItem
+   */
+
+  export type AggregateStoryItem = {
+    _count: StoryItemCountAggregateOutputType | null
+    _avg: StoryItemAvgAggregateOutputType | null
+    _sum: StoryItemSumAggregateOutputType | null
+    _min: StoryItemMinAggregateOutputType | null
+    _max: StoryItemMaxAggregateOutputType | null
+  }
+
+  export type StoryItemAvgAggregateOutputType = {
+    id: number | null
+    storyId: number | null
+  }
+
+  export type StoryItemSumAggregateOutputType = {
+    id: number | null
+    storyId: number | null
+  }
+
+  export type StoryItemMinAggregateOutputType = {
+    id: number | null
+    storyId: number | null
+    sourceUrl: string | null
+    createdAt: Date | null
+  }
+
+  export type StoryItemMaxAggregateOutputType = {
+    id: number | null
+    storyId: number | null
+    sourceUrl: string | null
+    createdAt: Date | null
+  }
+
+  export type StoryItemCountAggregateOutputType = {
+    id: number
+    storyId: number
+    sourceUrl: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type StoryItemAvgAggregateInputType = {
+    id?: true
+    storyId?: true
+  }
+
+  export type StoryItemSumAggregateInputType = {
+    id?: true
+    storyId?: true
+  }
+
+  export type StoryItemMinAggregateInputType = {
+    id?: true
+    storyId?: true
+    sourceUrl?: true
+    createdAt?: true
+  }
+
+  export type StoryItemMaxAggregateInputType = {
+    id?: true
+    storyId?: true
+    sourceUrl?: true
+    createdAt?: true
+  }
+
+  export type StoryItemCountAggregateInputType = {
+    id?: true
+    storyId?: true
+    sourceUrl?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type StoryItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StoryItem to aggregate.
+     */
+    where?: StoryItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StoryItems to fetch.
+     */
+    orderBy?: StoryItemOrderByWithRelationInput | StoryItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StoryItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StoryItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StoryItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StoryItems
+    **/
+    _count?: true | StoryItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StoryItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StoryItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StoryItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StoryItemMaxAggregateInputType
+  }
+
+  export type GetStoryItemAggregateType<T extends StoryItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateStoryItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStoryItem[P]>
+      : GetScalarType<T[P], AggregateStoryItem[P]>
+  }
+
+
+
+
+  export type StoryItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StoryItemWhereInput
+    orderBy?: StoryItemOrderByWithAggregationInput | StoryItemOrderByWithAggregationInput[]
+    by: StoryItemScalarFieldEnum[] | StoryItemScalarFieldEnum
+    having?: StoryItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StoryItemCountAggregateInputType | true
+    _avg?: StoryItemAvgAggregateInputType
+    _sum?: StoryItemSumAggregateInputType
+    _min?: StoryItemMinAggregateInputType
+    _max?: StoryItemMaxAggregateInputType
+  }
+
+  export type StoryItemGroupByOutputType = {
+    id: number
+    storyId: number
+    sourceUrl: string
+    createdAt: Date
+    _count: StoryItemCountAggregateOutputType | null
+    _avg: StoryItemAvgAggregateOutputType | null
+    _sum: StoryItemSumAggregateOutputType | null
+    _min: StoryItemMinAggregateOutputType | null
+    _max: StoryItemMaxAggregateOutputType | null
+  }
+
+  type GetStoryItemGroupByPayload<T extends StoryItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StoryItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StoryItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StoryItemGroupByOutputType[P]>
+            : GetScalarType<T[P], StoryItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StoryItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storyId?: boolean
+    sourceUrl?: boolean
+    createdAt?: boolean
+    story?: boolean | StoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["storyItem"]>
+
+  export type StoryItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storyId?: boolean
+    sourceUrl?: boolean
+    createdAt?: boolean
+    story?: boolean | StoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["storyItem"]>
+
+  export type StoryItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    storyId?: boolean
+    sourceUrl?: boolean
+    createdAt?: boolean
+    story?: boolean | StoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["storyItem"]>
+
+  export type StoryItemSelectScalar = {
+    id?: boolean
+    storyId?: boolean
+    sourceUrl?: boolean
+    createdAt?: boolean
+  }
+
+  export type StoryItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "storyId" | "sourceUrl" | "createdAt", ExtArgs["result"]["storyItem"]>
+  export type StoryItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    story?: boolean | StoryDefaultArgs<ExtArgs>
+  }
+  export type StoryItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    story?: boolean | StoryDefaultArgs<ExtArgs>
+  }
+  export type StoryItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    story?: boolean | StoryDefaultArgs<ExtArgs>
+  }
+
+  export type $StoryItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StoryItem"
+    objects: {
+      story: Prisma.$StoryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      storyId: number
+      sourceUrl: string
+      createdAt: Date
+    }, ExtArgs["result"]["storyItem"]>
+    composites: {}
+  }
+
+  type StoryItemGetPayload<S extends boolean | null | undefined | StoryItemDefaultArgs> = $Result.GetResult<Prisma.$StoryItemPayload, S>
+
+  type StoryItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StoryItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StoryItemCountAggregateInputType | true
+    }
+
+  export interface StoryItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StoryItem'], meta: { name: 'StoryItem' } }
+    /**
+     * Find zero or one StoryItem that matches the filter.
+     * @param {StoryItemFindUniqueArgs} args - Arguments to find a StoryItem
+     * @example
+     * // Get one StoryItem
+     * const storyItem = await prisma.storyItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StoryItemFindUniqueArgs>(args: SelectSubset<T, StoryItemFindUniqueArgs<ExtArgs>>): Prisma__StoryItemClient<$Result.GetResult<Prisma.$StoryItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StoryItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StoryItemFindUniqueOrThrowArgs} args - Arguments to find a StoryItem
+     * @example
+     * // Get one StoryItem
+     * const storyItem = await prisma.storyItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StoryItemFindUniqueOrThrowArgs>(args: SelectSubset<T, StoryItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StoryItemClient<$Result.GetResult<Prisma.$StoryItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StoryItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryItemFindFirstArgs} args - Arguments to find a StoryItem
+     * @example
+     * // Get one StoryItem
+     * const storyItem = await prisma.storyItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StoryItemFindFirstArgs>(args?: SelectSubset<T, StoryItemFindFirstArgs<ExtArgs>>): Prisma__StoryItemClient<$Result.GetResult<Prisma.$StoryItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StoryItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryItemFindFirstOrThrowArgs} args - Arguments to find a StoryItem
+     * @example
+     * // Get one StoryItem
+     * const storyItem = await prisma.storyItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StoryItemFindFirstOrThrowArgs>(args?: SelectSubset<T, StoryItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__StoryItemClient<$Result.GetResult<Prisma.$StoryItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StoryItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StoryItems
+     * const storyItems = await prisma.storyItem.findMany()
+     * 
+     * // Get first 10 StoryItems
+     * const storyItems = await prisma.storyItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const storyItemWithIdOnly = await prisma.storyItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StoryItemFindManyArgs>(args?: SelectSubset<T, StoryItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StoryItem.
+     * @param {StoryItemCreateArgs} args - Arguments to create a StoryItem.
+     * @example
+     * // Create one StoryItem
+     * const StoryItem = await prisma.storyItem.create({
+     *   data: {
+     *     // ... data to create a StoryItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends StoryItemCreateArgs>(args: SelectSubset<T, StoryItemCreateArgs<ExtArgs>>): Prisma__StoryItemClient<$Result.GetResult<Prisma.$StoryItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StoryItems.
+     * @param {StoryItemCreateManyArgs} args - Arguments to create many StoryItems.
+     * @example
+     * // Create many StoryItems
+     * const storyItem = await prisma.storyItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StoryItemCreateManyArgs>(args?: SelectSubset<T, StoryItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StoryItems and returns the data saved in the database.
+     * @param {StoryItemCreateManyAndReturnArgs} args - Arguments to create many StoryItems.
+     * @example
+     * // Create many StoryItems
+     * const storyItem = await prisma.storyItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StoryItems and only return the `id`
+     * const storyItemWithIdOnly = await prisma.storyItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StoryItemCreateManyAndReturnArgs>(args?: SelectSubset<T, StoryItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoryItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StoryItem.
+     * @param {StoryItemDeleteArgs} args - Arguments to delete one StoryItem.
+     * @example
+     * // Delete one StoryItem
+     * const StoryItem = await prisma.storyItem.delete({
+     *   where: {
+     *     // ... filter to delete one StoryItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StoryItemDeleteArgs>(args: SelectSubset<T, StoryItemDeleteArgs<ExtArgs>>): Prisma__StoryItemClient<$Result.GetResult<Prisma.$StoryItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StoryItem.
+     * @param {StoryItemUpdateArgs} args - Arguments to update one StoryItem.
+     * @example
+     * // Update one StoryItem
+     * const storyItem = await prisma.storyItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StoryItemUpdateArgs>(args: SelectSubset<T, StoryItemUpdateArgs<ExtArgs>>): Prisma__StoryItemClient<$Result.GetResult<Prisma.$StoryItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StoryItems.
+     * @param {StoryItemDeleteManyArgs} args - Arguments to filter StoryItems to delete.
+     * @example
+     * // Delete a few StoryItems
+     * const { count } = await prisma.storyItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StoryItemDeleteManyArgs>(args?: SelectSubset<T, StoryItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StoryItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StoryItems
+     * const storyItem = await prisma.storyItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StoryItemUpdateManyArgs>(args: SelectSubset<T, StoryItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StoryItems and returns the data updated in the database.
+     * @param {StoryItemUpdateManyAndReturnArgs} args - Arguments to update many StoryItems.
+     * @example
+     * // Update many StoryItems
+     * const storyItem = await prisma.storyItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StoryItems and only return the `id`
+     * const storyItemWithIdOnly = await prisma.storyItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StoryItemUpdateManyAndReturnArgs>(args: SelectSubset<T, StoryItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoryItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StoryItem.
+     * @param {StoryItemUpsertArgs} args - Arguments to update or create a StoryItem.
+     * @example
+     * // Update or create a StoryItem
+     * const storyItem = await prisma.storyItem.upsert({
+     *   create: {
+     *     // ... data to create a StoryItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StoryItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StoryItemUpsertArgs>(args: SelectSubset<T, StoryItemUpsertArgs<ExtArgs>>): Prisma__StoryItemClient<$Result.GetResult<Prisma.$StoryItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StoryItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryItemCountArgs} args - Arguments to filter StoryItems to count.
+     * @example
+     * // Count the number of StoryItems
+     * const count = await prisma.storyItem.count({
+     *   where: {
+     *     // ... the filter for the StoryItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends StoryItemCountArgs>(
+      args?: Subset<T, StoryItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StoryItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StoryItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StoryItemAggregateArgs>(args: Subset<T, StoryItemAggregateArgs>): Prisma.PrismaPromise<GetStoryItemAggregateType<T>>
+
+    /**
+     * Group by StoryItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoryItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StoryItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StoryItemGroupByArgs['orderBy'] }
+        : { orderBy?: StoryItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StoryItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStoryItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StoryItem model
+   */
+  readonly fields: StoryItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StoryItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StoryItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    story<T extends StoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoryDefaultArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StoryItem model
+   */
+  interface StoryItemFieldRefs {
+    readonly id: FieldRef<"StoryItem", 'Int'>
+    readonly storyId: FieldRef<"StoryItem", 'Int'>
+    readonly sourceUrl: FieldRef<"StoryItem", 'String'>
+    readonly createdAt: FieldRef<"StoryItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StoryItem findUnique
+   */
+  export type StoryItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryItem
+     */
+    select?: StoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoryItem
+     */
+    omit?: StoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which StoryItem to fetch.
+     */
+    where: StoryItemWhereUniqueInput
+  }
+
+  /**
+   * StoryItem findUniqueOrThrow
+   */
+  export type StoryItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryItem
+     */
+    select?: StoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoryItem
+     */
+    omit?: StoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which StoryItem to fetch.
+     */
+    where: StoryItemWhereUniqueInput
+  }
+
+  /**
+   * StoryItem findFirst
+   */
+  export type StoryItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryItem
+     */
+    select?: StoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoryItem
+     */
+    omit?: StoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which StoryItem to fetch.
+     */
+    where?: StoryItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StoryItems to fetch.
+     */
+    orderBy?: StoryItemOrderByWithRelationInput | StoryItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StoryItems.
+     */
+    cursor?: StoryItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StoryItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StoryItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StoryItems.
+     */
+    distinct?: StoryItemScalarFieldEnum | StoryItemScalarFieldEnum[]
+  }
+
+  /**
+   * StoryItem findFirstOrThrow
+   */
+  export type StoryItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryItem
+     */
+    select?: StoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoryItem
+     */
+    omit?: StoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which StoryItem to fetch.
+     */
+    where?: StoryItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StoryItems to fetch.
+     */
+    orderBy?: StoryItemOrderByWithRelationInput | StoryItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StoryItems.
+     */
+    cursor?: StoryItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StoryItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StoryItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StoryItems.
+     */
+    distinct?: StoryItemScalarFieldEnum | StoryItemScalarFieldEnum[]
+  }
+
+  /**
+   * StoryItem findMany
+   */
+  export type StoryItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryItem
+     */
+    select?: StoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoryItem
+     */
+    omit?: StoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which StoryItems to fetch.
+     */
+    where?: StoryItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StoryItems to fetch.
+     */
+    orderBy?: StoryItemOrderByWithRelationInput | StoryItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StoryItems.
+     */
+    cursor?: StoryItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StoryItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StoryItems.
+     */
+    skip?: number
+    distinct?: StoryItemScalarFieldEnum | StoryItemScalarFieldEnum[]
+  }
+
+  /**
+   * StoryItem create
+   */
+  export type StoryItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryItem
+     */
+    select?: StoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoryItem
+     */
+    omit?: StoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StoryItem.
+     */
+    data: XOR<StoryItemCreateInput, StoryItemUncheckedCreateInput>
+  }
+
+  /**
+   * StoryItem createMany
+   */
+  export type StoryItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StoryItems.
+     */
+    data: StoryItemCreateManyInput | StoryItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StoryItem createManyAndReturn
+   */
+  export type StoryItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryItem
+     */
+    select?: StoryItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoryItem
+     */
+    omit?: StoryItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many StoryItems.
+     */
+    data: StoryItemCreateManyInput | StoryItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StoryItem update
+   */
+  export type StoryItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryItem
+     */
+    select?: StoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoryItem
+     */
+    omit?: StoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StoryItem.
+     */
+    data: XOR<StoryItemUpdateInput, StoryItemUncheckedUpdateInput>
+    /**
+     * Choose, which StoryItem to update.
+     */
+    where: StoryItemWhereUniqueInput
+  }
+
+  /**
+   * StoryItem updateMany
+   */
+  export type StoryItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StoryItems.
+     */
+    data: XOR<StoryItemUpdateManyMutationInput, StoryItemUncheckedUpdateManyInput>
+    /**
+     * Filter which StoryItems to update
+     */
+    where?: StoryItemWhereInput
+    /**
+     * Limit how many StoryItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StoryItem updateManyAndReturn
+   */
+  export type StoryItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryItem
+     */
+    select?: StoryItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoryItem
+     */
+    omit?: StoryItemOmit<ExtArgs> | null
+    /**
+     * The data used to update StoryItems.
+     */
+    data: XOR<StoryItemUpdateManyMutationInput, StoryItemUncheckedUpdateManyInput>
+    /**
+     * Filter which StoryItems to update
+     */
+    where?: StoryItemWhereInput
+    /**
+     * Limit how many StoryItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StoryItem upsert
+   */
+  export type StoryItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryItem
+     */
+    select?: StoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoryItem
+     */
+    omit?: StoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StoryItem to update in case it exists.
+     */
+    where: StoryItemWhereUniqueInput
+    /**
+     * In case the StoryItem found by the `where` argument doesn't exist, create a new StoryItem with this data.
+     */
+    create: XOR<StoryItemCreateInput, StoryItemUncheckedCreateInput>
+    /**
+     * In case the StoryItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StoryItemUpdateInput, StoryItemUncheckedUpdateInput>
+  }
+
+  /**
+   * StoryItem delete
+   */
+  export type StoryItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryItem
+     */
+    select?: StoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoryItem
+     */
+    omit?: StoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryItemInclude<ExtArgs> | null
+    /**
+     * Filter which StoryItem to delete.
+     */
+    where: StoryItemWhereUniqueInput
+  }
+
+  /**
+   * StoryItem deleteMany
+   */
+  export type StoryItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StoryItems to delete
+     */
+    where?: StoryItemWhereInput
+    /**
+     * Limit how many StoryItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StoryItem without action
+   */
+  export type StoryItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoryItem
+     */
+    select?: StoryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoryItem
+     */
+    omit?: StoryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoryItemInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -11184,6 +13558,25 @@ export namespace Prisma {
   };
 
   export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
+  export const StoryScalarFieldEnum: {
+    id: 'id',
+    previewImageUrl: 'previewImageUrl',
+    createdAt: 'createdAt'
+  };
+
+  export type StoryScalarFieldEnum = (typeof StoryScalarFieldEnum)[keyof typeof StoryScalarFieldEnum]
+
+
+  export const StoryItemScalarFieldEnum: {
+    id: 'id',
+    storyId: 'storyId',
+    sourceUrl: 'sourceUrl',
+    createdAt: 'createdAt'
+  };
+
+  export type StoryItemScalarFieldEnum = (typeof StoryItemScalarFieldEnum)[keyof typeof StoryItemScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -11902,6 +14295,105 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
   }
 
+  export type StoryWhereInput = {
+    AND?: StoryWhereInput | StoryWhereInput[]
+    OR?: StoryWhereInput[]
+    NOT?: StoryWhereInput | StoryWhereInput[]
+    id?: IntFilter<"Story"> | number
+    previewImageUrl?: StringFilter<"Story"> | string
+    createdAt?: DateTimeFilter<"Story"> | Date | string
+    items?: StoryItemListRelationFilter
+  }
+
+  export type StoryOrderByWithRelationInput = {
+    id?: SortOrder
+    previewImageUrl?: SortOrder
+    createdAt?: SortOrder
+    items?: StoryItemOrderByRelationAggregateInput
+  }
+
+  export type StoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: StoryWhereInput | StoryWhereInput[]
+    OR?: StoryWhereInput[]
+    NOT?: StoryWhereInput | StoryWhereInput[]
+    previewImageUrl?: StringFilter<"Story"> | string
+    createdAt?: DateTimeFilter<"Story"> | Date | string
+    items?: StoryItemListRelationFilter
+  }, "id">
+
+  export type StoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    previewImageUrl?: SortOrder
+    createdAt?: SortOrder
+    _count?: StoryCountOrderByAggregateInput
+    _avg?: StoryAvgOrderByAggregateInput
+    _max?: StoryMaxOrderByAggregateInput
+    _min?: StoryMinOrderByAggregateInput
+    _sum?: StorySumOrderByAggregateInput
+  }
+
+  export type StoryScalarWhereWithAggregatesInput = {
+    AND?: StoryScalarWhereWithAggregatesInput | StoryScalarWhereWithAggregatesInput[]
+    OR?: StoryScalarWhereWithAggregatesInput[]
+    NOT?: StoryScalarWhereWithAggregatesInput | StoryScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Story"> | number
+    previewImageUrl?: StringWithAggregatesFilter<"Story"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Story"> | Date | string
+  }
+
+  export type StoryItemWhereInput = {
+    AND?: StoryItemWhereInput | StoryItemWhereInput[]
+    OR?: StoryItemWhereInput[]
+    NOT?: StoryItemWhereInput | StoryItemWhereInput[]
+    id?: IntFilter<"StoryItem"> | number
+    storyId?: IntFilter<"StoryItem"> | number
+    sourceUrl?: StringFilter<"StoryItem"> | string
+    createdAt?: DateTimeFilter<"StoryItem"> | Date | string
+    story?: XOR<StoryScalarRelationFilter, StoryWhereInput>
+  }
+
+  export type StoryItemOrderByWithRelationInput = {
+    id?: SortOrder
+    storyId?: SortOrder
+    sourceUrl?: SortOrder
+    createdAt?: SortOrder
+    story?: StoryOrderByWithRelationInput
+  }
+
+  export type StoryItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: StoryItemWhereInput | StoryItemWhereInput[]
+    OR?: StoryItemWhereInput[]
+    NOT?: StoryItemWhereInput | StoryItemWhereInput[]
+    storyId?: IntFilter<"StoryItem"> | number
+    sourceUrl?: StringFilter<"StoryItem"> | string
+    createdAt?: DateTimeFilter<"StoryItem"> | Date | string
+    story?: XOR<StoryScalarRelationFilter, StoryWhereInput>
+  }, "id">
+
+  export type StoryItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    storyId?: SortOrder
+    sourceUrl?: SortOrder
+    createdAt?: SortOrder
+    _count?: StoryItemCountOrderByAggregateInput
+    _avg?: StoryItemAvgOrderByAggregateInput
+    _max?: StoryItemMaxOrderByAggregateInput
+    _min?: StoryItemMinOrderByAggregateInput
+    _sum?: StoryItemSumOrderByAggregateInput
+  }
+
+  export type StoryItemScalarWhereWithAggregatesInput = {
+    AND?: StoryItemScalarWhereWithAggregatesInput | StoryItemScalarWhereWithAggregatesInput[]
+    OR?: StoryItemScalarWhereWithAggregatesInput[]
+    NOT?: StoryItemScalarWhereWithAggregatesInput | StoryItemScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"StoryItem"> | number
+    storyId?: IntWithAggregatesFilter<"StoryItem"> | number
+    sourceUrl?: StringWithAggregatesFilter<"StoryItem"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"StoryItem"> | Date | string
+  }
+
   export type UserCreateInput = {
     fullName: string
     email: string
@@ -12484,6 +14976,94 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StoryCreateInput = {
+    previewImageUrl: string
+    createdAt?: Date | string
+    items?: StoryItemCreateNestedManyWithoutStoryInput
+  }
+
+  export type StoryUncheckedCreateInput = {
+    id?: number
+    previewImageUrl: string
+    createdAt?: Date | string
+    items?: StoryItemUncheckedCreateNestedManyWithoutStoryInput
+  }
+
+  export type StoryUpdateInput = {
+    previewImageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: StoryItemUpdateManyWithoutStoryNestedInput
+  }
+
+  export type StoryUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    previewImageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: StoryItemUncheckedUpdateManyWithoutStoryNestedInput
+  }
+
+  export type StoryCreateManyInput = {
+    id?: number
+    previewImageUrl: string
+    createdAt?: Date | string
+  }
+
+  export type StoryUpdateManyMutationInput = {
+    previewImageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StoryUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    previewImageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StoryItemCreateInput = {
+    sourceUrl: string
+    createdAt?: Date | string
+    story: StoryCreateNestedOneWithoutItemsInput
+  }
+
+  export type StoryItemUncheckedCreateInput = {
+    id?: number
+    storyId: number
+    sourceUrl: string
+    createdAt?: Date | string
+  }
+
+  export type StoryItemUpdateInput = {
+    sourceUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    story?: StoryUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type StoryItemUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    storyId?: IntFieldUpdateOperationsInput | number
+    sourceUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StoryItemCreateManyInput = {
+    id?: number
+    storyId: number
+    sourceUrl: string
+    createdAt?: Date | string
+  }
+
+  export type StoryItemUpdateManyMutationInput = {
+    sourceUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StoryItemUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    storyId?: IntFieldUpdateOperationsInput | number
+    sourceUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -13135,6 +15715,78 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
+  export type StoryItemListRelationFilter = {
+    every?: StoryItemWhereInput
+    some?: StoryItemWhereInput
+    none?: StoryItemWhereInput
+  }
+
+  export type StoryItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    previewImageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StoryAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type StoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    previewImageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    previewImageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StorySumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type StoryScalarRelationFilter = {
+    is?: StoryWhereInput
+    isNot?: StoryWhereInput
+  }
+
+  export type StoryItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    storyId?: SortOrder
+    sourceUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StoryItemAvgOrderByAggregateInput = {
+    id?: SortOrder
+    storyId?: SortOrder
+  }
+
+  export type StoryItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    storyId?: SortOrder
+    sourceUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StoryItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    storyId?: SortOrder
+    sourceUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StoryItemSumOrderByAggregateInput = {
+    id?: SortOrder
+    storyId?: SortOrder
+  }
+
   export type CartCreateNestedOneWithoutUserInput = {
     create?: XOR<CartCreateWithoutUserInput, CartUncheckedCreateWithoutUserInput>
     connectOrCreate?: CartCreateOrConnectWithoutUserInput
@@ -13651,6 +16303,62 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOrdersInput, UserUpdateWithoutOrdersInput>, UserUncheckedUpdateWithoutOrdersInput>
+  }
+
+  export type StoryItemCreateNestedManyWithoutStoryInput = {
+    create?: XOR<StoryItemCreateWithoutStoryInput, StoryItemUncheckedCreateWithoutStoryInput> | StoryItemCreateWithoutStoryInput[] | StoryItemUncheckedCreateWithoutStoryInput[]
+    connectOrCreate?: StoryItemCreateOrConnectWithoutStoryInput | StoryItemCreateOrConnectWithoutStoryInput[]
+    createMany?: StoryItemCreateManyStoryInputEnvelope
+    connect?: StoryItemWhereUniqueInput | StoryItemWhereUniqueInput[]
+  }
+
+  export type StoryItemUncheckedCreateNestedManyWithoutStoryInput = {
+    create?: XOR<StoryItemCreateWithoutStoryInput, StoryItemUncheckedCreateWithoutStoryInput> | StoryItemCreateWithoutStoryInput[] | StoryItemUncheckedCreateWithoutStoryInput[]
+    connectOrCreate?: StoryItemCreateOrConnectWithoutStoryInput | StoryItemCreateOrConnectWithoutStoryInput[]
+    createMany?: StoryItemCreateManyStoryInputEnvelope
+    connect?: StoryItemWhereUniqueInput | StoryItemWhereUniqueInput[]
+  }
+
+  export type StoryItemUpdateManyWithoutStoryNestedInput = {
+    create?: XOR<StoryItemCreateWithoutStoryInput, StoryItemUncheckedCreateWithoutStoryInput> | StoryItemCreateWithoutStoryInput[] | StoryItemUncheckedCreateWithoutStoryInput[]
+    connectOrCreate?: StoryItemCreateOrConnectWithoutStoryInput | StoryItemCreateOrConnectWithoutStoryInput[]
+    upsert?: StoryItemUpsertWithWhereUniqueWithoutStoryInput | StoryItemUpsertWithWhereUniqueWithoutStoryInput[]
+    createMany?: StoryItemCreateManyStoryInputEnvelope
+    set?: StoryItemWhereUniqueInput | StoryItemWhereUniqueInput[]
+    disconnect?: StoryItemWhereUniqueInput | StoryItemWhereUniqueInput[]
+    delete?: StoryItemWhereUniqueInput | StoryItemWhereUniqueInput[]
+    connect?: StoryItemWhereUniqueInput | StoryItemWhereUniqueInput[]
+    update?: StoryItemUpdateWithWhereUniqueWithoutStoryInput | StoryItemUpdateWithWhereUniqueWithoutStoryInput[]
+    updateMany?: StoryItemUpdateManyWithWhereWithoutStoryInput | StoryItemUpdateManyWithWhereWithoutStoryInput[]
+    deleteMany?: StoryItemScalarWhereInput | StoryItemScalarWhereInput[]
+  }
+
+  export type StoryItemUncheckedUpdateManyWithoutStoryNestedInput = {
+    create?: XOR<StoryItemCreateWithoutStoryInput, StoryItemUncheckedCreateWithoutStoryInput> | StoryItemCreateWithoutStoryInput[] | StoryItemUncheckedCreateWithoutStoryInput[]
+    connectOrCreate?: StoryItemCreateOrConnectWithoutStoryInput | StoryItemCreateOrConnectWithoutStoryInput[]
+    upsert?: StoryItemUpsertWithWhereUniqueWithoutStoryInput | StoryItemUpsertWithWhereUniqueWithoutStoryInput[]
+    createMany?: StoryItemCreateManyStoryInputEnvelope
+    set?: StoryItemWhereUniqueInput | StoryItemWhereUniqueInput[]
+    disconnect?: StoryItemWhereUniqueInput | StoryItemWhereUniqueInput[]
+    delete?: StoryItemWhereUniqueInput | StoryItemWhereUniqueInput[]
+    connect?: StoryItemWhereUniqueInput | StoryItemWhereUniqueInput[]
+    update?: StoryItemUpdateWithWhereUniqueWithoutStoryInput | StoryItemUpdateWithWhereUniqueWithoutStoryInput[]
+    updateMany?: StoryItemUpdateManyWithWhereWithoutStoryInput | StoryItemUpdateManyWithWhereWithoutStoryInput[]
+    deleteMany?: StoryItemScalarWhereInput | StoryItemScalarWhereInput[]
+  }
+
+  export type StoryCreateNestedOneWithoutItemsInput = {
+    create?: XOR<StoryCreateWithoutItemsInput, StoryUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: StoryCreateOrConnectWithoutItemsInput
+    connect?: StoryWhereUniqueInput
+  }
+
+  export type StoryUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<StoryCreateWithoutItemsInput, StoryUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: StoryCreateOrConnectWithoutItemsInput
+    upsert?: StoryUpsertWithoutItemsInput
+    connect?: StoryWhereUniqueInput
+    update?: XOR<XOR<StoryUpdateToOneWithWhereWithoutItemsInput, StoryUpdateWithoutItemsInput>, StoryUncheckedUpdateWithoutItemsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -14715,6 +17423,91 @@ export namespace Prisma {
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
   }
 
+  export type StoryItemCreateWithoutStoryInput = {
+    sourceUrl: string
+    createdAt?: Date | string
+  }
+
+  export type StoryItemUncheckedCreateWithoutStoryInput = {
+    id?: number
+    sourceUrl: string
+    createdAt?: Date | string
+  }
+
+  export type StoryItemCreateOrConnectWithoutStoryInput = {
+    where: StoryItemWhereUniqueInput
+    create: XOR<StoryItemCreateWithoutStoryInput, StoryItemUncheckedCreateWithoutStoryInput>
+  }
+
+  export type StoryItemCreateManyStoryInputEnvelope = {
+    data: StoryItemCreateManyStoryInput | StoryItemCreateManyStoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StoryItemUpsertWithWhereUniqueWithoutStoryInput = {
+    where: StoryItemWhereUniqueInput
+    update: XOR<StoryItemUpdateWithoutStoryInput, StoryItemUncheckedUpdateWithoutStoryInput>
+    create: XOR<StoryItemCreateWithoutStoryInput, StoryItemUncheckedCreateWithoutStoryInput>
+  }
+
+  export type StoryItemUpdateWithWhereUniqueWithoutStoryInput = {
+    where: StoryItemWhereUniqueInput
+    data: XOR<StoryItemUpdateWithoutStoryInput, StoryItemUncheckedUpdateWithoutStoryInput>
+  }
+
+  export type StoryItemUpdateManyWithWhereWithoutStoryInput = {
+    where: StoryItemScalarWhereInput
+    data: XOR<StoryItemUpdateManyMutationInput, StoryItemUncheckedUpdateManyWithoutStoryInput>
+  }
+
+  export type StoryItemScalarWhereInput = {
+    AND?: StoryItemScalarWhereInput | StoryItemScalarWhereInput[]
+    OR?: StoryItemScalarWhereInput[]
+    NOT?: StoryItemScalarWhereInput | StoryItemScalarWhereInput[]
+    id?: IntFilter<"StoryItem"> | number
+    storyId?: IntFilter<"StoryItem"> | number
+    sourceUrl?: StringFilter<"StoryItem"> | string
+    createdAt?: DateTimeFilter<"StoryItem"> | Date | string
+  }
+
+  export type StoryCreateWithoutItemsInput = {
+    previewImageUrl: string
+    createdAt?: Date | string
+  }
+
+  export type StoryUncheckedCreateWithoutItemsInput = {
+    id?: number
+    previewImageUrl: string
+    createdAt?: Date | string
+  }
+
+  export type StoryCreateOrConnectWithoutItemsInput = {
+    where: StoryWhereUniqueInput
+    create: XOR<StoryCreateWithoutItemsInput, StoryUncheckedCreateWithoutItemsInput>
+  }
+
+  export type StoryUpsertWithoutItemsInput = {
+    update: XOR<StoryUpdateWithoutItemsInput, StoryUncheckedUpdateWithoutItemsInput>
+    create: XOR<StoryCreateWithoutItemsInput, StoryUncheckedCreateWithoutItemsInput>
+    where?: StoryWhereInput
+  }
+
+  export type StoryUpdateToOneWithWhereWithoutItemsInput = {
+    where?: StoryWhereInput
+    data: XOR<StoryUpdateWithoutItemsInput, StoryUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type StoryUpdateWithoutItemsInput = {
+    previewImageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StoryUncheckedUpdateWithoutItemsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    previewImageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type OrderCreateManyUserInput = {
     id?: number
     token: string
@@ -15038,6 +17831,29 @@ export namespace Prisma {
     imageUrl?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StoryItemCreateManyStoryInput = {
+    id?: number
+    sourceUrl: string
+    createdAt?: Date | string
+  }
+
+  export type StoryItemUpdateWithoutStoryInput = {
+    sourceUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StoryItemUncheckedUpdateWithoutStoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sourceUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StoryItemUncheckedUpdateManyWithoutStoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sourceUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
