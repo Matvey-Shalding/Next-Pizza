@@ -15,7 +15,6 @@ export const AdditionalInformation: React.FC<Props> = ({ className }) => {
 					label="Order note"
 					rows={5}
 					className="resize-none!"
-					placeholder="enter additional delivery instructions"
 				/>
 			</div>
 		</CheckoutBlock>

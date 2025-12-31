@@ -16,7 +16,6 @@ export const checkoutFormSchema = z.object({
   phone: z
     .string()
     .min(10, { message: 'Please enter a valid phone number' }),
-
   address: z
     .string()
     .min(5, { message: 'Please enter a valid address' }),

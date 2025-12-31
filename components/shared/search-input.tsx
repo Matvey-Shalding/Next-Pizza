@@ -1,66 +1,73 @@
-'use client';
+'use client'
 
-import { cn } from '@/lib/utils';
-import { Api } from '@/services/api-client';
-import { Product } from '@prisma/client';
-import Link from 'next/link';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useClickAway, useDebounce } from 'react-use';
-import { Input } from '../ui';
+import { cn } from '@/lib/utils'
+import { Product } from '@/prisma/generated/prisma'
+import { Api } from '@/services/api-client'
+import Link from 'next/link'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useClickAway, useDebounce } from 'react-use'
+import { Input } from '../ui'
 
 interface Props {
-	className?: string;
+	className?: string
 }
 
 export const SearchInput: React.FC<Props> = ({ className }) => {
-	const [defaultProducts, setDefaultProducts] = useState<Product[]>([]);
+	const [defaultProducts, setDefaultProducts] = useState<Product[]>([])
 
 	useEffect(() => {
-		Api.products.getDefault().then(setDefaultProducts);
-	}, []);
+		Api.products.getDefault().then(setDefaultProducts)
+	}, [])
 
-	const [isFocused, setIsFocused] = useState(false);
-	const [searchValue, setSearchValue] = useState('');
-	const [products, setProducts] = useState<Product[]>(defaultProducts);
+	const [isFocused, setIsFocused] = useState(false)
+	const [searchValue, setSearchValue] = useState('')
+	const [products, setProducts] = useState<Product[]>(defaultProducts)
 
 	const reset = useCallback(() => {
-		setIsFocused(false);
-		setSearchValue('');
-		setProducts(defaultProducts);
-	}, []);
+		setIsFocused(false)
+		setSearchValue('')
+		setProducts(defaultProducts)
+	}, [])
 
-	const ref = useRef(null);
+	const ref = useRef(null)
 	useClickAway(ref, () => {
-		reset();
-	});
+		reset()
+	})
 
 	useDebounce(
 		async () => {
-			await Api.products.search(searchValue).then(products => setProducts(products));
+			await Api.products
+				.search(searchValue)
+				.then(products => setProducts(products))
 		},
 		250,
 		[searchValue]
-	);
+	)
 
 	return (
 		<>
 			{
 				<div
 					className={`fixed inset-0 ${
-						isFocused ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+						isFocused
+							? 'opacity-100 pointer-events-auto'
+							: 'opacity-0 pointer-events-none'
 					} bg-black/50 z-30 transition-opacity duration-200`}
 				/>
 			}
 
-			<div ref={ref} className={cn(className, 'relative z-30 max-w-120')}>
+			<div
+				ref={ref}
+				className={cn(className, 'relative z-30')}
+			>
 				<Input
 					onFocus={() => setIsFocused(true)}
 					className={cn(
 						'bg-[url(/search.svg)] bg-white pl-8 h-12 bg-size-[14px] rounded-2xl bg-no-repeat bg-position-[0.75rem_center]',
 						'transition-all duration-300',
-						isFocused ? 'shadow-lg ring-2 ring-primary/20' : 'shadow-sm'
+						isFocused ? 'shadow-lg ring-2 ring-primary/20' : ''
 					)}
-					placeholder='Search...'
+					placeholder="Search..."
 					value={searchValue}
 					onChange={e => setSearchValue(e.target.value)}
 				/>
@@ -79,10 +86,10 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
 							onClick={() => reset()}
 							href={`/product/${product.id}`}
 							key={product.id}
-							className='min-h-12.5 px-5 flex items-center gap-x-3 cursor-pointer transition-colors duration-150 hover:bg-primary/10'
+							className="min-h-12.5 px-5 flex items-center gap-x-3 cursor-pointer transition-colors duration-150 hover:bg-primary/10"
 						>
 							<img
-								className='size-7.5 rounded object-cover transition-transform duration-200 hover:scale-105'
+								className="size-7.5 rounded object-cover transition-transform duration-200 hover:scale-105"
 								src={product.imageUrl}
 								alt={product.name}
 							/>
@@ -92,5 +99,5 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
 				</div>
 			</div>
 		</>
-	);
-};
+	)
+}

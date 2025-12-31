@@ -11,20 +11,16 @@ export const PersonalInfo: React.FC<Props> = ({ className }) => {
 				<FormInput
 					label="Name"
 					name="firstName"
-					placeholder="John"
 				/>
 				<FormInput
-					placeholder="Doe"
 					label="Surname"
 					name="lastName"
 				/>
 				<FormInput
-					placeholder="johndoe@gmail.com"
 					label="Email"
 					name="email"
 				/>
 				<FormInput
-					placeholder="+7 (999) 999-99-99"
 					label="Phone number"
 					name="phone"
 				/>

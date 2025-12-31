@@ -23,7 +23,10 @@ import toast from 'react-hot-toast'
 
 export default function Checkout() {
 	const methods = useForm<CheckoutFormSchemaType>({
-		resolver: zodResolver(checkoutFormSchema)
+		resolver: zodResolver(checkoutFormSchema),
+		defaultValues: {
+			address: ''
+		}
 	})
 
 	const [submitting, setSubmitting] = useState(false)

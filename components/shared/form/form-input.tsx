@@ -1,13 +1,17 @@
-import { Input } from '@/components/ui'
+// form-input.tsx
+import { FloatingLabelInput } from '@/components/ui/floating-label-input'
+import { cn } from '@/lib/utils'
 import { X } from 'lucide-react'
 import React, { useMemo } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { ErrorMessage } from './error-message'
+
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 	className?: string
 	label: string
 	name: string
 }
+
 export const FormInput: React.FC<Props> = ({
 	className,
 	label,
@@ -25,23 +29,38 @@ export const FormInput: React.FC<Props> = ({
 
 	const errorMessage = useMemo(() => {
 		return errors[name]?.message as string | undefined
-	}, [errors])
+	}, [errors, name])
+
+	const { onChange, onBlur, ref } = register(name)
 
 	return (
 		<div className="flex flex-col gap-y-2">
-			<span className="text-black font-bold text-sm">{label}</span>
 			<div className="relative">
-				<Input
-					{...register(name)}
+				<FloatingLabelInput
+					id={name}
+					label={label}
+					name={name}
+					onChange={onChange}
+					onBlur={onBlur}
+					ref={ref}
+					placeholder=" "
+					aria-invalid={!!errorMessage || undefined}
+					className={cn('pt-4', className)}
 					{...props}
 				/>
-				{value && (
-					<X
-						onClick={() => setValue(name, '')}
-						className="absolute size-4 stroke-gray-400 right-2 top-1/2 -translate-y-1/2"
-					/>
-				)}
+
+				<X
+					onClick={() => setValue(name, '')}
+					className={cn(
+						'absolute size-5 stroke-gray-400 right-3 transition-opacity duration-300 top-1/2 -translate-y-1/2 cursor-pointer',
+						{
+							'opacity-0 pointer-events-none': !value,
+							'opacity-100 pointer-events-auto': value
+						}
+					)}
+				/>
 			</div>
+
 			<ErrorMessage text={errorMessage} />
 		</div>
 	)
