@@ -57,21 +57,20 @@ export const StoriesCarousel = ({ stories, className }: Props) => {
 
         <button
           onClick={() => emblaApi?.scrollPrev()}
-          className="absolute left-0 translate-x-2 top-1/2 -translate-y-1/2 size-7 grid place-content-center bg-gray-200 rounded-full"
+          className="absolute left-0 translate-x-2 top-1/2 -translate-y-1/2 size-7 grid place-content-center border-primary bg-white rounded-full"
           aria-label="Previous"
         >
-          <ArrowLeft className="size-5 text-white" />
+          <ArrowLeft className="size-5 text-primary" />
         </button>
         <button
           onClick={() => emblaApi?.scrollNext()}
-          className="absolute right-2 -translate-x-2 top-1/2 -translate-y-1/2 size-7 grid place-content-center bg-gray-200 rounded-full"
+          className="absolute right-2 -translate-x-2 top-1/2 -translate-y-1/2 size-7 grid place-content-center border-primary bg-white rounded-full"
           aria-label="Next"
         >
-          <ArrowRight className="size-5 text-white" />
+          <ArrowRight className="size-5 text-primary" />
         </button>
       </div>
 
-      {/* Modal */}
       {open && selectedStory && (
         <div
           className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"

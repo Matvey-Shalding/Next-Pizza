@@ -32,7 +32,7 @@ export default async function Home({
 
 			<Container className="pb-15 mt-10 flex gap-x-15">
 				<Suspense>
-					<Filters />
+					<Filters/>
 				</Suspense>
 				<div className="flex flex-col gap-y-16 basis-full">
 					{categories.map(category => (

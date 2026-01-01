@@ -1,38 +1,72 @@
-'use client';
+'use client'
 
-import { cn } from '@/lib/utils';
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { AnimatePresence, motion } from 'framer-motion';
-import { CheckIcon } from 'lucide-react';
-import * as React from 'react';
+import { cn } from '@/lib/utils'
+import { AnimatePresence, motion } from 'framer-motion'
+import { CheckIcon } from 'lucide-react'
+import * as React from 'react'
 
-const Checkbox = React.forwardRef<
-	React.ElementRef<typeof CheckboxPrimitive.Root>,
-	React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ className, ...props }, ref) => (
-	<CheckboxPrimitive.Root
-		ref={ref}
-		className={cn(
-			'peer h-4 w-4 shrink-0 transition-all duration-300 bg-gray-100 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
-			className
-		)}
-		{...props}
-	>
-		<CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
-			<AnimatePresence>
-				<motion.div
-					key='check'
-					initial={{ scale: 0, opacity: 0 }}
-					animate={{ scale: 1, opacity: 1 }}
-					exit={{ scale: 0, opacity: 0 }}
-					transition={{ type: 'spring', duration: 300, stiffness: 300, damping: 20 }}
+export interface CheckboxProps
+	extends Omit<
+		React.InputHTMLAttributes<HTMLInputElement>,
+		'checked' | 'onChange'
+	> {
+	checked?: boolean
+	onCheckedChange?: (checked: boolean) => void
+}
+
+export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
+	(
+		{ className, checked = false, onCheckedChange, disabled, ...props },
+		ref
+	) => {
+		const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+			onCheckedChange?.(e.target.checked)
+		}
+
+		return (
+			<span
+				className={cn(
+					'inline-flex items-center justify-center',
+					disabled ? 'cursor-not-allowed opacity-60' : 'cursor-pointer',
+					className
+				)}
+			>
+				<input
+					ref={ref}
+					type="checkbox"
+					className="sr-only peer"
+					checked={checked}
+					disabled={disabled}
+					onChange={handleChange}
+					{...props}
+				/>
+
+				<span
+					aria-hidden="true"
+					className={cn(
+						'grid size-6 place-items-center rounded-[8px] border transition-colors',
+						'border-gray-300 bg-gray-100',
+						'peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background',
+						checked && 'bg-primary border-primary text-primary-foreground'
+					)}
 				>
-					<CheckIcon className='size-4' />
-				</motion.div>
-			</AnimatePresence>
-		</CheckboxPrimitive.Indicator>
-	</CheckboxPrimitive.Root>
-));
-Checkbox.displayName = CheckboxPrimitive.Root.displayName;
+					<AnimatePresence>
+						{checked && (
+							<motion.div
+								key="check"
+								initial={{ scale: 0.6, opacity: 0 }}
+								animate={{ scale: 1, opacity: 1 }}
+								exit={{ scale: 0.6, opacity: 0 }}
+								transition={{ type: 'spring', stiffness: 340, damping: 22 }}
+							>
+								<CheckIcon className="size-4" />
+							</motion.div>
+						)}
+					</AnimatePresence>
+				</span>
+			</span>
+		)
+	}
+)
 
-export { Checkbox };
+

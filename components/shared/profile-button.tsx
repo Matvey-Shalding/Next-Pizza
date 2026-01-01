@@ -14,11 +14,13 @@ export const ProfileButton: React.FC<Props> = ({
 	className,
 	onClickSignIn
 }) => {
-	const { data: session } = useSession()
-
-	console.log(session)
+	const { data: session, status } = useSession()
 
 	const [open, setOpen] = useState(false)
+
+	if (status === 'loading') {
+		return <Button className='min-w-25' loading={status === 'loading'}></Button>
+	}
 
 	return (
 		<div className={className}>
