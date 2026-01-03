@@ -26,6 +26,7 @@
 
 	--border: 20 5.9% 90%;
 	--input: 0 0% 80%;
+
 	--ring: 24.6 95% 53.1%;
 	--radius: 18px;
 }
@@ -92,7 +93,7 @@ input[type='number'] {
 	--animate-acnycordion-down: accordion-down 0.2s ease-out;
 	--animate-accordion-up: accordion-up 0.2s ease-out;
 
-	--shadow-popup: 0px 2px 4px 0px #0000000A;
+	--shadow-popup: 0px 2px 4px 0px #0000000a;
 
 	@keyframes accordion-down {
 		from {

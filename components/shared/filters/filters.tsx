@@ -13,7 +13,12 @@ export function Filters({ className }: { className?: string }) {
 	useQueryIngredients(filters)
 
 	return (
-		<div className={cn(className, 'basis-62.5 flex flex-col gap-y-5')}>
+		<div
+			className={cn(
+				className,
+				'basis-62.5 flex flex-col gap-y-5'
+			)}
+		>
 			<Title
 				text="Filters"
 				size="lg"
