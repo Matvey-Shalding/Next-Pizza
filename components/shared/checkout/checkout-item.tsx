@@ -1,8 +1,8 @@
 import { cn } from '@/lib/utils'
 import { X } from 'lucide-react'
 import React from 'react'
-import { CartDrawerItemProps } from '../cart-drawer-item'
 import { CartDrawerButton } from '..'
+import { CartDrawerItemProps } from '../cart/cart-drawer-item'
 
 export const CheckoutItem: React.FC<CartDrawerItemProps> = ({
 	imageUrl,
@@ -14,7 +14,6 @@ export const CheckoutItem: React.FC<CartDrawerItemProps> = ({
 	onClickCountButton,
 	onRemoveItem
 }) => {
-
 	return (
 		<div
 			className={cn(
@@ -24,7 +23,7 @@ export const CheckoutItem: React.FC<CartDrawerItemProps> = ({
 		>
 			<div className="flex items-center gap-x-5">
 				<img
-					className='size-15'
+					className="size-15"
 					src={imageUrl}
 					alt=""
 				/>
@@ -50,7 +49,10 @@ export const CheckoutItem: React.FC<CartDrawerItemProps> = ({
 						onClick={() => onClickCountButton('plus')}
 					/>
 				</div>
-				<X onClick={() => onRemoveItem()} className="size-4.5" />
+				<X
+					onClick={() => onRemoveItem()}
+					className="size-4.5"
+				/>
 			</div>
 		</div>
 	)

@@ -30,7 +30,7 @@ export default async function Home({
 			</Container>
 			<TopBar categories={categories} />
 
-			<Container className="pb-15 mt-10 flex gap-x-15">
+			<Container className="pb-25 mt-10 flex gap-x-15">
 				<Suspense>
 					<Filters/>
 				</Suspense>

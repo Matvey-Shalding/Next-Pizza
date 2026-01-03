@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
 
 	// TODO: fetch real token
 
-	const token = '123';
+	const token = req.cookies.get('cartToken')?.value;
 
 	if (!token) {
 		return NextResponse.json({

@@ -5,7 +5,7 @@ import { useCartStore } from '@/store/cart';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import React, { useEffect } from 'react';
 import { Button } from '../ui';
-import { CartDrawer } from './cart-drawer';
+import { CartDrawer } from './cart/cart-drawer';
 interface Props {
 	className?: string;
 }
