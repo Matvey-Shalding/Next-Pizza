@@ -1,13 +1,8 @@
-'use client'
-
 import { cn } from '@/lib/utils'
 import { Category } from '@/prisma/generated/prisma'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
-import toast from 'react-hot-toast'
+import { ArrowUpDown } from 'lucide-react'
 import { Categories } from './categories'
 import { Container } from './container'
-import { SortPopup } from './sort-popup'
 
 export function TopBar({
 	className,
@@ -16,19 +11,6 @@ export function TopBar({
 	className?: string
 	categories: Category[]
 }) {
-	const searchParams = useSearchParams()
-
-	const router = useRouter()
-
-	useEffect(() => {
-		if (searchParams.has('paid')) {
-			setTimeout(() => {
-				router.push('/')
-				toast.success('Order successfully paid!')
-			}, 500)
-		}
-	}, [])
-
 	return (
 		<div
 			className={cn(
@@ -38,7 +20,14 @@ export function TopBar({
 		>
 			<Container className="flex items-center justify-between">
 				<Categories categories={categories} />
-				<SortPopup />
+				<div
+					className="
+						inline-flex items-center gap-1 bg-gray-50 px-5 h-[52px] rounded-2xl cursor-pointer"
+				>
+					<ArrowUpDown size={16} />
+					<span className="font-bold">Sorting:</span>
+					<span className="text-primary font-bold">Popular</span>
+				</div>
 			</Container>
 		</div>
 	)

@@ -76,9 +76,7 @@ export const CartDrawer = ({
 										<div className="flex items-center gap-x-4 w-full">
 											<span className="text-black">Tax</span>
 											<div className="basis-full h-px border-dashed border border-gray-200"></div>
-											<span className="text-black text-lg font-bold">
-												150$
-											</span>
+											<span className="text-black text-lg font-bold">150$</span>
 										</div>
 										<Button
 											onClick={() => router.push('/checkout')}
@@ -93,7 +91,9 @@ export const CartDrawer = ({
 									</div>
 								</>
 							) : (
-								<CartDrawerEmpty onClose={() => setOpen(false)} />
+								<div className="grid place-content-center h-screen">
+									<CartDrawerEmpty onClose={() => setOpen(false)} />
+								</div>
 							)}
 						</motion.div>
 					</motion.div>

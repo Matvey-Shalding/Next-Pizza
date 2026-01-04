@@ -1,10 +1,10 @@
 'use client'
 
+import { Skeleton } from '@/components/ui'
 import { Api } from '@/services/api-client'
 import { StoryWithItems } from '@/services/dto/stories.dto'
 import { useEffect, useState } from 'react'
-import { Skeleton } from '../ui'
-import { StoriesCarousel } from './stories-carousel'
+import { StoriesCarousel } from '.'
 
 interface Props {
 	className?: string
@@ -13,12 +13,15 @@ interface Props {
 export const Stories = ({ className }: Props) => {
 	const [stories, setStories] = useState<StoryWithItems[]>([])
 	const [isLoading, setIsLoading] = useState(true)
+	const [error, setError] = useState<string | null>(null)
 
 	useEffect(() => {
 		const loadStories = async () => {
 			try {
 				const data = await Api.stories.getAll()
 				setStories(data)
+			} catch (err) {
+				setError('Failed to load stories')
 			} finally {
 				setIsLoading(false)
 			}
@@ -30,13 +33,21 @@ export const Stories = ({ className }: Props) => {
 		return (
 			<div className={className}>
 				<div className="flex gap-x-5 py-4">
-					{[...Array(6)].map((_, i) => (
+					{Array.from({ length: 6 }).map((_, i) => (
 						<Skeleton
 							key={i}
 							className="w-[200px] h-[250px] rounded-md shrink-0"
 						/>
 					))}
 				</div>
+			</div>
+		)
+	}
+
+	if (error) {
+		return (
+			<div className={className}>
+				<p className="text-red-500">{error}</p>
 			</div>
 		)
 	}

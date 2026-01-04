@@ -5,6 +5,7 @@ import { Container, Title } from '@/components/shared'
 import {
 	AdditionalInformation,
 	Cart,
+	CheckoutEmpty,
 	CheckoutSidebar,
 	PersonalInfo
 } from '@/components/shared/checkout'
@@ -15,29 +16,34 @@ import {
 } from '@/schema/checkout-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-
-//TODO: Add loading state, react Imask
 
 export default function Checkout() {
 	const methods = useForm<CheckoutFormSchemaType>({
 		resolver: zodResolver(checkoutFormSchema),
-		defaultValues: {
-			address: ''
-		}
+		defaultValues: { address: '' }
 	})
 
 	const [submitting, setSubmitting] = useState(false)
+	const [wasLoaded, setWasLoaded] = useState(false)
 
 	const router = useRouter()
+	const { items, onClickCountButton, removeCartItem, totalAmount, loading } =
+		useCart()
+
+	// mark as loaded once the first fetch finishes
+	useEffect(() => {
+		if (!loading && !wasLoaded) {
+			setWasLoaded(true)
+		}
+	}, [loading, wasLoaded])
 
 	const onSubmit = methods.handleSubmit(async data => {
 		try {
 			setSubmitting(true)
-			const res = (await createOrder(data)) as any
-
+			await createOrder(data)
 			router.push('/?paid=success')
 		} catch (error) {
 			toast.error('Something went wrong')
@@ -46,8 +52,10 @@ export default function Checkout() {
 		}
 	})
 
-	const { items, onClickCountButton, removeCartItem, totalAmount, loading } =
-		useCart()
+	// Empty cart UI
+	if (items.length === 0 && wasLoaded) {
+		return <CheckoutEmpty />
+	}
 
 	return (
 		<FormProvider {...methods}>
@@ -63,7 +71,7 @@ export default function Checkout() {
 				>
 					<div className="flex flex-col gap-y-11">
 						<Cart
-							loading={loading}
+							loading={!wasLoaded && loading}
 							items={items}
 							onClickCountButton={onClickCountButton}
 							removeCartItem={removeCartItem}
@@ -73,7 +81,7 @@ export default function Checkout() {
 						<AdditionalInformation />
 					</div>
 					<CheckoutSidebar
-						loading={loading || submitting}
+						loading={loading || methods.formState.isSubmitting || submitting}
 						totalAmount={totalAmount}
 					/>
 				</form>

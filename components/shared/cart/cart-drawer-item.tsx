@@ -1,11 +1,10 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 import React from 'react'
 import { CartItemControls } from './cart-item-controls'
 
-interface Props {
+export interface CartDrawerItemProps {
 	name: string
 	description: string
 	imageUrl: string
@@ -16,7 +15,7 @@ interface Props {
 	disabled?: boolean
 }
 
-export const CartDrawerItem: React.FC<Props> = ({
+export const CartDrawerItem: React.FC<CartDrawerItemProps> = ({
 	name,
 	description,
 	imageUrl,

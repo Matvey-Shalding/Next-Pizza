@@ -3,7 +3,8 @@
 import { cn } from '@/lib/utils'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import { CartButton, Container, SearchInput } from '.'
+import { Container, SearchInput } from '.'
+import { CartButton } from './cart-button'
 import { ProfileButton } from './profile-button'
 
 export function Header({

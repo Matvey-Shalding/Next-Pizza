@@ -1,68 +1,59 @@
-'use client';
+'use client'
 
-import { cn } from '@/lib/utils';
-import { useCategoryStore } from '@/store/category';
-import { Category } from '@prisma/client';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { cn } from '@/lib/utils'
+import { Category } from '@/prisma/generated/prisma'
+import { useCategoryStore } from '@/store/category'
+import { useRef } from 'react'
+import React from 'react'
+import { useSlidingMarker } from '@/hooks/use-sliding-marker'
 
-export function Categories({ classname, categories }: { classname?: string; categories: Category[] }) {
-	const activeId = useCategoryStore(state => state.activeId);
-	const containerRef = useRef<HTMLDivElement>(null);
-	const [markerStyle, setMarkerStyle] = useState<React.CSSProperties>({ left: 0, width: 0 });
-
-	const measure = useCallback(() => {
-		if (!containerRef.current) return;
-		const activeBtn = containerRef.current.querySelector<HTMLButtonElement>(`[data-id="${activeId}"] button`);
-		if (!activeBtn) return;
-
-		// Left relative to the container
-		const containerRect = containerRef.current.getBoundingClientRect();
-		const btnRect = activeBtn.getBoundingClientRect();
-
-		const left = btnRect.left - containerRect.left;
-		const width = btnRect.width;
-
-		setMarkerStyle({ left, width });
-	}, [containerRef, activeId]);
-
-	useEffect(() => {
-		measure();
-	}, [activeId]);
-
-	useEffect(() => {
-		const handleResize = () => measure();
-		window.addEventListener('resize', handleResize);
-		// Measure once after initial render (fonts/images can shift layout)
-		const id = window.setTimeout(measure, 0);
-		return () => {
-			window.removeEventListener('resize', handleResize);
-			window.clearTimeout(id);
-		};
-	}, []);
-
-	return (
-		<div
-			ref={containerRef}
-			className={cn(classname, 'relative inline-flex gap-x-1 p-1 bg-gray-50 rounded-2xl')}
-		>
-			{/* Sliding marker */}
-			<span
-				className='absolute top-1 bottom-1 rounded-2xl bg-white shadow-md shadow-gray-200 transition-[left,width] duration-300 ease-in-out'
-				style={markerStyle}
-			/>
-
-			{categories.map(({ name, id }) => (
-				<a key={id} data-id={id} href={`#${name}`} className='relative z-10'>
-					<button
-						className={cn(
-							'flex items-center font-bold h-11 rounded-2xl px-5 transition-colors duration-300',
-							activeId === id ? 'text-primary' : 'text-gray-700'
-						)}
-					>
-						{name}
-					</button>
-				</a>
-			))}
-		</div>
-	);
+interface Props {
+  className?: string
+  categories: Category[]
 }
+
+export const Categories = React.memo(function Categories({
+  className,
+  categories,
+}: Props) {
+  const activeId = useCategoryStore((state) => state.activeId)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Reuse the hook — no resize handling
+  const markerStyle = useSlidingMarker({
+    containerRef,
+    selectedValue: String(activeId),
+  })
+
+  return (
+    <div
+      ref={containerRef}
+      className={cn(
+        className,
+        'relative inline-flex gap-x-1 p-1 bg-gray-50 rounded-2xl'
+      )}
+    >
+      {/* Sliding marker */}
+      <span
+        className="absolute top-1 bottom-1 rounded-2xl bg-white shadow-md shadow-gray-200 ease-in-out"
+        style={markerStyle}
+      />
+
+      {categories.map(({ name, id }) => (
+        <button
+          key={id}
+          data-value={id} // ✅ matches hook selector
+          onClick={() =>
+            document.getElementById(name)?.scrollIntoView({ behavior: 'smooth' })
+          }
+          className={cn(
+            'relative z-10 flex items-center font-bold h-11 rounded-2xl px-5 transition-colors duration-300',
+            activeId === id ? 'text-primary' : 'text-gray-700'
+          )}
+        >
+          {name}
+        </button>
+      ))}
+    </div>
+  )
+})

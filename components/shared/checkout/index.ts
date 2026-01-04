@@ -1,6 +1,7 @@
 export { AdditionalInformation } from './additional-information'
-export { Cart } from './checkout-cart'
 export { CheckoutBlock } from './checkout-block'
+export { Cart } from './checkout-cart'
+export { CheckoutEmpty } from './checkout-empty'
 export { CheckoutItem } from './checkout-item'
 export { CheckoutSidebar } from './checkout-sidebar'
 export { PersonalInfo } from './personal-info'

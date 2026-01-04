@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useFilteredItems } from '@/hooks'
 import { FilterList, LoadingSkeletons, SearchBox } from '.'
 import type { FilterCheckboxProps } from './filter-checkbox'
+import React from 'react'
 
 type Item = FilterCheckboxProps
 
@@ -22,7 +23,7 @@ interface Props {
 	showAllButton?: boolean
 }
 
-export function CheckboxFiltersGroup({
+const CheckboxFiltersGroupComponent: React.FC<Props> = ({
 	title,
 	items,
 	limit = 5,
@@ -32,7 +33,7 @@ export function CheckboxFiltersGroup({
 	selectedIds,
 	toggle,
 	showAllButton = false
-}: Props) {
+}) => {
 	const [showAll, setShowAll] = useState(false)
 	const [searchValue, setSearchValue] = useState('')
 
@@ -101,3 +102,5 @@ export function CheckboxFiltersGroup({
 		</div>
 	)
 }
+
+export const CheckboxFiltersGroup = React.memo(CheckboxFiltersGroupComponent)

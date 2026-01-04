@@ -1,57 +1,65 @@
-'use client';
+'use client'
 
-import { cn } from '@/lib/utils';
-import { useCategoryStore } from '@/store/category';
-import React, { useEffect, useRef } from 'react';
-import { useIntersection } from 'react-use';
-import { v4 } from 'uuid';
-import { ProductCard, Title } from '.';
-import { ProductWithIngredients } from '@/types';
+import { cn } from '@/lib/utils'
+import { useCategoryStore } from '@/store/category'
+import { ProductWithIngredients } from '@/types'
+import React, { memo, useEffect, useRef } from 'react'
+import { useIntersection } from 'react-use'
+import { ProductCard, Title } from '.'
 interface Props {
-	className?: string;
-	title: string;
-	categoryId: number;
-	products: ProductWithIngredients[];
-	listClassName?: string;
+	className?: string
+	title: string
+	categoryId: number
+	products: ProductWithIngredients[]
+	listClassName?: string
 }
-export const ProductsGroupList: React.FC<Props> = ({
-	className,
-	title,
-	products,
-	categoryId,
-	listClassName,
-}) => {
-	const setActiveCategoryId = useCategoryStore(state => state.setActiveId);
+export const ProductsGroupList: React.FC<Props> = memo(
+	({ className, title, products, categoryId, listClassName }) => {
+		const setActiveCategoryId = useCategoryStore(state => state.setActiveId)
 
-	const intersectionRef = useRef<HTMLDivElement>(null);
+		const intersectionRef = useRef<HTMLDivElement>(null)
 
-	const intersection = useIntersection(intersectionRef as any, {
-		threshold: 0.4,
-	});
+		const intersection = useIntersection(intersectionRef as any, {
+			threshold: 0.4
+		})
 
-	useEffect(() => {
-		if (intersection?.isIntersecting) {
-			setActiveCategoryId(categoryId);
-		}
-	}, [intersection?.isIntersecting, categoryId]);
+		useEffect(() => {
+			if (intersection?.isIntersecting) {
+				setActiveCategoryId(categoryId)
+			}
+		}, [intersection?.isIntersecting, categoryId])
 
-	if(products.length === 0) return null
+		if (products.length === 0) return null
 
-	return (
-		<div id={title} ref={intersectionRef} className={cn(className, 'flex flex-col gap-y-5')}>
-			<Title text={title} size='lg' className='font-extrabold' />
-			<div className={cn(listClassName, 'grid gap-16 grid-cols-[repeat(auto-fit,_285px)]')}>
-				{products.map((product, i) => (
-					<ProductCard
-						key={v4()}
-						id={product.id}
-						name={product.name}
-						imageUrl={product.imageUrl}
-						price={product.items[0].price}
-						ingredients={product.ingredients}
-					/>
-				))}
+		return (
+			<div
+				id={title}
+				ref={intersectionRef}
+				className={cn(className, 'flex flex-col gap-y-5')}
+			>
+				<Title
+					text={title}
+					size="lg"
+					className="font-extrabold"
+				/>
+				<div
+					className={cn(
+						listClassName,
+						'grid gap-16 grid-cols-[repeat(auto-fit,_285px)]'
+					)}
+				>
+					{products.map((product, i) => (
+						<ProductCard
+							key={product.id}
+							id={product.id}
+							name={product.name}
+							imageUrl={product.imageUrl}
+							price={product.items[0].price}
+							ingredients={product.ingredients}
+						/>
+					))}
+				</div>
 			</div>
-		</div>
-	);
-};
+		)
+	}
+)
