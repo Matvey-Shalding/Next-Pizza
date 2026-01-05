@@ -38,7 +38,10 @@ export const ProductCard = React.memo(function ProductCard({
 				'flex flex-col gap-y-4 transform transition duration-200 ease-out hover:scale-[1.01] hover:shadow-lg rounded-lg'
 			)}
 		>
-			<Link href={`/product/${id}`}>
+			<Link
+				prefetch
+				href={`/product/${id}`}
+			>
 				<div className="flex justify-center p-6 bg-secondary rounded-lg h-70 overflow-hidden">
 					<img
 						src={imageUrl}

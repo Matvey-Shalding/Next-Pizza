@@ -1,5 +1,5 @@
+import { CategoryWithProducts } from '@/@types/CategoryWithProducts'
 import { cn } from '@/lib/utils'
-import { Category } from '@/prisma/generated/prisma'
 import { ArrowUpDown } from 'lucide-react'
 import { Categories } from './categories'
 import { Container } from './container'
@@ -9,7 +9,7 @@ export function TopBar({
 	categories
 }: {
 	className?: string
-	categories: Category[]
+	categories: CategoryWithProducts[]
 }) {
 	return (
 		<div

@@ -8,15 +8,13 @@ interface Props {
 export default async function ProfilePage({ className }: Props) {
 	const session = await getUserSession()
 
-	console.log(session, '999')
-
 	if (!session?.user) {
 		redirect('/unauthorized')
 	}
 
 	const user = await prisma.user.findFirst({
 		where: {
-			email: session.user.email
+			id: +session.user.id
 		}
 	})
 

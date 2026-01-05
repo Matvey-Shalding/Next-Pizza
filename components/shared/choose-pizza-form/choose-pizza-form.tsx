@@ -7,119 +7,121 @@ import { usePizzaPrice, useValidatedPizzaSelection } from '@/hooks'
 import { getItemDetails } from '@/lib/get-item-details'
 import { cn } from '@/lib/utils'
 import { Ingredient, ProductItem } from '@/prisma/generated/prisma'
-import React, { useContext, useMemo, useState } from 'react'
+import React, { useContext, useMemo, useState, useCallback } from 'react'
 import { useSet } from 'react-use'
 import { PizzaFormIngredients, PizzaFormSelectors, PizzaImage, Title } from '..'
 
 interface Props {
-	className?: string
-	name: string
-	imageUrl: string
-	items: ProductItem[]
-	ingredients: Ingredient[]
-	onSubmit: (productId: number, ingredients: number[]) => void
-	loading?: boolean
+  className?: string
+  name: string
+  imageUrl: string
+  items: ProductItem[]
+  ingredients: Ingredient[]
+  onSubmit: (productId: number, ingredients: number[]) => void
+  loading?: boolean
 }
 
 export const ChoosePizzaForm: React.FC<Props> = ({
-	className,
-	name,
-	imageUrl,
-	items,
-	ingredients,
-	onSubmit,
-	loading
+  className,
+  name,
+  imageUrl,
+  items,
+  ingredients,
+  onSubmit,
+  loading,
 }) => {
-	const [size, setSize] = useState<PizzaSize>(20)
-	const [type, setType] = useState<PizzaType>(1)
-	const [selectedIngredients, { toggle: toggleIngredient }] = useSet(
-		new Set<number>([])
-	)
+  const [size, setSize] = useState<PizzaSize>(20)
+  const [type, setType] = useState<PizzaType>(1)
+  const [selectedIngredients, { toggle: toggleIngredient }] = useSet(
+    new Set<number>([])
+  )
 
-	const inline = useContext(ProductFormContext)
+  const inline = useContext(ProductFormContext)
 
-	const currentId = useMemo(() => {
-		return items.find(item => item.size === size && item.pizzaType === type)?.id
-	}, [items, size, type])
+  const currentId = useMemo(() => {
+    return items.find((item) => item.size === size && item.pizzaType === type)?.id
+  }, [items, size, type])
 
-	const currentIngredients = useMemo(() => {
-		return ingredients.filter(ing => selectedIngredients.has(ing.id))
-	}, [selectedIngredients, ingredients])
+  const currentIngredients = useMemo(() => {
+    return ingredients.filter((ing) => selectedIngredients.has(ing.id))
+  }, [selectedIngredients, ingredients])
 
-	useValidatedPizzaSelection({
-		size,
-		type,
-		items,
-		onSizeChange: setSize,
-		onTypeChange: setType
-	})
+  useValidatedPizzaSelection({
+    size,
+    type,
+    items,
+    onSizeChange: setSize,
+    onTypeChange: setType,
+  })
 
-	const currentPrice = usePizzaPrice(
-		items,
-		size,
-		type,
-		ingredients,
-		selectedIngredients
-	)
+  const currentPrice = usePizzaPrice(
+    items,
+    size,
+    type,
+    ingredients,
+    selectedIngredients
+  )
 
-	return (
-		<div
-			className={cn(className, 'flex', {
-				'gap-x-11': inline,
-				'gap-x-1': !inline
-			})}
-		>
-			<div
-				className={cn('grid  place-content-center', {
-					'basis-1/2': !inline,
-					'basis-143 shrink-0 border-r border-gray-200': inline
-				})}
-			>
-				<PizzaImage
-					imageUrl={imageUrl}
-					size={size}
-				/>
-			</div>
-			<div
-				className={cn('flex flex-col gap-y-4 basis-full', {
-					'overflow-auto scrollbar max-h-145 bg-[#F4F1EE] basis-1/2 p-10':
-						!inline
-				})}
-			>
-				<div className="flex flex-col gap-y-1">
-					<h1>
-						<Title
-							size="sm"
-							className="font-bold"
-							text={name}
-						/>
-					</h1>
-					<span className="text-[#777777] text-sm">
-						{getItemDetails(type, size, currentIngredients)}
-					</span>
-				</div>
+  const handleToggle = useCallback(
+    (id: number) => toggleIngredient(id),
+    [toggleIngredient]
+  )
 
-				<PizzaFormSelectors
-					size={size}
-					type={type}
-					items={items}
-					onSizeChange={setSize}
-					onTypeChange={setType}
-				/>
+  return (
+    <div
+      className={cn(className, 'flex', {
+        'gap-x-11': inline,
+        'gap-x-1': !inline,
+      })}
+    >
+      <div
+        className={cn('grid place-content-center', {
+          'basis-1/2': !inline,
+          'basis-143 shrink-0 border-r border-gray-200': inline,
+        })}
+      >
+        <PizzaImage imageUrl={imageUrl} size={size} />
+      </div>
+      <div
+        className={cn('flex flex-col gap-y-4 basis-full', {
+          'overflow-auto scrollbar max-h-145 bg-[#F4F1EE] basis-1/2 p-10':
+            !inline,
+        })}
+      >
+        <div className="flex flex-col gap-y-1">
+          <h1>
+            <Title size="sm" className="font-bold" text={name} />
+          </h1>
+          <span className="text-[#777777] text-sm">
+            {getItemDetails(type, size, currentIngredients)}
+          </span>
+        </div>
 
-				<PizzaFormIngredients
-					ingredients={ingredients}
-					selectedIds={selectedIngredients}
-					onToggle={toggleIngredient}
-				/>
+        <PizzaFormSelectors
+          size={size}
+          type={type}
+          items={items}
+          onSizeChange={setSize}
+          onTypeChange={setType}
+        />
 
-				<Button
-					loading={loading}
-					onClick={() => onSubmit(currentId!, Array.from(selectedIngredients))}
-				>
-					Add to cart for ${currentPrice.toFixed(2)}
-				</Button>
-			</div>
-		</div>
-	)
+        <PizzaFormIngredients
+          ingredients={ingredients}
+          selectedIds={selectedIngredients}
+          onToggle={handleToggle}
+        />
+
+        {currentId && (
+          <Button
+            loading={loading}
+            onClick={() =>
+              onSubmit(currentId, Array.from(selectedIngredients))
+            }
+          >
+            Add to cart for ${currentPrice.toFixed(2)}
+          </Button>
+        )}
+      </div>
+    </div>
+  )
 }

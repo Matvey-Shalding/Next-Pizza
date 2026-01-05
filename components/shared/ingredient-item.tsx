@@ -13,22 +13,29 @@ interface Props {
 	className?: string
 }
 
-export const IngredientItem: React.FC<Props> = ({
+export const IngredientItem = React.memo(function IngredientItem({
 	className,
 	active,
 	price,
 	name,
 	imageUrl,
 	onClick
-}) => {
+}: Props) {
+	const formattedPrice = new Intl.NumberFormat('ru-RU', {
+		style: 'currency',
+		currency: 'RUB'
+	}).format(price)
+
 	return (
 		<div
+			role="button"
+			aria-pressed={active}
 			onClick={onClick}
 			className={cn(
-				'flex items-center flex-col p-2 rounded-md w-32 text-center relative cursor-pointer shadow-md bg-white',
+				'group flex items-center flex-col p-2 rounded-md w-32 text-center relative cursor-pointer shadow-md bg-white',
 				'transition-all duration-200 ease-out',
 				'hover:shadow-lg hover:scale-105 hover:border-primary',
-				'active:scale-98 active:shadow-sm',
+				'active:scale-95 active:shadow-sm',
 				{
 					'border-2 border-primary ring-2 ring-primary/30': active
 				},
@@ -44,9 +51,10 @@ export const IngredientItem: React.FC<Props> = ({
 				src={imageUrl}
 				alt={name}
 				className="rounded-md transition-transform duration-200 group-hover:rotate-1"
+				loading="lazy"
 			/>
 			<span className="text-xs mb-1">{name}</span>
-			<span className="font-bold">{price} ₽</span>
+			<span className="font-bold">{formattedPrice}</span>
 		</div>
 	)
-}
+})

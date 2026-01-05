@@ -1,26 +1,30 @@
-import { z } from 'zod';
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
+import { z } from 'zod'
 
 export const checkoutFormSchema = z.object({
-  firstName: z
-    .string()
-    .min(2, { message: 'First name must contain at least 2 characters' }),
+	firstName: z
+		.string()
+		.min(2, { message: 'First name must contain at least 2 characters' }),
 
-  lastName: z
-    .string()
-    .min(2, { message: 'Last name must contain at least 2 characters' }),
+	lastName: z
+		.string()
+		.min(2, { message: 'Last name must contain at least 2 characters' }),
 
-  email: z
-    .string()
-    .email({ message: 'Please enter a valid email address' }),
+	email: z.string().email({ message: 'Please enter a valid email address' }),
 
-  phone: z
-    .string()
-    .min(10, { message: 'Please enter a valid phone number' }),
-  address: z
-    .string()
-    .min(5, { message: 'Please enter a valid address' }),
+	phone: z.string().refine(
+		val => {
+			const phone = parsePhoneNumberFromString(val)
+			return phone?.isValid() ?? false
+		},
+		{
+			message: 'Please enter a valid phone number'
+		}
+	),
 
-  comment: z.string().optional(),
-});
+	address: z.string().min(5, { message: 'Please enter a valid address' }),
 
-export type CheckoutFormSchemaType = z.infer<typeof checkoutFormSchema>;
+	comment: z.string().optional()
+})
+
+export type CheckoutFormSchemaType = z.infer<typeof checkoutFormSchema>

@@ -1,38 +1,44 @@
-'use client';
+'use client'
 
-import { ProductFormContext } from '@/context/ProductForm';
-import { useCartStore } from '@/store/cart';
-import { ProductWithIngredients } from '@/types';
-import { useRouter } from 'next/navigation';
-import React, { useMemo } from 'react';
-import toast from 'react-hot-toast';
-import { ChoosePizzaForm, ChooseProductForm } from '.';
+import { ProductFormContext } from '@/context/ProductForm'
+import { useCartStore } from '@/store/cart'
+import { ProductWithIngredients } from '@/types'
+import { useRouter } from 'next/navigation'
+import React, { useMemo } from 'react'
+import toast from 'react-hot-toast'
+import { ChoosePizzaForm, ChooseProductForm } from '.'
 interface Props {
-	className?: string;
-	product: ProductWithIngredients;
-	inline?: boolean;
+	className?: string
+	product: ProductWithIngredients
+	inline?: boolean
 }
-export const ProductForm: React.FC<Props> = ({ className, product, inline }) => {
-	const { addCartItem, loading } = useCartStore();
+export const ProductForm: React.FC<Props> = ({
+	className,
+	product,
+	inline
+}) => {
+	const { addCartItem, loading } = useCartStore()
 
 	const isPizza = useMemo(() => {
-		return Boolean(product.items[0].pizzaType);
-	}, []);
+		return Boolean(product.items[0].pizzaType)
+	}, [])
 
-	const router = useRouter();
+	const router = useRouter()
 
 	const onSubmit = async (productId?: number, ingredients?: number[]) => {
 		try {
-			await addCartItem({ productItemId: productId ?? product.items[0].id, ingredients: ingredients });
+			await addCartItem({
+				productItemId: productId ?? product.items[0].id,
+				ingredients: ingredients
+			})
 
-			toast.success(`${product.name} added to cart`);
+			toast.success(`${product.name} added to cart`)
 
-			router.back();
+			router.back()
 		} catch (error) {
-			console.log(error);
-			toast.error('Something went wrong');
+			toast.error('Something went wrong')
 		}
-	};
+	}
 
 	if (isPizza) {
 		return (
@@ -46,7 +52,7 @@ export const ProductForm: React.FC<Props> = ({ className, product, inline }) => 
 					ingredients={product.ingredients}
 				/>
 			</ProductFormContext>
-		);
+		)
 	} else {
 		return (
 			<ProductFormContext value={!!inline}>
@@ -58,6 +64,6 @@ export const ProductForm: React.FC<Props> = ({ className, product, inline }) => 
 					imageUrl={product.imageUrl}
 				/>
 			</ProductFormContext>
-		);
+		)
 	}
-};
+}

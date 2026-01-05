@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
 				password: { label: 'Password', type: 'password' }
 			},
 			async authorize(credentials) {
-				// If there're on credentials, return
+				// If there're no credentials, return
 
 				if (!credentials?.email || !credentials?.password) {
 					return null
@@ -53,20 +53,32 @@ export const authOptions: NextAuthOptions = {
 
 				// Return data which will be stored in jwt token
 				return {
-					id: user.id.toString(), // token.sub,
-					role: user.role
+					id: user.id.toString() // token.sub,
 				}
 			}
 		})
 	],
 	callbacks: {
+		async jwt({ token, user, account }) {
+			if (user) {
+				// this function ensures the id in useSession or getServerSession is the id of the user, not provider
+				const dbUser = await prisma.user.findUnique({
+					where: { email: user.email! }
+				})
+				if (dbUser) {
+					token.sub = dbUser.id.toString()
+				}
+			}
+			return token
+		},
+
 		// Optional: enrich session with user ID
-		// async session({ session, token }) {
-		// 	if (session.user) {
-		// 		session.user.id = token.sub as string
-		// 	}
-		// 	return session
-		// },
+		async session({ session, token }) {
+			if (session.user) {
+				session.user.id = token.sub as string
+			}
+			return session
+		},
 		async signIn({ user, account }) {
 			try {
 				//Sign in logic only applies to providers
@@ -124,7 +136,6 @@ export const authOptions: NextAuthOptions = {
 					return true
 				}
 			} catch (error) {
-				console.log('[SIGN IN ERROR] ' + error)
 				return false
 			}
 		}

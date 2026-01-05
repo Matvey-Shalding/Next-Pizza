@@ -6,6 +6,7 @@ import { User } from '@/prisma/generated/prisma'
 import { profileSchema, ProfileSchemaType } from '@/schema/profile-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -18,6 +19,8 @@ interface Props {
 	user: User
 }
 export const ProfileForm: React.FC<Props> = ({ className, user }) => {
+	const router = useRouter()
+
 	const methods = useForm<ProfileSchemaType>({
 		resolver: zodResolver(profileSchema),
 		defaultValues: {
@@ -29,11 +32,20 @@ export const ProfileForm: React.FC<Props> = ({ className, user }) => {
 	const onSubmit = async (data: ProfileSchemaType) => {
 		try {
 			await updateProfile(data)
-
-			toast.success('Profile updated successfully')
-		} catch {
-			toast.error('Something went wrong')
+			router.push('/?updateProfile=success')
+		} catch (error: any) {
+			toast.error(error.message)
+			methods.reset({
+				fullName: user.fullName,
+				email: user.email,
+				password: '',
+				confirmPassword: ''
+			})
 		}
+	}
+
+	const onSignOut = async () => {
+		await signOut({ callbackUrl: '/?signOut=success' })
 	}
 
 	return (
@@ -58,10 +70,12 @@ export const ProfileForm: React.FC<Props> = ({ className, user }) => {
 							name="email"
 						/>
 						<FormInput
+							type="password"
 							label="Password"
 							name="password"
 						/>
 						<FormInput
+							type="password"
 							label="Confirm password"
 							name="confirmPassword"
 						/>
@@ -74,9 +88,10 @@ export const ProfileForm: React.FC<Props> = ({ className, user }) => {
 								Update
 							</Button>
 							<Button
+								type="button"
 								loading={methods.formState.isSubmitting}
 								className="w-full min-h-11"
-								onClick={() => signOut()}
+								onClick={() => onSignOut()}
 								variant="outline"
 							>
 								Sign out

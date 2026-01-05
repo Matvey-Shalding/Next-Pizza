@@ -19,7 +19,7 @@ export const CheckoutItem: React.FC<CartDrawerItemProps> = ({
 	return (
 		<div
 			className={cn(
-				'w-full pb-6 border-b border-gray-200 flex items-center justify-between',
+				'w-full pb-6 pt-6 border-b border-gray-200 flex items-center justify-between',
 				'transition-all duration-300 ease-out',
 				'hover:-translate-y-0.5',
 				{ 'opacity-50 pointer-events-none': disabled }

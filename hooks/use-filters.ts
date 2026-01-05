@@ -1,4 +1,4 @@
-import { PriceRange } from '@/types';
+import { PriceRange } from '@/@types'
 import { useSearchParams } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { useSet } from 'react-use';

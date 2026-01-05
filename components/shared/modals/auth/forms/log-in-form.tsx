@@ -9,7 +9,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 interface Props {
-  onClose?: VoidFunction;
+  onClose: VoidFunction;
 }
 
 export const LoginForm: React.FC<Props> = ({ onClose }) => {

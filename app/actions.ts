@@ -14,8 +14,6 @@ import { cookies } from 'next/headers'
 import { Resend } from 'resend'
 
 export const createOrder = async (data: CheckoutFormSchemaType) => {
-	console.log('Creating order...')
-
 	try {
 		const cookie = await cookies()
 
@@ -97,19 +95,16 @@ export const createOrder = async (data: CheckoutFormSchemaType) => {
 		await sendEmail(data.email, 'Payment for the order', emailHtml)
 
 		return paymentUrl
-	} catch (e) {
-		console.log('Error while creating order', e)
-	}
+	} catch (e) {}
 }
 
 export const updateProfile = async (data: ProfileSchemaType) => {
 	try {
-		// Check if user exists
-
 		const currentUser = await getUserSession()
 
 		if (!currentUser) {
-			throw new Error('User not found')
+			console.error('[PROFILE_UPDATE_ERROR] User not found in getServerSession')
+			throw new Error('Something went wrong...')
 		}
 
 		const user = await prisma.user.findUnique({
@@ -119,7 +114,25 @@ export const updateProfile = async (data: ProfileSchemaType) => {
 		})
 
 		if (!user) {
-			throw new Error('User not found')
+			console.error(
+				'[PROFILE_UPDATE_ERROR] User with such id was not found in db'
+			)
+			throw new Error('Something went wrong...')
+		}
+
+		// Check is this email is unique
+
+		const findUser = await prisma.user.findUnique({
+			where: {
+				email: data.email
+			}
+		})
+
+		if (findUser && findUser.id !== user.id) {
+			console.error(
+				'[PROFILE_UPDATE_ERROR] User with such email already exists'
+			)
+			throw new Error('User with such email already exists')
 		}
 
 		await prisma.user.update({
@@ -133,7 +146,8 @@ export const updateProfile = async (data: ProfileSchemaType) => {
 			}
 		})
 	} catch (error) {
-		console.log('[PROFILE_UPDATE_ERROR]', error)
+		// Error for client
+		throw error
 	}
 }
 
@@ -153,10 +167,10 @@ export const createUser = async (form: SignUpSchemaType) => {
 			data: {
 				fullName: form.fullName,
 				email: form.email,
-				password: hashSync(form.password, 10),
+				password: hashSync(form.password, 10)
 			}
 		})
 	} catch (error) {
-		console.log('[SIGN_UP_ERROR]', error)
+		throw error
 	}
 }

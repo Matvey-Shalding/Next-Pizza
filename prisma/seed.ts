@@ -251,9 +251,7 @@ async function main() {
 	try {
 		await down()
 		await up()
-	} catch (e) {
-		console.log(e)
-	}
+	} catch (e) {}
 }
 
 main()

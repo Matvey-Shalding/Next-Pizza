@@ -1,7 +1,6 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { Container, SearchInput } from '.'
 import { CartButton } from './cart-button'
@@ -16,8 +15,6 @@ export function Header({
 	hasSearch?: boolean
 	hasCartButton?: boolean
 }) {
-	const { data: session } = useSession()
-
 	return (
 		<header className={cn(className, 'border-b min-h-30 flex')}>
 			<Container className="flex justify-between items-center gap-x-10 basis-full">

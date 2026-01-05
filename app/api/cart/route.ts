@@ -10,54 +10,55 @@ export async function GET(req: NextRequest) {
 
 	// TODO: fetch real token
 
-	const token = req.cookies.get('cartToken')?.value;
+	const token = req.cookies.get('cartToken')?.value
 
 	if (!token) {
 		return NextResponse.json({
 			totalAmount: 0,
-			items: [],
-		});
+			items: []
+		})
 	}
 
 	const userCart = await prisma.cart.findFirst({
 		where: {
-			token,
+			token
 		},
 		include: {
 			items: {
 				orderBy: {
-					createdAt: 'desc',
+					createdAt: 'desc'
 				},
 				include: {
 					productItem: {
 						include: {
-							product: true,
-						},
+							product: true
+						}
 					},
-					ingredients: true,
-				},
-			},
-		},
-	});
+					ingredients: true
+				}
+			}
+		}
+	})
 
-	return NextResponse.json(userCart);
+	return NextResponse.json(userCart)
 }
 
 // add cart item
 
 export async function POST(req: NextRequest) {
 	try {
-		let token = req.cookies.get('cartToken')?.value;
+		let token = req.cookies.get('cartToken')?.value
 
 		if (!token) {
-			token = crypto.randomUUID();
+			token = crypto.randomUUID()
 		}
 
-		const cart = await initCart(token);
+		const cart = await initCart(token)
 
-		const { ingredients, productItemId } = (await req.json()) as CreateCartItemValues;
+		const { ingredients, productItemId } =
+			(await req.json()) as CreateCartItemValues
 
-		const ingredientsKey = createIngredientsKey(ingredients);
+		const ingredientsKey = createIngredientsKey(ingredients)
 
 		// if such cart item already exists
 
@@ -66,23 +67,20 @@ export async function POST(req: NextRequest) {
 				cartId: cart.id,
 				productItemId,
 				ingredientsKey: ingredientsKey
-			},
-		});
-
-		console.log(cartItem)
-
+			}
+		})
 
 		//update quantity
 
 		if (cartItem) {
 			await prisma.cartItem.update({
 				where: {
-					id: cartItem.id,
+					id: cartItem.id
 				},
 				data: {
-					quantity: cartItem.quantity + 1,
-				},
-			});
+					quantity: cartItem.quantity + 1
+				}
+			})
 		} else {
 			await prisma.cartItem.create({
 				data: {
@@ -90,24 +88,26 @@ export async function POST(req: NextRequest) {
 					cartId: cart.id,
 					productItemId,
 					ingredients: {
-						connect: ingredients?.map(id => ({ id })),
+						connect: ingredients?.map(id => ({ id }))
 					},
 					ingredientsKey,
-					ingredientsCount: ingredients?.length ?? 0,
-				},
-			});
+					ingredientsCount: ingredients?.length ?? 0
+				}
+			})
 		}
 
-		const updatedCart = await updateCartTotalAmount(cart.id);
+		const updatedCart = await updateCartTotalAmount(cart.id)
 
-		const response = NextResponse.json(updatedCart);
+		const response = NextResponse.json(updatedCart)
 
-		response.cookies.set('cartToken', token);
+		response.cookies.set('cartToken', token)
 
-		return response;
-
+		return response
 	} catch (e) {
-		console.error('[CART_POST] server error', e);
-		return NextResponse.json({ message: 'Something went wrong'}, { status: 500 });
+		console.error('[CART_POST] server error', e)
+		return NextResponse.json(
+			{ message: 'Something went wrong' },
+			{ status: 500 }
+		)
 	}
 }

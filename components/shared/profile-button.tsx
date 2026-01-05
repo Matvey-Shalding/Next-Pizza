@@ -1,3 +1,5 @@
+'use client'
+
 import { CircleUser, User } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
@@ -15,28 +17,36 @@ export const ProfileButton: React.FC<Props> = ({
 	onClickSignIn
 }) => {
 	const { data: session, status } = useSession()
-
 	const [open, setOpen] = useState(false)
 
 	if (status === 'loading') {
-		return <Button className='min-w-25' loading={status === 'loading'}></Button>
+		return (
+			<Button
+				className="min-w-25"
+				loading
+			/>
+		)
 	}
 
 	return (
 		<div className={className}>
 			{!session ? (
-				<Button
-					onClick={() => setOpen(true)}
-					variant="outline"
-					className="flex items-center gap-1"
-				>
-					<User size={16} />
+				<>
+					<Button
+						onClick={() => setOpen(true)}
+						variant="outline"
+						className="flex items-center gap-1"
+					>
+						<User size={16} />
+						Sign in
+					</Button>
+
+					{/* Modal rendered alongside, not inside the button */}
 					<AuthModal
 						open={open}
 						onClose={() => setOpen(false)}
 					/>
-					Sign in
-				</Button>
+				</>
 			) : (
 				<Link href="/profile">
 					<Button

@@ -30,7 +30,7 @@ export const Cart: React.FC<Props> = ({
 }) => {
 	return (
 		<CheckoutBlock
-			className="flex flex-col gap-y-6"
+			className="flex flex-col gap-y-0"
 			title="1.Cart"
 		>
 			{loading ? (

@@ -4,12 +4,13 @@ import { FormInput } from '@/components/shared/form'
 import { Button } from '@/components/ui'
 import { signUpSchema, SignUpSchemaType } from '@/schema/sign-up-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { signIn } from 'next-auth/react'
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
 interface Props {
-	onClose?: VoidFunction
+	onClose: VoidFunction
 }
 
 export const SignUpForm: React.FC<Props> = ({ onClose }) => {
@@ -25,16 +26,19 @@ export const SignUpForm: React.FC<Props> = ({ onClose }) => {
 		try {
 			await createUser(data)
 
+			await signIn('credentials', {
+				email: data.email,
+				password: data.password,
+				redirect: false
+			})
+
 			toast.success('You have successfully signed up', {
 				icon: '✅'
 			})
 
 			onClose?.()
-		} catch (error) {
-			console.error('Error [LOGIN]', error)
-			toast.error('Failed to sign up', {
-				icon: '❌'
-			})
+		} catch (error: any) {
+			toast.error(error.message)
 		}
 	}
 
@@ -47,7 +51,7 @@ export const SignUpForm: React.FC<Props> = ({ onClose }) => {
 				<div className="flex justify-between items-center">
 					<div className="mr-2">
 						<Title
-							text="Sign in to your account"
+							text="Sign up"
 							size="md"
 							className="font-bold"
 						/>
@@ -77,6 +81,7 @@ export const SignUpForm: React.FC<Props> = ({ onClose }) => {
 					required
 				/>
 				<FormInput
+					type="password"
 					name="confirmPassword"
 					label="Confirm password"
 					required

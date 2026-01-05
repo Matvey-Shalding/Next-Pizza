@@ -16,8 +16,9 @@ export const CheckoutBlock: React.FC<Props> = ({
 	return (
 		<div
 			className={cn(
+				'bg-white py-9 rounded-[30px] flex flex-col gap-y-9',
 				className,
-				'bg-white py-9 rounded-[30px] flex flex-col gap-y-9'
+
 			)}
 		>
 			<div className="flex items-center justify-between pb-6 border-b border-gray-200 px-9">

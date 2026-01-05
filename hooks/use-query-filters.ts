@@ -1,4 +1,4 @@
-import { PriceRange } from '@/types'
+import { PriceRange } from '@/@types'
 import { useRouter } from 'next/navigation'
 import qs from 'qs'
 import React from 'react'
