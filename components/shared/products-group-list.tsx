@@ -1,8 +1,8 @@
 'use client'
 
+import { ProductWithIngredients } from '@/@types'
 import { cn } from '@/lib/utils'
 import { useCategoryStore } from '@/store/category'
-import { ProductWithIngredients } from '@/types'
 import React, { memo, useEffect, useRef } from 'react'
 import { useIntersection } from 'react-use'
 import { ProductCard, Title } from '.'

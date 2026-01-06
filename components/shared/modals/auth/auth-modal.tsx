@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { signIn } from 'next-auth/react'
 import React from 'react'
 import toast from 'react-hot-toast'
-import { LoginForm } from './forms/log-in-form'
-import { SignUpForm } from './forms/sign-up-form'
+import { LogInForm } from '.'
+import { SignUpForm } from './sign-up-form'
 
 interface Props {
 	open: boolean
@@ -72,7 +72,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
 							className="flex flex-col gap-y-5"
 						>
 							{type === 'login' ? (
-								<LoginForm onClose={onClose} />
+								<LogInForm onClose={onClose} />
 							) : (
 								<SignUpForm onClose={onClose} />
 							)}

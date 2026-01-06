@@ -2,9 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
-import { Container, SearchInput } from '.'
-import { CartButton } from './cart-button'
-import { ProfileButton } from './profile-button'
+import { CartButton, Container, ProfileButton, SearchInput } from '..'
 
 export function Header({
 	className,

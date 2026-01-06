@@ -47,6 +47,8 @@ export const authOptions: NextAuthOptions = {
 					user.password
 				)
 
+				console.log(user, isPasswordValid)
+
 				if (!isPasswordValid) {
 					return null
 				}
@@ -62,12 +64,7 @@ export const authOptions: NextAuthOptions = {
 		async jwt({ token, user, account }) {
 			if (user) {
 				// this function ensures the id in useSession or getServerSession is the id of the user, not provider
-				const dbUser = await prisma.user.findUnique({
-					where: { email: user.email! }
-				})
-				if (dbUser) {
-					token.sub = dbUser.id.toString()
-				}
+				token.sub = user.id.toString()
 			}
 			return token
 		},

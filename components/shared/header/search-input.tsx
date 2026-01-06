@@ -1,10 +1,10 @@
 'use client'
 
+import { Input, Skeleton } from '@/components/ui'
 import { useSearchProducts } from '@/hooks/use-search-products'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import React from 'react'
-import { Input, Skeleton } from '../ui'
 
 interface Props {
 	className?: string

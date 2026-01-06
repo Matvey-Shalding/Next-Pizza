@@ -1,11 +1,11 @@
 'use client'
 
+import { Button } from '@/components/ui'
 import { CircleUser, User } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { Button } from '../ui/button'
-import { AuthModal } from './modals/auth/auth-modal'
+import { AuthModal } from '../modals'
 
 interface Props {
 	onClickSignIn?: () => void

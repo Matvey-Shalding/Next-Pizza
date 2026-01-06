@@ -1,8 +1,7 @@
 import { CategoryWithProducts } from '@/@types/CategoryWithProducts'
 import { cn } from '@/lib/utils'
 import { ArrowUpDown } from 'lucide-react'
-import { Categories } from './categories'
-import { Container } from './container'
+import { Categories, Container } from '..'
 
 export function TopBar({
 	className,

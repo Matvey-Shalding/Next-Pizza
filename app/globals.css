@@ -58,6 +58,31 @@ input[type='number'] {
 	-moz-appearance: textfield;
 }
 
+html::-webkit-scrollbar {
+	width: 8px;
+}
+
+html::-webkit-scrollbar-track {
+	border-radius: var(--radius-md);
+	background: hsl(var(--muted));
+}
+
+html::-webkit-scrollbar-thumb {
+	background: hsl(var(--primary));
+	border-radius: var(--radius-md);
+	border: 2px solid hsl(var(--muted));
+}
+
+html::-webkit-scrollbar-thumb:hover {
+	background: hsl(var(--primary-foreground));
+}
+
+/* Firefox */
+html {
+	scrollbar-width: thin;
+	scrollbar-color: hsl(var(--primary)) hsl(var(--muted));
+}
+
 @theme {
 	--color-border: hsl(var(--border));
 	--color-input: hsl(var(--input));
@@ -137,21 +162,21 @@ html {
 	font-family: var(--font-nunito), sans-serif;
 }
 
-.scrollbar::-webkit-scrollbar {
+::-webkit-scrollbar {
 	width: 4px;
 }
 
-.scrollbar::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
 	border-radius: 6px;
 	background: #fff;
 }
 
-.scrollbar::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
 	background: #dbdadd;
 	border-radius: 6px;
 }
 
-.scrollbar::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
 	background: #dbdadd;
 }
 

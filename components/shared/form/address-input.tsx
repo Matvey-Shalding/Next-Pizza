@@ -1,3 +1,5 @@
+'use client'
+
 import { FloatingLabelInput } from '@/components/ui/floating-label-input'
 import React, { useMemo } from 'react'
 import { AddressSuggestions } from 'react-dadata'

@@ -17,7 +17,7 @@ interface Props {
 	paymentUrl: string
 }
 
-export default function PayOrderTemplate({
+export function PayOrderTemplate({
 	orderId,
 	totalAmount,
 	paymentUrl

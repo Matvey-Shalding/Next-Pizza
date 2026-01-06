@@ -4,8 +4,8 @@ import { cn } from '@/lib/utils';
 import { useCartStore } from '@/store/cart';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import React, { useEffect } from 'react';
-import { Button } from '../ui';
-import { CartDrawer } from './cart/cart-drawer';
+import { CartDrawer } from '..'
+import { Button } from '@/components/ui'
 interface Props {
 	className?: string;
 }

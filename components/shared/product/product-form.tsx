@@ -1,12 +1,12 @@
 'use client'
 
+import { ProductWithIngredients } from '@/@types'
 import { ProductFormContext } from '@/context/ProductForm'
 import { useCartStore } from '@/store/cart'
-import { ProductWithIngredients } from '@/types'
 import { useRouter } from 'next/navigation'
 import React, { useMemo } from 'react'
 import toast from 'react-hot-toast'
-import { ChoosePizzaForm, ChooseProductForm } from '.'
+import { ChoosePizzaForm, ChooseProductForm } from '..'
 interface Props {
 	className?: string
 	product: ProductWithIngredients

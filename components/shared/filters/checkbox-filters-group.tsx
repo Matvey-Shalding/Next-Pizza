@@ -5,9 +5,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 
 import { useFilteredItems } from '@/hooks'
-import { FilterList, LoadingSkeletons, SearchBox } from '.'
-import type { FilterCheckboxProps } from './filter-checkbox'
 import React from 'react'
+import { FilterList, SearchBox, Skeletons } from '.'
+import type { FilterCheckboxProps } from './filter-checkbox'
 
 type Item = FilterCheckboxProps
 
@@ -50,7 +50,7 @@ const CheckboxFiltersGroupComponent: React.FC<Props> = ({
 
 	if (loading) {
 		return (
-			<LoadingSkeletons
+			<Skeletons
 				title={title}
 				count={limit}
 				showSearch={showSearch}

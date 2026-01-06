@@ -2,11 +2,11 @@ import {
 	Container,
 	Filters,
 	ProductsGroupList,
+	QueryToastHandler,
+	Stories,
 	Title,
 	TopBar
 } from '@/components/shared'
-import { PaymentToastHandler } from '@/components/shared/payment-toast-handler'
-import { Stories } from '@/components/shared/stories'
 import { getCategories, SearchParams } from '@/lib/get-categories'
 import { Suspense } from 'react'
 
@@ -20,7 +20,7 @@ export default async function Home({
 
 	return (
 		<>
-			<PaymentToastHandler />
+			<QueryToastHandler />
 			<Container className="mt-8">
 				<Stories />
 				<Title

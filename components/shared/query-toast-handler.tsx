@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 
-export function PaymentToastHandler() {
+export function QueryToastHandler() {
 	const searchParams = useSearchParams()
 	const router = useRouter()
 

@@ -5,8 +5,8 @@ import { Ingredient } from '@/prisma/generated/prisma'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-import { Title } from '.'
-import { Button } from '../ui'
+import { Title } from '..'
+import { Button } from '@/components/ui'
 
 interface Props {
 	className?: string

@@ -1,11 +1,9 @@
-export { Button } from './button';
-export { Checkbox } from './checkbox';
-export { Dialog } from './dialog';
-export { Drawer } from './drawer';
-export { DropdownMenu } from './dropdown-menu';
-export { Input } from './input';
-export { Popover } from './popover';
-export { Select } from './select';
-export { Skeleton } from './skeleton';
-export { Slider } from './slider';
-export {Textarea} from './textarea'
+export { Button } from './button'
+export { Checkbox } from './checkbox'
+export { Dialog } from './dialog'
+export { FloatingLabelInput } from './floating-label-input'
+export { Input } from './input'
+export { Sheet } from './sheet'
+export { Skeleton } from './skeleton'
+export { Slider } from './slider'
+export { Textarea } from './textarea'

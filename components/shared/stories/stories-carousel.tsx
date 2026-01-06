@@ -7,7 +7,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { ArrowLeft, ArrowRight, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import ReactStories from 'react-insta-stories'
-import { Container } from '../container'
+import { Container } from '..'
 
 interface Props {
 	stories: StoryWithItems[]

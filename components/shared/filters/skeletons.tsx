@@ -8,7 +8,7 @@ interface Props {
 	showSearch: boolean
 }
 
-export function LoadingSkeletons({ title, count, showSearch }: Props) {
+export function Skeletons({ title, count, showSearch }: Props) {
 	return (
 		<div className="flex flex-col gap-y-3">
 			<span className="font-bold">{title}</span>
