@@ -1,6 +1,7 @@
 import { Header } from '@/components/shared'
 import { nunito } from '@/config/font'
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
 	title: 'Next pizza | Home page'
@@ -17,7 +18,9 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={nunito.className}>
 				<main className="min-h-screen">
-					<Header />
+					<Suspense>
+						<Header />
+					</Suspense>
 					{modal}
 					{children}
 				</main>

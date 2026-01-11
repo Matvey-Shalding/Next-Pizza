@@ -1,4 +1,5 @@
-// components/form/form-textarea.tsx
+'use client'
+
 import { Textarea } from '@/components/ui'
 import { cn } from '@/lib/utils'
 import { X } from 'lucide-react'
