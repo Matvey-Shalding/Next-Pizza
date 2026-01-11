@@ -60,8 +60,7 @@ async function up() {
 	const pizza1 = await prisma.product.create({
 		data: {
 			name: 'Pepperoni Fresh',
-			imageUrl:
-				'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp',
+			imageUrl: '/assets/products/pepperoni.webp',
 			categoryId: 1,
 			ingredients: {
 				connect: ingredients.slice(0, 5)
@@ -72,8 +71,7 @@ async function up() {
 	const pizza2 = await prisma.product.create({
 		data: {
 			name: 'Cheesy',
-			imageUrl:
-				'https://media.dodostatic.net/image/r:233x233/11EE7D610CF7E265B7C72BE5AE757CA7.webp',
+			imageUrl: '/assets/products/cheesy.webp',
 			categoryId: 1,
 			ingredients: {
 				connect: ingredients.slice(5, 10)
@@ -84,8 +82,7 @@ async function up() {
 	const pizza3 = await prisma.product.create({
 		data: {
 			name: 'Chorizo Fresh',
-			imageUrl:
-				'https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
+			imageUrl: '/assets/products/chorizo-fresh.webp',
 			categoryId: 1,
 			ingredients: {
 				connect: ingredients.slice(10, 40)
@@ -193,20 +190,20 @@ async function up() {
 
 	// === STORIES SECTION (UPDATED) ===
 	const previewImages = [
-		'https://cdn.inappstory.ru/story/xep/xzh/zmc/cr4gcw0aselwvf628pbmj3j/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=3101815496',
-		'https://cdn.inappstory.ru/story/km2/9gf/jrn/sb7ls1yj9fe5bwvuwgym73e/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=3074015640',
-		'https://cdn.inappstory.ru/story/quw/acz/zf5/zu37vankpngyccqvgzbohj1/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=1336215020',
-		'https://cdn.inappstory.ru/story/7oc/5nf/ipn/oznceu2ywv82tdlnpwriyrq/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=38903958',
-		'https://cdn.inappstory.ru/story/q0t/flg/0ph/xt67uw7kgqe9bag7spwkkyw/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=2941222737',
-		'https://cdn.inappstory.ru/story/lza/rsp/2gc/xrar8zdspl4saq4uajmso38/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=4207486284'
+		'/assets/products/preview1.webp',
+		'/assets/products/preview2.webp',
+		'/assets/products/preview3.webp',
+		'/assets/products/preview4.webp',
+		'/assets/products/preview5.webp',
+		'/assets/products/preview6.webp'
 	]
 
 	const baseStoryItems = [
-		'https://cdn.inappstory.ru/file/dd/yj/sx/oqx9feuljibke3mknab7ilb35t.webp?k=IgAAAAAAAAAE',
-		'https://cdn.inappstory.ru/file/jv/sb/fh/io7c5zarojdm7eus0trn7czdet.webp?k=IgAAAAAAAAAE',
-		'https://cdn.inappstory.ru/file/ts/p9/vq/zktyxdxnjqbzufonxd8ffk44cb.webp?k=IgAAAAAAAAAE',
-		'https://cdn.inappstory.ru/file/ur/uq/le/9ufzwtpdjeekidqq04alfnxvu2.webp?k=IgAAAAAAAAAE',
-		'https://cdn.inappstory.ru/file/sy/vl/c7/uyqzmdojadcbw7o0a35ojxlcul.webp?k=IgAAAAAAAAAE'
+		'/assets/products/storyitem1.webp',
+		'/assets/products/storyitem2.webp',
+		'/assets/products/storyitem3.webp',
+		'/assets/products/storyitem4.webp',
+		'/assets/products/storyitem5.webp'
 	]
 
 	// Make 6 items per story by duplicating the first
