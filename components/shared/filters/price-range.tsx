@@ -3,7 +3,8 @@
 import { Input } from '@/components/ui'
 import { cn } from '@/lib/utils'
 import * as React from 'react'
-import { RangeSlider } from '..'
+import { RangeSlider } from './range-slider'
+
 
 export interface PriceRangeProps {
 	className?: string
