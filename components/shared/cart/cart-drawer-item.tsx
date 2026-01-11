@@ -28,7 +28,7 @@ export const CartDrawerItem: React.FC<CartDrawerItemProps> = ({
 	return (
 		<div
 			className={cn(
-				'bg-white p-5 flex gap-x-6 rounded-md transition-all duration-300 ease-out',
+				'bg-white p-3 phone:p-5 flex gap-x-3 phone:gap-x-6 rounded-md transition-all duration-300 ease-out',
 				'hover:shadow-md hover:scale-[1.02] hover:bg-gray-50',
 				{ 'opacity-50 pointer-events-none scale-95': disabled }
 			)}
@@ -36,7 +36,7 @@ export const CartDrawerItem: React.FC<CartDrawerItemProps> = ({
 			<img
 				src={imageUrl}
 				alt={name}
-				className="size-15 rounded object-cover"
+				className="phone:size-15 size-14 rounded object-cover"
 				loading="lazy"
 			/>
 			<div className="flex flex-col gap-y-3 basis-full">

@@ -1,9 +1,9 @@
 'use client';
 
-import * as SliderPrimitive from '@radix-ui/react-slider';
-import React from 'react';
+import * as SliderPrimitive from '@radix-ui/react-slider'
+import React from 'react'
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'
 
 type SliderProps = {
 	className?: string;
@@ -48,13 +48,13 @@ const RangeSlider = React.forwardRef(
 				{localValues.map((value, index) => (
 					<React.Fragment key={index}>
 						<div
-							className='absolute text-center'
+							className='absolute text-center -translate-x-full'
 							style={{
-								left: `calc(${((value - min) / (max - min)) * 100}% + 0px)`,
+								left: `calc(${((value - min) / (max - min)) * 100}% + 11.5px)`,
 								top: `10px`,
 							}}
 						>
-							<span className='text-sm'>{formatLabel ? formatLabel(value) : value}</span>
+							<span className='text-sm relative '>{formatLabel ? formatLabel(value) : value}</span>
 						</div>
 						<SliderPrimitive.Thumb className='block h-4 w-4 rounded-full border border-primary/50 bg-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50' />
 					</React.Fragment>
@@ -66,4 +66,5 @@ const RangeSlider = React.forwardRef(
 
 RangeSlider.displayName = SliderPrimitive.Root.displayName;
 
-export { RangeSlider };
+export { RangeSlider }
+

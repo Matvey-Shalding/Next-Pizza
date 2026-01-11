@@ -34,45 +34,49 @@ export const Cart: React.FC<Props> = ({
 			title="1.Cart"
 		>
 			{loading ? (
-				new Array(4).fill(0).map((_, i) => (
-					<Skeleton
-						key={i}
-						className="h-[85px] w-full"
-					/>
-				))
+				<div className="flex flex-col gap-y-4">
+					{new Array(4).fill(0).map((_, i) => (
+						<Skeleton
+							key={i}
+							className="tablet:h-[85px] phone:h-[70px] small-phone:h-15 w-full"
+						/>
+					))}
+				</div>
 			) : (
 				<AnimatePresence mode="popLayout">
-					{items.map(item => (
-						<motion.div
-							key={item.id}
-							initial={{ opacity: 0, y: 10 }}
-							animate={{ opacity: 1, y: 0 }}
-							exit={{ opacity: 0, y: 10, scale: 0.95 }}
-							transition={{ duration: 0.25 }}
-							layout
-						>
-							<CheckoutItem
-								disabled={item.disabled}
-								onRemoveItem={() => removeCartItem(item.id)}
-								onClickCountButton={(type: 'plus' | 'minus') =>
-									onClickCountButton(item.id, type, item.quantity)
-								}
-								quantity={item.quantity}
-								name={item.name}
-								description={
-									item.pizzaType && item.pizzaSize
-										? getItemDetails(
-												item.pizzaType as PizzaType,
-												item.pizzaSize as PizzaSize,
-												item.ingredients
-										  )
-										: ''
-								}
-								imageUrl={item.imageUrl}
-								price={item.price}
-							/>
-						</motion.div>
-					))}
+					<div className="tablet:max-w-200 overflow-x-auto">
+						{items.map(item => (
+							<motion.div
+								key={item.id}
+								initial={{ opacity: 0, y: 10 }}
+								animate={{ opacity: 1, y: 0 }}
+								exit={{ opacity: 0, y: 10, scale: 0.95 }}
+								transition={{ duration: 0.25 }}
+								layout
+							>
+								<CheckoutItem
+									disabled={item.disabled}
+									onRemoveItem={() => removeCartItem(item.id)}
+									onClickCountButton={(type: 'plus' | 'minus') =>
+										onClickCountButton(item.id, type, item.quantity)
+									}
+									quantity={item.quantity}
+									name={item.name}
+									description={
+										item.pizzaType && item.pizzaSize
+											? getItemDetails(
+													item.pizzaType as PizzaType,
+													item.pizzaSize as PizzaSize,
+													item.ingredients
+											  )
+											: ''
+									}
+									imageUrl={item.imageUrl}
+									price={item.price}
+								/>
+							</motion.div>
+						))}
+					</div>
 				</AnimatePresence>
 			)}
 		</CheckoutBlock>

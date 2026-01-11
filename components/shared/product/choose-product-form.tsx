@@ -20,11 +20,11 @@ export const ChooseProductForm: React.FC<Props> = ({
 	onSubmit
 }) => {
 	return (
-		<div className={cn(className, 'flex gap-x-1 min-h-full')}>
-			<div className="bg-white min-h-full basis-1/2 grid place-content-center">
+		<div className={cn(className, 'flex gap-x-1 min-h-full min-w-full')}>
+			<div className="bg-white max-xl:hidden min-h-full basis-1/2 grid place-content-center">
 				<img src={imageUrl} />
 			</div>
-			<div className="basis-1/2 min-h-full flex flex-col justify-between  bg-[#F4F1EE] p-10">
+			<div className="xl-max:basis-1/2 basis-full min-h-full flex flex-col justify-between  bg-[#F4F1EE] p-10">
 				<Title
 					size="sm"
 					className="font-bold"

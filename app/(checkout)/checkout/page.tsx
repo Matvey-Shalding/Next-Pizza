@@ -59,17 +59,17 @@ export default function Checkout() {
 
 	return (
 		<FormProvider {...methods}>
-			<Container className="pt-10 flex flex-col gap-y-12 pb-20">
+			<Container className="tablet:pt-10 phone:pt-8 small-phone:pt-6 flex flex-col gap-y-12 small-laptop:pb-20 tablet:pb-16 phone:pb-12 small-phone:pb-9 max-tablet:px-0!">
 				<Title
 					text="Checkout"
 					size="lg"
-					className="font-bold text-[36px]"
+					className="font-bold tablet:text-[32px] max-tablet:px-6 phone:text-[28px] small-phone:text-[24px] laptop:text-[36px]"
 				/>
 				<form
 					onSubmit={onSubmit}
-					className="grid grid-cols-[1.67fr_1fr] gap-11"
+					className="laptop:grid laptop:grid-cols-[1.67fr_1fr] flex flex-col phone:gap-8 small-phone:gap-6 tablet:gap-11"
 				>
-					<div className="flex flex-col gap-y-11">
+					<div className="flex flex-col phone:gap-y-8 small-phone:gap-y-6 tablet:gap-y-11">
 						<Cart
 							loading={!wasLoaded && loading}
 							items={items}

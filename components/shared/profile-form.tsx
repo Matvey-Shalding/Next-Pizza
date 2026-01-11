@@ -55,7 +55,7 @@ export const ProfileForm: React.FC<Props> = ({ className, user }) => {
 					<Title
 						text="Personal information"
 						size="lg"
-						className="font-bold"
+						className="font-bold small-laptop:text-[32px]! tablet:text-[28px]! phone:text-[24px]! small-phone:text-[22px]!"
 					/>
 					<form
 						onSubmit={methods.handleSubmit(onSubmit)}

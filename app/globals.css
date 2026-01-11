@@ -84,6 +84,16 @@ html {
 }
 
 @theme {
+	--breakpoint-xs: 640px;
+	--breakpoint-small-phone: 320px;
+	--breakpoint-phone: 480px;
+	--breakpoint-tablet: 768px;
+	--breakpoint-big-tablet: 900px;
+	--breakpoint-small-laptop: 1024px;
+	--breakpoint-laptop: 1280px;
+	--breakpoint-desktop: 1440px;
+	--breakpoint-wide: 1600px;
+
 	--color-border: hsl(var(--border));
 	--color-input: hsl(var(--input));
 	--color-ring: hsl(var(--ring));

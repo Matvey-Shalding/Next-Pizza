@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui'
 import { AnimatePresence, motion } from 'framer-motion'
+import { X } from 'lucide-react'
 import { signIn } from 'next-auth/react'
 import React from 'react'
 import toast from 'react-hot-toast'
@@ -28,12 +29,9 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
 
 	const onSignIn = async (provider: 'github' | 'google') => {
 		try {
-			await signIn(provider, {
-				redirect: false
-			})
-
+			await signIn(provider, { redirect: false })
 			toast.success('You have successfully signed in')
-		} catch (error) {
+		} catch {
 			toast.error('Failed to sign in')
 		}
 	}
@@ -49,7 +47,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
 					onClick={e => {
 						if (e.target === e.currentTarget) onClose()
 					}}
-					className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
+					className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center phone:items-start"
 					role="dialog"
 					aria-modal="true"
 				>
@@ -59,8 +57,13 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
 						exit={{ opacity: 0, y: -20 }}
 						transition={{ duration: 0.3, ease: 'easeOut' }}
 						onClick={e => e.stopPropagation()}
-						className="w-[450px] bg-white rounded-xl px-9 py-8 flex flex-col gap-y-5"
+						className="w-[450px] bg-white rounded-xl px-9 py-8 flex flex-col gap-y-5 max-phone:justify-center 
+                       max-phone:min-w-full max-phone:min-h-full max-phone:rounded-none max-phone:shadow-none max-phone:px-5 max-phone:py-6 relative"
 					>
+						<X
+							onClick={onClose}
+							className="size-5 text-gray-200 absolute top-2 right-2"
+						></X>
 						{/* Smooth height transition for content */}
 						<motion.div
 							key={type}
@@ -69,7 +72,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
 							exit={{ opacity: 0, y: -10 }}
 							transition={{ duration: 0.25 }}
 							layout
-							className="flex flex-col gap-y-5"
+							className="flex flex-col gap-y-5 h-full"
 						>
 							{type === 'login' ? (
 								<LogInForm onClose={onClose} />

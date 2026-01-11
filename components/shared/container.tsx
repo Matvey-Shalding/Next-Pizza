@@ -13,5 +13,12 @@ export const Container: React.FC<React.PropsWithChildren<Props>> = ({
 	children,
 	ref
 }) => {
-	return <div ref={ref} className={cn('mx-auto max-w-320', className)}>{children}</div>
+	return (
+		<div
+			ref={ref}
+			className={cn('mx-auto max-w-340 tablet:px-8 small-phone:px-4 phone:px-6 small-laptop:px-10', className)}
+		>
+			{children}
+		</div>
+	)
 }

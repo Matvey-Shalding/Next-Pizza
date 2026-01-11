@@ -21,12 +21,10 @@ export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
 		if (!open) return
 
 		const handleKeyDown = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') {
-				router.back()
-			}
+			if (e.key === 'Escape') router.back()
 		}
-		window.addEventListener('keydown', handleKeyDown)
 
+		window.addEventListener('keydown', handleKeyDown)
 		document.body.style.overflow = 'hidden'
 
 		return () => {
@@ -52,10 +50,15 @@ export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
 			{/* Content */}
 			<div
 				className={cn(
-					'w-full max-w-[1000px] max-h-145 h-145 overflow-hidden p-0! rounded-4xl shadow-popup bg-white relative',
+					// Desktop (≥640px)
+					'xs:max-w-[640px] xs:w-full xs:max-h-145 xs:h-145 xs:rounded-4xl xs:shadow-popup xs:bg-white',
+
+					// Mobile (<640px)
+					'max-xs:w-full max-xs:h-full max-xs:max-h-none max-xs:overflow-y-auto max-xs:rounded-none max-xs:shadow-none max-xs:bg-transparent',
+
+					'overflow-hidden p-0! relative',
 					className
 				)}
-				// prevent clicks inside modal from closing it
 				onClick={e => e.stopPropagation()}
 			>
 				<ProductForm
@@ -63,7 +66,7 @@ export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
 					inline={false}
 				/>
 
-				{/* Custom close button */}
+				{/* Close button */}
 				<button
 					onClick={() => router.back()}
 					className="absolute right-4 top-4 opacity-70 hover:opacity-100 transition-opacity"
@@ -71,7 +74,6 @@ export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
 					<X
 						width={30}
 						height={30}
-						stroke="#99a1af"
 						className="stroke-gray-400"
 					/>
 					<span className="sr-only">Close</span>

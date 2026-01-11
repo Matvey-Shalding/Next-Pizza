@@ -36,7 +36,7 @@ export const Stories = ({ className }: Props) => {
 					{Array.from({ length: 6 }).map((_, i) => (
 						<Skeleton
 							key={i}
-							className="w-[200px] h-[250px] rounded-md shrink-0"
+							className="small-laptop:basis-[200px] small-phone:basis-[150px] small-phone:h-[150px] small-laptop:h-[250px] rounded-md shrink-0"
 						/>
 					))}
 				</div>

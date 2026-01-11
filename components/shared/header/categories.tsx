@@ -24,6 +24,8 @@ export const Categories = React.memo(function Categories({
 		selectedValue: String(activeId)
 	})
 
+	//TODO: create a dropdown menu for header
+
 	return (
 		<div
 			ref={containerRef}
@@ -43,14 +45,14 @@ export const Categories = React.memo(function Categories({
 					products.length > 0 && (
 						<button
 							key={id}
-							data-value={id} // ✅ matches hook selector
+							data-value={id} 
 							onClick={() =>
 								document
 									.getElementById(name)
 									?.scrollIntoView({ behavior: 'smooth' })
 							}
 							className={cn(
-								'relative z-10 flex items-center font-bold h-11 rounded-2xl px-5 transition-colors duration-300',
+								'relative z-10 flex items-center font-bold small-laptop:h-11 small-phone:h-10 rounded-2xl px-5 transition-colors duration-300',
 								activeId === id ? 'text-primary' : 'text-gray-700'
 							)}
 						>

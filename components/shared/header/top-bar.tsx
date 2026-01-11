@@ -1,3 +1,5 @@
+'use client'
+
 import { CategoryWithProducts } from '@/@types/CategoryWithProducts'
 import { cn } from '@/lib/utils'
 import { ArrowUpDown } from 'lucide-react'
@@ -5,28 +7,24 @@ import { Categories, Container } from '..'
 
 export function TopBar({
 	className,
-	categories
+	categories,
+	children
 }: {
 	className?: string
 	categories: CategoryWithProducts[]
+	children?: React.ReactNode
 }) {
+
 	return (
 		<div
 			className={cn(
 				className,
-				'sticky top-0 bg-white py-5 z-10 shadow-lg shadow-black/5'
+				'sticky top-0 bg-white tablet:min-w-192 overflow-x-auto small-phone:py-3 small-laptop:py-5 z-10 shadow-lg shadow-black/5'
 			)}
 		>
-			<Container className="flex items-center justify-between">
+			<Container className="flex items-center gap-x-6 justify-between">
 				<Categories categories={categories} />
-				<div
-					className="
-						inline-flex items-center gap-1 bg-gray-50 px-5 h-[52px] rounded-2xl cursor-pointer"
-				>
-					<ArrowUpDown size={16} />
-					<span className="font-bold">Sorting:</span>
-					<span className="text-primary font-bold">Popular</span>
-				</div>
+				{children}
 			</Container>
 		</div>
 	)

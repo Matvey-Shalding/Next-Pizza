@@ -45,7 +45,7 @@ export const ProductsGroupList: React.FC<Props> = memo(
 				<div
 					className={cn(
 						listClassName,
-						'grid gap-16 grid-cols-[repeat(auto-fit,_285px)]'
+						'grid gap-16 place-content-center small-laptop:place-content-start grid-cols-[repeat(auto-fit,_285px)]'
 					)}
 				>
 					{products.map((product, i) => (

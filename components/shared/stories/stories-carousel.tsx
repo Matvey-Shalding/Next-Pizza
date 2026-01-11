@@ -7,6 +7,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { ArrowLeft, ArrowRight, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import ReactStories from 'react-insta-stories'
+import { useMedia } from 'react-use'
 import { Container } from '..'
 
 interface Props {
@@ -23,6 +24,8 @@ export const StoriesCarousel = ({ stories, className }: Props) => {
 		{ loop: true, align: 'start' },
 		[Autoplay({ delay: 3000, stopOnInteraction: false })]
 	)
+
+	const isMobile = useMedia('(max-width: 768px)', false)
 
 	useEffect(() => {
 		setStoryHeight(window.innerHeight * 0.85)
@@ -52,7 +55,7 @@ export const StoriesCarousel = ({ stories, className }: Props) => {
 						{stories.map(story => (
 							<div
 								key={story.id}
-								className="shrink-0 basis-[200px] h-[250px]"
+								className="shrink-0 small-laptop:basis-[200px] small-phone:basis-[150px] small-phone:h-[150px] small-laptop:h-[250px]"
 							>
 								<img
 									onClick={() => handleClick(story)}
@@ -94,35 +97,46 @@ export const StoriesCarousel = ({ stories, className }: Props) => {
 				<div
 					role="dialog"
 					aria-modal="true"
-					className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+					className={cn(
+						'fixed inset-0 z-50 flex items-center justify-center p-4',
+						isMobile ? 'bg-black' : 'bg-black/80'
+					)}
 					onClick={closeModal}
 				>
 					<div
-						className="relative w-full max-w-[520px]"
+						className={cn(
+							'relative',
+							isMobile ? 'w-full h-full' : 'w-full max-w-[520px]'
+						)}
 						onClick={e => e.stopPropagation()}
 					>
-						<button
-							onClick={closeModal}
-							aria-label="Close"
-							className="absolute -right-12 top-0 text-white/70 
-                         hover:text-white hover:scale-110 
-                         transition-transform duration-200 ease-out"
-						>
-							<X className="w-8 h-8" />
-						</button>
-
+						{/* Story viewer */}
 						<ReactStories
 							stories={selectedStory.items.map(item => ({
 								url: item.sourceUrl,
 								type: 'image'
 							}))}
-							width="100%"
-							height={storyHeight}
+							width={isMobile ? '100vw' : '100%'}
+							height={isMobile ? '100vh' : storyHeight}
 							onAllStoriesEnd={closeModal}
 							defaultInterval={3000}
 							loop
 							keyboardNavigation
 						/>
+
+						{/* Close button as sibling, always clickable */}
+						<button
+							onClick={closeModal}
+							aria-label="Close"
+							className={cn(
+								'absolute text-white/70 hover:text-white transition-transform duration-200 ease-out z-50',
+								isMobile
+									? 'top-4 right-4' // mobile: inside fullscreen
+									: '-right-12 top-0 hover:scale-110' // desktop: outside modal
+							)}
+						>
+							<X className="w-8 h-8" />
+						</button>
 					</div>
 				</div>
 			)}
