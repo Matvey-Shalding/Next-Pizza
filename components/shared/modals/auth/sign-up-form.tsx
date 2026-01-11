@@ -1,3 +1,5 @@
+'use client'
+
 import { createUser } from '@/app/actions'
 import { Title } from '@/components/shared'
 import { FormInput } from '@/components/shared/form'

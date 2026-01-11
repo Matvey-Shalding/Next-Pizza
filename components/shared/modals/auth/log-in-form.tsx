@@ -1,3 +1,5 @@
+'use client'
+
 import { Title } from '@/components/shared'
 import { FormInput } from '@/components/shared/form'
 import { Button } from '@/components/ui'
