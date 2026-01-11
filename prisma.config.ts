@@ -8,7 +8,6 @@ export default defineConfig({
 		path: 'prisma/migrations',
 		seed: 'tsx prisma/seed.ts', // optional
 	},
-	engine: 'classic',
 	datasource: {
 		url: env('DATABASE_URL'), // ✅ This is where the URL goes now
 	},
