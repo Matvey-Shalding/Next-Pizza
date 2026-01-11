@@ -6,7 +6,7 @@ interface FloatingLabelInputProps extends React.InputHTMLAttributes<HTMLInputEle
   label: string
 }
 
-export const FloatingLabelInput = React.forwardRef<HTMLInputElement, FloatingLabelInputProps>(
+const FloatingLabelInput = React.forwardRef<HTMLInputElement, FloatingLabelInputProps>(
   ({ className, label, id, ...props }, ref) => {
     return (
       <div className="relative w-full">
@@ -38,3 +38,7 @@ export const FloatingLabelInput = React.forwardRef<HTMLInputElement, FloatingLab
     )
   }
 )
+
+FloatingLabelInput.displayName = 'FloatingLabelInput'
+
+export { FloatingLabelInput }

@@ -1,7 +1,7 @@
 'use client'
 
-import { Product } from '@/prisma/generated/prisma'
 import { Api } from '@/services/api-client'
+import { Product } from '@prisma/client'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useClickAway, useDebounce } from 'react-use'
 

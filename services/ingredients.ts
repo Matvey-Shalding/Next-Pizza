@@ -1,9 +1,12 @@
-import { API_ROUTES } from '@/config/routes';
-import { axiosInstance } from './instance';
-import { Ingredient } from '@/prisma/generated/prisma';
+import { API_ROUTES } from '@/config/routes'
+import { Ingredient } from '@prisma/client'
+import { axiosInstance } from './instance'
 
 export const getAll = async (): Promise<Ingredient[]> => {
-	const { data } = await axiosInstance.get<Ingredient[]>(API_ROUTES.INGREDIENTS, {});
+	const { data } = await axiosInstance.get<Ingredient[]>(
+		API_ROUTES.INGREDIENTS,
+		{}
+	)
 
-	return data;
-};
+	return data
+}

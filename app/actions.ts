@@ -1,13 +1,14 @@
 'use server'
 
-import PayOrderTemplate from '@/components/shared/email-templates/pay-order'
+
+import { PayOrderTemplate } from '@/components/shared'
 import { getUserSession } from '@/lib/get-user-session'
 import prisma from '@/lib/prisma'
 import { sendEmail } from '@/lib/send-email'
-import { OrderStatus } from '@/prisma/generated/prisma'
 import { CheckoutFormSchemaType } from '@/schema/checkout-schema'
 import { ProfileSchemaType } from '@/schema/profile-schema'
 import { SignUpSchemaType } from '@/schema/sign-up-schema'
+import { OrderStatus } from '@prisma/client'
 import { render } from '@react-email/components'
 import { hashSync } from 'bcrypt'
 import { cookies } from 'next/headers'

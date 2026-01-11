@@ -7,7 +7,7 @@ interface FloatingLabelTextareaProps
 	id?: string
 }
 
-export const Textarea = React.forwardRef<
+const Textarea = React.forwardRef<
 	HTMLTextAreaElement,
 	FloatingLabelTextareaProps
 >(({ className, label, id, ...props }, ref) => {
@@ -49,3 +49,7 @@ export const Textarea = React.forwardRef<
 		</div>
 	)
 })
+
+Textarea.displayName = 'Textarea'
+
+export { Textarea }

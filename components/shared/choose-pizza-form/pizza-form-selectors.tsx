@@ -3,7 +3,7 @@
 import { PizzaSize, PizzaType, pizzaSizes, pizzaTypes } from '@/constants/pizza'
 import { ProductFormContext } from '@/context/ProductForm'
 import { cn } from '@/lib/utils'
-import { ProductItem } from '@/prisma/generated/prisma'
+import { ProductItem } from '@prisma/client'
 import { useContext, useMemo } from 'react'
 import { Toggles } from '..'
 

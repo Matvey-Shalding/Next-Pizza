@@ -1,12 +1,12 @@
 'use client'
 
+import { Button } from '@/components/ui'
 import { cn } from '@/lib/utils'
-import { Ingredient } from '@/prisma/generated/prisma'
+import { Ingredient } from '@prisma/client'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { Title } from '..'
-import { Button } from '@/components/ui'
 
 interface Props {
 	className?: string

@@ -1,3 +1,3 @@
-import { Story, StoryItem } from '@/prisma/generated/prisma'
+import { Story, StoryItem } from '@prisma/client'
 
 export type StoryWithItems = Story & { items: StoryItem[] }

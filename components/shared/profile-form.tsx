@@ -2,9 +2,9 @@
 
 import { updateProfile } from '@/app/actions'
 import { cn } from '@/lib/utils'
-import { User } from '@/prisma/generated/prisma'
 import { profileSchema, ProfileSchemaType } from '@/schema/profile-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { User } from '@prisma/client'
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import React from 'react'

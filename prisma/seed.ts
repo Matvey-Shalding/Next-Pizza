@@ -3,7 +3,7 @@
 import prisma from '@/lib/prisma'
 import { hashSync } from 'bcrypt'
 import { categories, ingredients, products } from './constants'
-import { Prisma } from './generated/prisma/client'
+import { Prisma } from '@prisma/client'
 
 const randomDecimalNumber = (min: number, max: number) => {
 	return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10

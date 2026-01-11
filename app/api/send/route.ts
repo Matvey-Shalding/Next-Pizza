@@ -1,4 +1,5 @@
-import PayOrderTemplate from '@/components/shared/email-templates/pay-order'
+
+import { PayOrderTemplate } from '@/components/shared'
 import { render } from '@react-email/components'
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
