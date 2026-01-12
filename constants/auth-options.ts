@@ -5,6 +5,9 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 
+//https://next-pizza-l6i6fecr4-matvey-shaldings-projects.vercel.app
+//https://next-pizza-l6i6fecr4-matvey-shaldings-projects.vercel.app/api/auth/callback/google
+
 export const authOptions: NextAuthOptions = {
 	providers: [
 		GoogleProvider({
@@ -22,76 +25,46 @@ export const authOptions: NextAuthOptions = {
 				password: { label: 'Password', type: 'password' }
 			},
 			async authorize(credentials) {
-				// If there're no credentials, return
-
 				if (!credentials?.email || !credentials?.password) {
 					return null
 				}
-
-				// Find the user
 
 				const user = await prisma.user.findUnique({
 					where: { email: credentials.email }
 				})
 
-				// User not found or has no password (e.g., OAuth-only)
-
 				if (!user || !user.password) {
 					return null
 				}
-
-				// Compare passwords
 
 				const isPasswordValid = await compare(
 					credentials.password,
 					user.password
 				)
-
-				console.log(user, isPasswordValid)
-
 				if (!isPasswordValid) {
 					return null
 				}
 
-				// Return data which will be stored in jwt token
-				return {
-					id: user.id.toString() // token.sub,
-				}
+				// Return DB user ID so jwt callback can use it
+				return { id: user.id.toString(), email: user.email }
 			}
 		})
 	],
-	callbacks: {
-		async jwt({ token, user, account }) {
-			if (user) {
-				// this function ensures the id in useSession or getServerSession is the id of the user, not provider
-				token.sub = user.id.toString()
-			}
-			return token
-		},
 
-		// Optional: enrich session with user ID
-		async session({ session, token }) {
-			if (session.user) {
-				session.user.id = token.sub as string
-			}
-			return session
-		},
+	callbacks: {
 		async signIn({ user, account }) {
 			try {
-				//Sign in logic only applies to providers
 				if (account?.provider === 'credentials') {
+					// Credentials provider already returns DB user id
 					return true
 				}
-
-				// Deny access when user don't have an email
 
 				if (!user.email) {
 					return false
 				}
 
-				// find user by either email or provider id
-
-				const databaseUser = await prisma.user.findFirst({
+				// Find or create DB user for OAuth
+				let dbUser = await prisma.user.findFirst({
 					where: {
 						OR: [
 							{ email: user.email },
@@ -103,24 +76,16 @@ export const authOptions: NextAuthOptions = {
 					}
 				})
 
-				// if user exist we add provider fields to db
-
-				if (databaseUser) {
+				if (dbUser) {
 					await prisma.user.update({
-						where: {
-							email: user.email
-						},
+						where: { id: dbUser.id },
 						data: {
 							provider: account?.provider,
 							providerId: account?.providerAccountId
 						}
 					})
-
-					return true
 				} else {
-					// if user doesn't exist we create it
-
-					await prisma.user.create({
+					dbUser = await prisma.user.create({
 						data: {
 							email: user.email,
 							provider: account?.provider,
@@ -129,16 +94,43 @@ export const authOptions: NextAuthOptions = {
 							password: crypto.randomUUID()
 						}
 					})
-
-					return true
 				}
+
+				// Attach DB user id to the user object so jwt can pick it up
+				;(user as any).dbId = dbUser.id.toString()
+
+				return true
 			} catch (error) {
+				console.error('signIn error', error)
 				return false
 			}
+		},
+
+		async jwt({ token, user }) {
+			// For credentials provider, user.id is already DB id
+			if (user?.id) {
+				token.sub = user.id.toString()
+			}
+
+			// For OAuth providers, we attached dbId in signIn
+			if ((user as any)?.dbId) {
+				token.sub = (user as any).dbId
+			}
+
+			return token
+		},
+
+		async session({ session, token }) {
+			if (session.user) {
+				session.user.id = token.sub as string
+			}
+			return session
 		}
 	},
+
 	session: {
 		strategy: 'jwt'
 	},
+
 	secret: process.env.NEXTAUTH_SECRET
 }

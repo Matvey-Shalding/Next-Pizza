@@ -47,7 +47,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
 					onClick={e => {
 						if (e.target === e.currentTarget) onClose()
 					}}
-					className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center phone:items-start"
+					className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
 					role="dialog"
 					aria-modal="true"
 				>

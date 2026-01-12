@@ -10,7 +10,6 @@ export async function GET(req: NextRequest) {
 
 	// TODO: fetch real token
 
-	console.log(prisma)
 
 	const token = req.cookies.get('cartToken')?.value
 
