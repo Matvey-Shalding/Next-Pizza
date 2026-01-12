@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍕 Dodo Pizza – Fullstack Next.js Application
 
-## Getting Started
+A modern pizza ordering platform built with **Next.js 15.5**, featuring authentication, database integration, and a polished UI/UX.  
+This project demonstrates a production‑ready stack with cutting‑edge tools for frontend, backend, and developer experience.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Tech Highlights
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- ⚡ **Next.js 15.5** with Turbopack for blazing‑fast builds
+- 🔐 **Authentication** via NextAuth.js (Google, GitHub, Credentials)
+- 🗄️ **Database** powered by Prisma ORM + PostgreSQL
+- 🎨 **UI/UX** with Tailwind CSS, Radix UI, Headless UI, and Framer Motion
+- 📬 **Email workflows** using Resend + React Email
+- 📱 **State management** with Zustand
+- 🧩 **Form handling & validation** via React Hook Form + Zod
+- 🔧 **Developer experience**: ESLint, TypeScript, pnpm, unimported for code hygiene
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack
 
-## Learn More
+| Layer            | Technologies |
+|------------------|--------------|
+| **Framework**    | ![Next.js](https://skillicons.dev/icons?i=nextjs) Next.js 15.5, ![React](https://skillicons.dev/icons?i=react) React 19 |
+| **Styling**      | ![Tailwind](https://skillicons.dev/icons?i=tailwind) Tailwind CSS, Radix UI, Headless UI, Lucide Icons, Framer Motion |
+| **Auth**         | ![Auth](https://skillicons.dev/icons?i=auth0) NextAuth.js (Google, GitHub, Credentials) |
+| **Database**     | ![Prisma](https://skillicons.dev/icons?i=prisma) Prisma, ![Postgres](https://skillicons.dev/icons?i=postgres) PostgreSQL |
+| **Email**        | Resend, React Email |
+| **Forms**        | React Hook Form, Zod |
+| **State**        | Zustand |
+| **Utilities**    | Axios, bcrypt, clsx, uuid, qs |
+| **Dev Tools**    | ![TypeScript](https://skillicons.dev/icons?i=typescript) TypeScript, ESLint, pnpm, tsx, unimported |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✨ Key Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 🍕 Dynamic product catalog with interactive UI components
+- 🔐 Secure login via OAuth providers and credentials
+- 🛒 Cart and order management with persistent state
+- 📬 Transactional emails and notifications
+- 📱 Fully responsive design
+- ☁️ Deployed seamlessly on Vercel
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📜 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License.
