@@ -22,15 +22,15 @@ This project demonstrates a production‑ready stack with cutting‑edge tools f
 
 | Layer            | Technologies |
 |------------------|--------------|
-| **Framework**    | ![Next.js](https://skillicons.dev/icons?i=nextjs) Next.js 15.5, ![React](https://skillicons.dev/icons?i=react) React 19 |
-| **Styling**      | ![Tailwind](https://skillicons.dev/icons?i=tailwind) Tailwind CSS, Radix UI, Headless UI, Lucide Icons, Framer Motion |
-| **Auth**         | ![Auth](https://skillicons.dev/icons?i=auth0) NextAuth.js (Google, GitHub, Credentials) |
-| **Database**     | ![Prisma](https://skillicons.dev/icons?i=prisma) Prisma, ![Postgres](https://skillicons.dev/icons?i=postgres) PostgreSQL |
+| **Framework**    | Next.js 15.5, React 19 |
+| **Styling**      | Tailwind CSS, Radix UI, Headless UI, Lucide Icons, Framer Motion |
+| **Auth**         | NextAuth.js (Google, GitHub, Credentials) |
+| **Database**     | Prisma, PostgreSQL |
 | **Email**        | Resend, React Email |
 | **Forms**        | React Hook Form, Zod |
 | **State**        | Zustand |
 | **Utilities**    | Axios, bcrypt, clsx, uuid, qs |
-| **Dev Tools**    | ![TypeScript](https://skillicons.dev/icons?i=typescript) TypeScript, ESLint, pnpm, tsx, unimported |
+| **Dev Tools**    | TypeScript, ESLint, pnpm, tsx, unimported |
 
 ---
 
