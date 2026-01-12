@@ -9,5 +9,7 @@ export default async function Home({
   const params = await searchParams
   const categories = await getCategories(params)
 
+  console.log(categories)
+
   return <HomeClient categories={categories} />
 }
