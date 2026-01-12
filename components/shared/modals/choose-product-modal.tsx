@@ -51,12 +51,12 @@ export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
 			<div
 				className={cn(
 					// Desktop (≥640px)
-					'xs:max-w-[640px] xs:w-full xs:max-h-145 xs:h-145 xs:rounded-4xl xs:shadow-popup xs:bg-white',
+					'max-laptop:max-w-[640px] laptop:w-250 bg-white rounded-[30px] shadow-lg max-h-145 overflow-y-auto overflow-x-hidden',
 
 					// Mobile (<640px)
 					'max-xs:w-full max-xs:h-full max-xs:max-h-none max-xs:overflow-y-auto max-xs:rounded-none max-xs:shadow-none max-xs:bg-transparent',
 
-					'overflow-hidden p-0! relative',
+					'relative',
 					className
 				)}
 				onClick={e => e.stopPropagation()}
